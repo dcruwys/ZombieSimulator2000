@@ -4,8 +4,8 @@ public class Cop extends Human
 {
 	private int ammo;
 	
-	public Cop(){
-		super();
+	public Cop(int x, int y){
+		super(x, y);
 		ammo = 0;
 		this.changeType("Cop");
 	}

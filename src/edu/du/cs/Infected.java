@@ -11,7 +11,6 @@ public class Infected implements CharacterInterface
 	public Infected()
 	{
 		hp = 10;
-		this.generate();
 		type = "Infected";
 	}
 	
@@ -57,14 +56,6 @@ public class Infected implements CharacterInterface
 		return y;
 	}
 
-	
-	@Override
-	public void generate() 
-	{
-		// Ensures not in building
-		
-	}
-	
 	public void decay()
 	{
 		

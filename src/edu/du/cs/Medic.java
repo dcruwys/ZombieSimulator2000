@@ -4,8 +4,8 @@ public class Medic extends Human
 {
 	public int cure;
 	
-	public Medic(){
-		super();
+	public Medic(int x, int y){
+		super(x, y);
 		cure = 0;
 		this.changeType("Medic");
 	}
