@@ -1,4 +1,5 @@
 package edu.du.cs;
+
 public class Building {
 	
 	private int mySize;
