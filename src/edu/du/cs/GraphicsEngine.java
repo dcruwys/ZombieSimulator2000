@@ -3,7 +3,10 @@ import java.awt.Color;
 
 import edu.du.cs.StdDraw;
 
+//Switch Class to interface passing generic methods like void drawHuman();
 
+//Creating an initialize method for standard draw that handles the
+//Actual drawing of the stuff
 
 public class GraphicsEngine {
 
@@ -21,7 +24,7 @@ public class GraphicsEngine {
 	public void drawBuildings(Building aBuilding){
 		int type = aBuilding.getMyType();
 		//Create any building type modifications here, size and width are controlled in the constructor.
-		
+		//Use variable for graphics so no if statements needed
 		if(type == 1){
 			StdDraw.setPenColor(StdDraw.RED);
 		}
@@ -30,9 +33,6 @@ public class GraphicsEngine {
 			StdDraw.setPenColor(StdDraw.BLUE);
 		}
 		StdDraw.filledRectangle(aBuilding.getMyXCoord(), aBuilding.getMyYCoord(), aBuilding.getMySize()/2, aBuilding.getMySize()/4);
-	//	StdDraw.filledRectangle(aBuilding.getMyXCoord(), aBuilding.getMyYCoord(), aBuilding.getMyWidth(), aBuilding.getMyHeight());
-
-		//building types shit here
 	}
 	
 	
