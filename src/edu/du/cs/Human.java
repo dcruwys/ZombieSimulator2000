@@ -3,16 +3,18 @@ package edu.du.cs;
 public class Human implements CharacterInterface 
 {
 	private int hp;
-	private int x;
-	private int y;
+	private int myX;
+	private int myY;
 	private String type;
 	private int vel;
 	
-	public Human()
-	{
+	public Human(int x, int y) {
 		hp = 10;
 		this.generate();
 		type = "Human";
+		
+		myX = x;
+		myY = y;
 	}
 	
 	@Override
@@ -58,13 +60,13 @@ public class Human implements CharacterInterface
 	@Override
 	public int getX() 
 	{
-		return x;
+		return myX;
 	}
 
 	@Override
 	public int getY() 
 	{
-		return y;
+		return myY;
 	}
 
 	@Override
