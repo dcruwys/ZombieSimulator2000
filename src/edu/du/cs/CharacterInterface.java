@@ -2,7 +2,6 @@ package edu.du.cs;
 
 public interface CharacterInterface 
 {	
-	public void generate();
 	public void move();
 	public void changeType( String newType );
 	public void die();

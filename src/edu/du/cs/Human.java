@@ -7,28 +7,26 @@ public class Human implements CharacterInterface
 	private int myY;
 	private String type;
 	private int vel;
+	private int direction;
+	private boolean panic;
 	
 	public Human(int x, int y) {
 		hp = 10;
-		this.generate();
 		type = "Human";
-		
+		direction = (int) (Math.random() * 360) % 360;
+		vel = (int) Math.ceil(Math.random()*2) + 3;
 		myX = x;
 		myY = y;
+		panic = false;
 	}
 	
 	@Override
-	public void generate() 
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void move() 
 	{
-		// TODO Auto-generated method stub
-
+		if(!panic){
+			myX += vel * Math.sin(direction);
+			myY += vel * Math.cos(direction);
+		}
 	}
 
 	@Override
@@ -73,6 +71,10 @@ public class Human implements CharacterInterface
 	public int getVel() 
 	{
 		return vel;
+	}
+	
+	public boolean getPanic(){
+		return panic;
 	}
 
 	public void starve()
