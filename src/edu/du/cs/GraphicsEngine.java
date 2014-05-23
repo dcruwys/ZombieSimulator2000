@@ -1,8 +1,6 @@
 package edu.du.cs;
 import java.awt.Color;
 
-import edu.du.cs.StdDraw;
-
 //Switch Class to interface passing generic methods like void drawHuman();
 
 //Creating an initialize method for standard draw that handles the
@@ -21,19 +19,20 @@ public class GraphicsEngine {
 // |____/ \__,_|_|_|\__,_|_|_| |_|\__, |___/
 //                                |___/     
 	
-	public void drawBuildings(Building aBuilding){
-		int type = aBuilding.getMyType();
-		//Create any building type modifications here, size and width are controlled in the constructor.
-		//Use variable for graphics so no if statements needed
-		if(type == 1){
-			StdDraw.setPenColor(StdDraw.RED);
-		}
-//		
-		if(type == 2){
-			StdDraw.setPenColor(StdDraw.BLUE);
-		}
-		StdDraw.filledRectangle(aBuilding.getMyXCoord(), aBuilding.getMyYCoord(), aBuilding.getMySize()/2, aBuilding.getMySize()/4);
-	}
+//	public void drawBuildings(Building aBuilding){
+//		int type = aBuilding.getMyType();
+//		//Create any building type modifications here, size and width are controlled in the constructor.
+//		//Use variable for graphics so no if statements needed
+//		if(type == 1){
+//			StdDraw.setPenColor(StdDraw.RED);
+//			
+//		}
+////		
+//		if(type == 2){
+//			StdDraw.setPenColor(StdDraw.BLUE);
+//		}
+//		StdDraw.filledRectangle(aBuilding.getMyXCoord(), aBuilding.getMyYCoord(), aBuilding.getMySize()/2, aBuilding.getMySize()/4);
+//	}
 	
 	
 //  ____ _                          _                
@@ -89,12 +88,13 @@ public class GraphicsEngine {
 		StdDraw.setXscale(0.0, 1000.0);
 		StdDraw.setYscale(0.0, 500.0);
 		GraphicsEngine g = new GraphicsEngine();
-		Building b = new Building();
+	//	Building b = new Building();
 		Human h = new Human(300, 300);
 		
-		g.drawBuildings(b);
+		//g.drawBuildings(b);
+		
+		StdDraw.setPenColor(StdDraw.BLUE);
 		g.drawHumans(h);
-//		StdDraw.setPenColor(StdDraw.BLUE);
-//		StdDraw.rectangle(, 25, 12, 12);
+		//StdDraw.rectangle(, 25, 12, 12);
 	}
 }
