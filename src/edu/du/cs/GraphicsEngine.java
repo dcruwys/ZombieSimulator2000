@@ -89,7 +89,7 @@ public class GraphicsEngine {
 		StdDraw.setXscale(0.0, 1000.0);
 		StdDraw.setYscale(0.0, 500.0);
 		GraphicsEngine g = new GraphicsEngine();
-		Building b = new Building(100, 100, 2);
+		Building b = new Building();
 		Human h = new Human(300, 300);
 		
 		g.drawBuildings(b);
