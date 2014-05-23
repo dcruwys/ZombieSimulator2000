@@ -9,7 +9,6 @@ public class Simulate {
 	}
 	
 	public void generateBuildings(){
-		Building aBuilding = new Building();
 		for (int row=0; row < mySize; row ++){
 			for (int col=0; col < mySize; col ++){
 				grid[row][col] = 3;
@@ -33,12 +32,6 @@ public class Simulate {
 				if(grid[row][col] != 0 && (int) Math.ceil(Math.random()*100) > 10){
 				   grid[row][col] = 1;
 				}
-			}
-		}
-		for (int row=0; row < mySize; row ++){
-			System.out.println();
-			for (int col=0; col < mySize; col ++){
-				System.out.print(grid[row][col]);
 			}
 		}
 	}
