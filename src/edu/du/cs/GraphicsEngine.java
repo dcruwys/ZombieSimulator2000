@@ -1,100 +1,44 @@
 package edu.du.cs;
-import java.awt.Color;
 
-//Switch Class to interface passing generic methods like void drawHuman();
+public class GraphicsEngine implements GraphicsInterface 
+{
 
-//Creating an initialize method for standard draw that handles the
-//Actual drawing of the stuff
+	@Override
+	public void drawHuman( Human aHuman ) {
+		
+		if( aHuman.getType().equalsIgnoreCase( "medic" ))
+			StdDraw.setPenColor( StdDraw.RED );
+		else if( aHuman.getType().equalsIgnoreCase( "cop" ))
+			StdDraw.setPenColor( StdDraw.BLUE );
+		else if( aHuman.getType().equalsIgnoreCase( "human" ))
+			StdDraw.setPenColor( StdDraw.PINK );
+		
+		StdDraw.filledSquare( aHuman.getX(), aHuman.getY(), 2);
+	}
 
-public class GraphicsEngine {
+	@Override
+	public void drawZombie(Infected aZombie) {
+		
+		StdDraw.setPenColor( StdDraw.GREEN );
+		
+		if( aZombie.getType().equalsIgnoreCase( "tank" ))
+			StdDraw.filledSquare( aZombie.getX(), aZombie.getY(), 4);
+		else
+			StdDraw.filledSquare( aZombie.getX(), aZombie.getY(), 2);
+	}
 
-	public GraphicsEngine(){
+	@Override
+	public void drawSupply(Supplies someSupply) {
 		
-	}
-	
-//  ____        _ _     _ _                 
-// | __ ) _   _(_) | __| (_)_ __   __ _ ___ 
-// |  _ \| | | | | |/ _` | | '_ \ / _` / __|
-// | |_) | |_| | | | (_| | | | | | (_| \__ \
-// |____/ \__,_|_|_|\__,_|_|_| |_|\__, |___/
-//                                |___/     
-	
-//	public void drawBuildings(Building aBuilding){
-//		int type = aBuilding.getMyType();
-//		//Create any building type modifications here, size and width are controlled in the constructor.
-//		//Use variable for graphics so no if statements needed
-//		if(type == 1){
-//			StdDraw.setPenColor(StdDraw.RED);
-//			
-//		}
-////		
-//		if(type == 2){
-//			StdDraw.setPenColor(StdDraw.BLUE);
-//		}
-//		StdDraw.filledRectangle(aBuilding.getMyXCoord(), aBuilding.getMyYCoord(), aBuilding.getMySize()/2, aBuilding.getMySize()/4);
-//	}
-	
-	
-//  ____ _                          _                
-// / ___| |__   __ _ _ __ __ _  ___| |_ ___ _ __ ___ 
-//| |   | '_ \ / _` | '__/ _` |/ __| __/ _ \ '__/ __|
-//| |___| | | | (_| | | | (_| | (__| ||  __/ |  \__ \
-// \____|_| |_|\__,_|_|  \__,_|\___|\__\___|_|  |___/
-//                                                                         
-	
-	//Humans
-	public void drawHumans(Human aHuman){
-		StdDraw.setPenColor(new Color(247, 235, 202));
-		StdDraw.filledSquare(aHuman.getX(), aHuman.getY(), 4);
+		StdDraw.setPenColor( StdDraw.ORANGE );
 		
-//		StdDraw.picture(x, y, s);
+		StdDraw.filledCircle( someSupply.getX(), someSupply.getY(), 1);
 	}
-	//Medics
-	public void drawMedics(Medic aMedic){
-		StdDraw.setPenColor(new Color(252, 58, 58));
-		StdDraw.filledSquare(aMedic.getX(), aMedic.getY(), 4);
-//		StdDraw.picture(x, y, s);
-	}
-	
-	//Cops
-	public void drawCops(Cop aCop){
-		StdDraw.setPenColor(new Color(59, 150, 247));
-		StdDraw.filledSquare(aCop.getX(), aCop.getY(), 4);
-		
-//		StdDraw.picture(x, y, s);
-	}
-	
-	//Infected
-	public void drawInfected(Infected anInfected){
-		StdDraw.setPenColor(new Color(129, 255, 61));
-		StdDraw.filledSquare(anInfected.getX(), anInfected.getY(), 4);
-		
-//		StdDraw.picture(x, y, s);
-	}
-	//TAAAAAAANNNK
-	public void drawTank(Tank aTank){
-		StdDraw.setPenColor(new Color(37, 158, 73));
-		StdDraw.filledSquare(aTank.getX(), aTank.getY(), 6);
-		
-//		StdDraw.picture(x, y, s);
-	}
-	
-	
-	
 
-
-	public static void main(String[] args){
-		StdDraw.setCanvasSize(500, 500);
-		StdDraw.setXscale(0.0, 1000.0);
-		StdDraw.setYscale(0.0, 500.0);
-		GraphicsEngine g = new GraphicsEngine();
-	//	Building b = new Building();
-		Human h = new Human(300, 300);
+	@Override
+	public void drawBuilding( int[][] grid ) {
 		
-		//g.drawBuildings(b);
-		
-		StdDraw.setPenColor(StdDraw.BLUE);
-		g.drawHumans(h);
-		//StdDraw.rectangle(, 25, 12, 12);
+		StdDraw.setPenColor( StdDraw.BLACK );
+	
 	}
 }
