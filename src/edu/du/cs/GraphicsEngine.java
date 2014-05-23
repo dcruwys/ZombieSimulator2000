@@ -36,9 +36,22 @@ public class GraphicsEngine implements GraphicsInterface
 	}
 
 	@Override
-	public void drawBuilding( int[][] grid ) {
-		
-		StdDraw.setPenColor( StdDraw.BLACK );
+	public void drawMap( int[][] grid ) {
+		for(int row=0;row<grid.length; row++){
+			   for(int col=0;col<grid.length;col++){
+			     switch(grid[row][col]){
+			      case 0:StdDraw.setPenColor( StdDraw.GRAY );
+			      		StdDraw.filledSquare(row+4, col+4, 4);
+			       break;
+			      case 1:StdDraw.setPenColor( StdDraw.BLACK );
+		      		StdDraw.filledSquare(row+4, col+4, 4);;
+			       break;
+			      case 9:StdDraw.setPenColor( StdDraw.LIGHT_GRAY );
+		      		StdDraw.filledSquare(row+4, col+4, 4);;
+			       break;
+			     }
+			   }  
+			}
 	
 	}
 }

@@ -6,7 +6,7 @@ public interface GraphicsInterface
 	
 	public void drawZombie( Infected aZombie );
 	
-	public void drawBuilding(int[][] grid);
+	public void drawMap(int[][] grid);
 	
 	public void drawSupply( Supplies someSupply );
 }
