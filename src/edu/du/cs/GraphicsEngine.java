@@ -54,23 +54,7 @@ public class GraphicsEngine implements GraphicsInterface
 		}
 	}
 	public static void main(String[] args){
-<<<<<<< HEAD
-		StdDraw.setCanvasSize(500, 500);
-		StdDraw.setXscale(0.0, 1000.0);
-		StdDraw.setYscale(0.0, 1000.0);
-		System.out.println("error");
-		GraphicsEngine g = new GraphicsEngine();
 
-	//	Building b = new Building();
-		Human h = new Human(300, 300);
-		
-		//g.drawBuildings(b);
-		
-		StdDraw.setPenColor(StdDraw.BLUE);
-		StdDraw.filledSquare(100, 100, 20);
-		g.drawHumans(h);
-		//StdDraw.rectangle(, 25, 12, 12);
-=======
 		StdDraw.setCanvasSize(500,500);
 		StdDraw.setXscale(0.0, 500.0);
 		StdDraw.setYscale(0.0, 500.0);
@@ -84,7 +68,7 @@ public class GraphicsEngine implements GraphicsInterface
 			paul.move();
 			g.drawHuman(paul);
 		}
->>>>>>> FETCH_HEAD
+
 	}
 	
 }
