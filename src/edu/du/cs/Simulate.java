@@ -2,10 +2,11 @@ package edu.du.cs;
 
 public class Simulate {
 	private int[][] grid;
-	private int mySize = 100; //Grid Size
+	private int mySize; //Grid Size
 	
 	public Simulate() {
-		// TODO Auto-generated constructor stub
+		mySize = 50;
+		grid = new int[mySize][mySize];
 	}
 	
 	public void generateBuildings(){
@@ -41,6 +42,10 @@ public class Simulate {
 					grid[row][col] = 0;
 			}
 		}
+	}
+	
+	public int[][] getGrid(){
+		return grid;
 	}
 	
 
