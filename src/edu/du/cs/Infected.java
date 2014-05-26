@@ -3,8 +3,8 @@ package edu.du.cs;
 public class Infected implements CharacterInterface 
 {
 	private int hp;
-	private int x;
-	private int y;
+	private int myX;
+	private int myY;
 	private String type;
 	private int vel;
 	
@@ -47,13 +47,32 @@ public class Infected implements CharacterInterface
 	@Override
 	public int getX() 
 	{
-		return x;
+		return myX;
 	}
 
 	@Override
 	public int getY() 
 	{ 
-		return y;
+		return myY;
+	}
+	
+	public void checkCollisions(){
+//		if(myX >= 500){
+//			myX = 500;
+//			direction = (int) (Math.random() * 360) % 360;
+//		}
+//		if(myY >= 500){
+//			myY = 500;
+//			direction = (int) (Math.random() * 360) % 360;
+//		}
+//		if(myX <= 0){
+//			myX = 0;
+//			direction = (int) (Math.random() * 360) % 360;
+//		}
+//		if(myX <= 0){
+//			myY = 0;
+//			direction = (int) (Math.random() * 360) % 360;	
+//		}
 	}
 
 	public void decay()

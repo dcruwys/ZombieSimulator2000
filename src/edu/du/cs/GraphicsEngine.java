@@ -32,7 +32,8 @@ public class GraphicsEngine implements GraphicsInterface
 		
 		StdDraw.setPenColor( StdDraw.ORANGE );
 		
-		StdDraw.filledCircle( someSupply.getX(), someSupply.getY(), 1);
+		StdDraw.filledCircle( someSupply.getX(), someSupply.getY(), 4);
+		
 	}
 
 	@Override
@@ -63,12 +64,18 @@ public class GraphicsEngine implements GraphicsInterface
 		
 		GraphicsEngine g = new GraphicsEngine();
 		g.drawMap(test.getGrid());
+		
 		Human paul = new Human(10, 10);
+		int i = 0;
 		while(true){
-			paul.move();
-			g.drawHuman(paul);
+		    i++;
+		    if(i % 10000000 == 0){
+				paul.move();
+				g.drawHuman(paul);
+		    }
+			
 		}
-
+		
 	}
 	
 }

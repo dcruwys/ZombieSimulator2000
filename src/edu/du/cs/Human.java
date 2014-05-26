@@ -14,7 +14,7 @@ public class Human implements CharacterInterface
 		hp = 10;
 		type = "Human";
 		direction = (int) (Math.random() * 360) % 360;
-		vel = (int) Math.ceil(Math.random()*2) + 3;
+		vel = (int) (Math.ceil(Math.random()*2) + 2)/2;
 		myX = x;
 		myY = y;
 		panic = false;
@@ -27,6 +27,7 @@ public class Human implements CharacterInterface
 			myX += vel * Math.sin(direction);
 			myY += vel * Math.cos(direction);
 		}
+		this.checkCollisions();
 	}
 
 	@Override
@@ -80,5 +81,23 @@ public class Human implements CharacterInterface
 	public void starve()
 	{
 		
+	}
+	public void checkCollisions(){
+		if(myX > 500){
+			myX = 500;
+			direction = (int) (Math.random() * 360) % 360;
+		}
+		if(myY > 500){
+			myY = 500;
+			direction = (int) (Math.random() * 360) % 360;
+		}
+		if(myX < -10){
+			myX = -10;
+			direction = (int) (Math.random() * 360) % 360;
+		}
+		if(myY < -10){
+			myY = -10;
+			direction = (int) (Math.random() * 360) % 360;	
+		}
 	}
 }

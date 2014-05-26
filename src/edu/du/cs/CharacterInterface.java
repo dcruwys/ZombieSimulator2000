@@ -10,4 +10,5 @@ public interface CharacterInterface
 	public int getX();
 	public int getY();
 	public int getVel();
+	public void checkCollisions();
 }
