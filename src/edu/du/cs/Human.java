@@ -3,29 +3,34 @@ package edu.du.cs;
 public class Human implements CharacterInterface 
 {
 	private int hp;
-	private int myX;
-	private int myY;
+	private int x;
+	private int y;
 	private String type;
 	private int vel;
 	private int direction;
 	private boolean panic;
+	private int xVel;
+	private int yVel;
 	
-	public Human(int x, int y) {
+	public Human(int xIn, int yIn) {
 		hp = 10;
 		type = "Human";
 		direction = (int) (Math.random() * 360) % 360;
-		vel = (int) (Math.ceil(Math.random()*2) + 2)/2;
-		myX = x;
-		myY = y;
+		vel = (int) (Math.ceil(Math.random()*2) + 3);
+		x = xIn;
+		y = yIn;
+		
 		panic = false;
 	}
 	
 	@Override
 	public void move() 
 	{
+		xVel = (int) (vel * Math.sin(direction));
+		yVel = (int) (vel * Math.cos(direction));
 		if(!panic){
-			myX += vel * Math.sin(direction);
-			myY += vel * Math.cos(direction);
+			x += xVel;
+			y += yVel;
 		}
 		this.checkCollisions();
 	}
@@ -59,13 +64,13 @@ public class Human implements CharacterInterface
 	@Override
 	public int getX() 
 	{
-		return myX;
+		return x;
 	}
 
 	@Override
 	public int getY() 
 	{
-		return myY;
+		return y;
 	}
 
 	@Override
@@ -83,21 +88,23 @@ public class Human implements CharacterInterface
 		
 	}
 	public void checkCollisions(){
-		if(myX > 500){
-			myX = 500;
+		if(x > 500){
+			x = 500;
 			direction = (int) (Math.random() * 360) % 360;
 		}
-		if(myY > 500){
-			myY = 500;
+		else if(y > 500){
+			y = 500;
 			direction = (int) (Math.random() * 360) % 360;
 		}
-		if(myX < -10){
-			myX = -10;
+		else if(x < -10){
+			x = -10;
 			direction = (int) (Math.random() * 360) % 360;
 		}
-		if(myY < -10){
-			myY = -10;
+		else if(y < -10){
+			y = -10;
 			direction = (int) (Math.random() * 360) % 360;	
 		}
+		//GraphicsEngine.grid[][]
+		
 	}
 }

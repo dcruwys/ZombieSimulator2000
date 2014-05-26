@@ -2,7 +2,8 @@ package edu.du.cs;
 
 public class GraphicsEngine implements GraphicsInterface 
 {
-
+	public static int[][] grid;
+	
 	@Override
 	public void drawHuman( Human aHuman ) {
 		
@@ -45,10 +46,10 @@ public class GraphicsEngine implements GraphicsInterface
 			      		StdDraw.filledSquare(row*10, col*10, 10);
 			       break;
 			      case 1:StdDraw.setPenColor( StdDraw.BLACK );
-		      		StdDraw.filledSquare(row*10, col*10, 10);;
+		      		StdDraw.filledSquare(row*10, col*10, 10);
 			       break;
 			      case 9:StdDraw.setPenColor( StdDraw.LIGHT_GRAY );
-		      		StdDraw.filledSquare(row*10, col*10, 10);;
+		      		StdDraw.filledSquare(row*10, col*10, 10);
 			       break;
 			     }
 			   }  
@@ -56,23 +57,22 @@ public class GraphicsEngine implements GraphicsInterface
 	}
 	public static void main(String[] args){
 
-		StdDraw.setCanvasSize(500,500);
+		StdDraw.setCanvasSize(500, 500);
 		StdDraw.setXscale(0.0, 500.0);
 		StdDraw.setYscale(0.0, 500.0);
 		Simulate test = new Simulate();
 		test.generateBuildings();
-		
+		grid = test.getGrid();
 		GraphicsEngine g = new GraphicsEngine();
-		g.drawMap(test.getGrid());
+		
 		
 		Human paul = new Human(10, 10);
-		int i = 0;
 		while(true){
-		    i++;
-		    if(i % 10000000 == 0){
-				paul.move();
-				g.drawHuman(paul);
-		    }
+			StdDraw.clear();
+			paul.move();
+		    g.drawMap(grid);
+		    g.drawHuman(paul);
+		    StdDraw.show(30);
 			
 		}
 		
