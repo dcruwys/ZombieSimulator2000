@@ -1,4 +1,4 @@
-
+package edu.du.cs;
 public class test { 
 	//DRUNKARD map generation
 	//Test idea for map generation
@@ -35,7 +35,7 @@ public class test {
 	            steps++;
 	            StdDraw.setPenColor(StdDraw.BLUE);
 	            StdDraw.filledSquare(x, y, 4);
-	            StdDraw.show(40);
+	            StdDraw.show(4);
 	        }
 	        System.out.println("Total steps = " + steps);
 	    }

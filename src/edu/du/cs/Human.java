@@ -24,15 +24,16 @@ public class Human implements CharacterInterface
 	}
 	
 	@Override
-	public void move() 
-	{
-		xVel = (int) (vel * Math.sin(direction));
-		yVel = (int) (vel * Math.cos(direction));
-		if(!panic){
-			x += xVel;
-			y += yVel;
-		}
-		this.checkCollisions();
+	public void move() {
+//		xVel = (int) (vel * Math.sin(direction));
+//		yVel = (int) (vel * Math.cos(direction));
+//		if(!panic){
+//			x += xVel;
+//			y += yVel;
+//		}
+//		this.checkCollisions();
+		
+		
 	}
 
 	@Override
