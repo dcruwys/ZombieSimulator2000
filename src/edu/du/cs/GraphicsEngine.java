@@ -115,6 +115,8 @@ public class GraphicsEngine implements GraphicsInterface
 		System.out.println("walkway size: " + test.getWalkwayNodes().size());
 		g.randomNode();
 		startNode = randomNode;
+		//start node doesnt have proper adjacent, but why?
+		System.out.println("DOES NODE HAVE ADJACENT?:"+startNode.getAdjacentNodes().size());
 		g.randomNode();
 		Node aRandomNode = randomNode;
 		Human paul = new Human((startNode.getMyX()), (startNode.getMyY()));
