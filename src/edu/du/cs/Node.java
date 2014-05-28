@@ -65,6 +65,7 @@ public class Node {
 		return walkable;
 	}
 	public Node findNode(int x, int y){
+		//System.out.println("Node size in Node Class " + walkway.size() );
 		for(Node n : walkway){
 			if((n.getMyX() == x) && (n.getMyY() == y)){
 				return n;

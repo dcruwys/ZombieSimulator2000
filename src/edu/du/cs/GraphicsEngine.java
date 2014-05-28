@@ -118,15 +118,21 @@ public class GraphicsEngine implements GraphicsInterface
 		g.randomNode();
 		Node aRandomNode = randomNode;
 		Human paul = new Human((startNode.getMyX()), (startNode.getMyY()));
-		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
-		System.out.println("Path Size: " + path.size());
+//		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
+//		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
+//		System.out.println("Path Size: " + path.size());
 //		for(int i = 0; i < path.size(); i++){
 //			System.out.println("Node: " + i + " X " + path.get(i).getMyX() + " Y " + path.get(i).getMyY());
 //		}
+		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
+		System.out.println("Right Adjacent Node: X " + startNode.findNode(startNode.getMyX()+10, startNode.getMyY()).getMyX() + " Y " + startNode.findNode(startNode.getMyX()+10, startNode.getMyY()).getMyY()); 
+		System.out.println("Left Adjacent Node: X " + startNode.findNode(startNode.getMyX()-10, startNode.getMyY()).getMyX() + " Y " + startNode.findNode(startNode.getMyX()-10, startNode.getMyY()).getMyY()); 
+		System.out.println("Top Adjacent Node: X " + startNode.findNode(startNode.getMyX(), startNode.getMyY()+10).getMyX() + " Y " + startNode.findNode(startNode.getMyX(), startNode.getMyY()+10).getMyY()); 
+		System.out.println("Bottom Adjacent Node: X " + startNode.findNode(startNode.getMyX(), startNode.getMyY()-10).getMyX() + " Y " + startNode.findNode(startNode.getMyX(), startNode.getMyY()-10).getMyY()); 
+
 		while(true){
 			StdDraw.clear();
-
+			
 			paul.move();
 		    g.drawMap(grid);
 			for(Node n : test.getWalkwayNodes()){
