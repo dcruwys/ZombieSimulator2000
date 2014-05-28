@@ -23,7 +23,7 @@ public class AStarPathFinding {
 	public ArrayList<Node> findPath(){
 		//For each adjacent node, set the parent to current parent
 		//Then add it to be processed
-		System.out.println("Adjacent Node Size: " + Parent.getAdjacentNodes().size());
+		//System.out.println("Adjacent Node Size: " + Parent.getAdjacentNodes().size());
 		for(Node adj : Parent.getAdjacentNodes()){
 			if(!(processed.contains(adj))){
 				adj.setParent(Parent);
@@ -32,11 +32,12 @@ public class AStarPathFinding {
 
 		}
 		openList.remove(Parent);processed.add(Parent);
+		
 		while(openList.size() != 0){
-			
+			ArrayList<Node> temp = new ArrayList<Node>(openList);
 			int Fmin;
-			//System.out.println(openList.size());
-			for(Node aNode : openList){
+			System.out.println("OpenList Size;"+openList.size());
+			for(Node aNode : temp){
 				//Estimate distance H, if we add diagnals the formula will be sqrt((aNode.x-Goal.x)^2 + (aNode.y-Goal.y)^2)
 				H = (Math.abs((aNode.getMyX() - Goal.getMyX())) + Math.abs((aNode.getMyY() - Goal.getMyY())));
 				Fmin = (aNode.getCost()+G) + H;
@@ -47,6 +48,7 @@ public class AStarPathFinding {
 				openList.remove(aNode);
 				processed.add(aNode);
 			}
+			System.out.println("OpenList Size;"+openList.size());
 		}
 		if(BestNode != Goal){
 			nodePath.add(BestNode);

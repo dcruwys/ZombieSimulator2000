@@ -121,7 +121,7 @@ public class GraphicsEngine implements GraphicsInterface
 		System.out.println(startNode.getAdjacentNodes().size());
 		Human paul = new Human((startNode.getMyX()), (startNode.getMyY()));
 		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-		//ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
+		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
 		//System.out.println("Path Size: " + path.size());
 
 		while(true){
