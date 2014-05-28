@@ -30,6 +30,7 @@ public class Node {
 		//Right adjacent node
 		if((walkway.contains((this.findNode(myX+10, myY)))) && (this.findNode(myX+10, myY).isWalkable()==true)){
 			rightNode = this.findNode(myX+10, myY);
+			//System.out.println("POOPY:"+this.findNode(myX+10, myY));
 			rightNode.setMyCost(10);
 			adjacentNodes.add(rightNode);
 		}
