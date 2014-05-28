@@ -1,5 +1,7 @@
 package edu.du.cs;
 
+import java.util.List;
+
 public class Infected implements CharacterInterface 
 {
 	private int hp;
@@ -90,5 +92,11 @@ public class Infected implements CharacterInterface
 	public int getVel() 
 	{
 		return vel;
+	}
+
+	@Override
+	public void setPath(List<Node> pathIN) {
+		// TODO Auto-generated method stub
+		
 	}
 }

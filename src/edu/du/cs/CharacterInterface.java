@@ -1,5 +1,7 @@
 package edu.du.cs;
 
+import java.util.List;
+
 public interface CharacterInterface 
 {	
 	public void move();
@@ -11,4 +13,5 @@ public interface CharacterInterface
 	public int getY();
 	public int getVel();
 	public void checkCollisions();
+	public void setPath(List<Node> pathIN);
 }

@@ -1,6 +1,7 @@
 package edu.du.cs;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GraphicsEngine implements GraphicsInterface 
@@ -119,32 +120,33 @@ public class GraphicsEngine implements GraphicsInterface
 		g.randomNode();
 		Node aRandomNode = randomNode;
 		System.out.println(startNode.getAdjacentNodes().size());
-		Human paul = new Human((startNode.getMyX()), (startNode.getMyY()));
+		Human paul = new Human((startNode.getX()), (startNode.getY()));
 		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
-		//System.out.println("Path Size: " + path.size());
+		List<Node> path = startNode.aStar(aRandomNode);
+		System.out.println("Path Size: " + path.size());
 
 		while(true){
 			StdDraw.clear();
-			
+			paul.setPath(path);
 			paul.move();
 		    g.drawMap(grid);
 			for(Node n : test.getWalkwayNodes()){
 				if(n.isWalkable()){
 					StdDraw.setPenColor(StdDraw.GREEN);
 					StdDraw.setPenRadius(0.005);
-					StdDraw.point(n.getMyX(), n.getMyY());
+					StdDraw.point(n.getX(), n.getY());
 				}
-				else{
-					StdDraw.setPenColor(StdDraw.RED);
-					StdDraw.setPenRadius(0.005);
-					StdDraw.point(n.getMyX(), n.getMyY());
-				}
-				if(n.getMyX() == startNode.getMyX() && n.getMyY() == startNode.getMyY())
+				if(n.getX() == startNode.getX() && n.getY() == startNode.getY())
 				{
 					StdDraw.setPenColor(StdDraw.BLUE);
 					StdDraw.setPenRadius(0.01);
-					StdDraw.point(n.getMyX(), n.getMyY());
+					StdDraw.point(n.getX(), n.getY());
+				}
+				if(n.getX() == aRandomNode.getX() && n.getY() == aRandomNode.getY())
+				{
+					StdDraw.setPenColor(StdDraw.CYAN);
+					StdDraw.setPenRadius(0.01);
+					StdDraw.point(n.getX(), n.getY());
 				}
 			}
 		    g.drawHuman(paul);

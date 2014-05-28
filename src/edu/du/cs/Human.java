@@ -1,5 +1,8 @@
 package edu.du.cs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Human implements CharacterInterface 
 {
 	private int hp;
@@ -11,7 +14,8 @@ public class Human implements CharacterInterface
 	private boolean panic;
 	private int xVel;
 	private int yVel;
-	
+	private List<Node> path;
+
 	public Human(int xIn, int yIn) {
 		hp = 10;
 		type = "Human";
@@ -19,21 +23,21 @@ public class Human implements CharacterInterface
 		vel = (int) (Math.ceil(Math.random()*2) + 3);
 		x = xIn;
 		y = yIn;
+		//factor = vel / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed);
 		
 		panic = false;
 	}
 	
 	@Override
 	public void move() {
-//		xVel = (int) (vel * Math.sin(direction));
-//		yVel = (int) (vel * Math.cos(direction));
+
 //		if(!panic){
+//			xVel = (int) (vel * Math.sin(direction));
+//			yVel = (int) (vel * Math.cos(direction));
 //			x += xVel;
 //			y += yVel;
 //		}
 //		this.checkCollisions();
-		
-		
 	}
 
 	@Override
@@ -106,6 +110,12 @@ public class Human implements CharacterInterface
 			direction = (int) (Math.random() * 360) % 360;	
 		}
 		//GraphicsEngine.grid[][]
+		
+	}
+
+	@Override
+	public void setPath(List<Node> pathIN) {
+		path = pathIN;
 		
 	}
 }
