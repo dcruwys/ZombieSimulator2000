@@ -121,9 +121,9 @@ public class GraphicsEngine implements GraphicsInterface
 		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
 		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
 		System.out.println("Path Size: " + path.size());
-		for(int i = 0; i < path.size(); i++){
-			System.out.println("Node: " + i + " X " + path.get(i).getMyX() + " Y " + path.get(i).getMyY());
-		}
+//		for(int i = 0; i < path.size(); i++){
+//			System.out.println("Node: " + i + " X " + path.get(i).getMyX() + " Y " + path.get(i).getMyY());
+//		}
 		while(true){
 			StdDraw.clear();
 
