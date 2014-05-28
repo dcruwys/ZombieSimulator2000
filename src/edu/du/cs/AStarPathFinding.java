@@ -36,7 +36,6 @@ public class AStarPathFinding {
 			
 			int Fmin;
 			//System.out.println(openList.size());
-			synchronized (openList){
 			for(Node aNode : openList){
 				//Estimate distance H, if we add diagnals the formula will be sqrt((aNode.x-Goal.x)^2 + (aNode.y-Goal.y)^2)
 				H = (Math.abs((aNode.getMyX() - Goal.getMyX())) + Math.abs((aNode.getMyY() - Goal.getMyY())));
@@ -47,7 +46,6 @@ public class AStarPathFinding {
 				}
 				//openList.remove(aNode);
 				processed.add(aNode);
-			}
 			}
 		}
 		if(BestNode != Goal){

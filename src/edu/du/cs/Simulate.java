@@ -7,7 +7,7 @@ public class Simulate {
 	int myX, myY;
 	private int mySize; //Grid Size
 	//More node stuff
-	private ArrayList<Node> walkway = new ArrayList<Node>();
+	public ArrayList<Node> walkway = new ArrayList<Node>();
 	
 	public Simulate() {
 		mySize = 50;
@@ -19,7 +19,7 @@ public class Simulate {
 	public void generateBuildings(){
 		for (int row=0; row < mySize; row ++){
 			for (int col=0; col < mySize; col ++){
-				grid[row][col] = 3;
+				grid[row][col] = 8;
 			}
 		}
 		//first pass
@@ -40,16 +40,19 @@ public class Simulate {
 				if(grid[row][col] != 0 && (int) Math.ceil(Math.random()*100) > 10){
 				   grid[row][col] = 1;
 				}
-				if(grid[row][col] == 3){
-					grid[row][col] = 0;
-				}
 			}
 		}
+//		for (int row=0; row < mySize; row ++){
+//			System.out.println();
+//			for (int col=0; col < mySize; col ++){
+//				System.out.print(grid[row][col]);
+//			}
+//		}
 		for (int row=0; row < mySize; row ++){
 			for (int col=0; col < mySize; col ++){
-				if(grid[row][col] == 0 || grid[row][col] == 9)
+				if(grid[row][col] == 0)
 					walkway.add(new Node((row*10-5), (col*10-5), true));
-				else
+				else if(grid[row][col] == 1 || grid[row][col] == 8)
 					walkway.add(new Node((row*10-5), (col*10-5), false));
 			}
 		}

@@ -16,11 +16,11 @@ public class GraphicsEngine implements GraphicsInterface
 	
 	public GraphicsEngine(){
 		test = new Simulate();
-		
-		walkwayNodes = test.getWalkwayNodes();
-		
 		test.generateBuildings();
+		walkwayNodes = test.getWalkwayNodes();
 		grid = test.getGrid();
+		for(Node n: walkwayNodes)
+			n.setAdjacent();
 	}
 	
 	@Override
@@ -119,17 +119,12 @@ public class GraphicsEngine implements GraphicsInterface
 		g.randomNode();
 		Node aRandomNode = randomNode;
 		Human paul = new Human((startNode.getMyX()), (startNode.getMyY()));
-//		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
+		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
 //		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
 //		System.out.println("Path Size: " + path.size());
 //		for(int i = 0; i < path.size(); i++){
 //			System.out.println("Node: " + i + " X " + path.get(i).getMyX() + " Y " + path.get(i).getMyY());
 //		}
-		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-		System.out.println("Right Adjacent Node: X " + startNode.findNode(startNode.getMyX()+10, startNode.getMyY()).getMyX() + " Y " + startNode.findNode(startNode.getMyX()+10, startNode.getMyY()).getMyY()); 
-		System.out.println("Left Adjacent Node: X " + startNode.findNode(startNode.getMyX()-10, startNode.getMyY()).getMyX() + " Y " + startNode.findNode(startNode.getMyX()-10, startNode.getMyY()).getMyY()); 
-		System.out.println("Top Adjacent Node: X " + startNode.findNode(startNode.getMyX(), startNode.getMyY()+10).getMyX() + " Y " + startNode.findNode(startNode.getMyX(), startNode.getMyY()+10).getMyY()); 
-		System.out.println("Bottom Adjacent Node: X " + startNode.findNode(startNode.getMyX(), startNode.getMyY()-10).getMyX() + " Y " + startNode.findNode(startNode.getMyX(), startNode.getMyY()-10).getMyY()); 
 
 		while(true){
 			StdDraw.clear();
@@ -137,9 +132,22 @@ public class GraphicsEngine implements GraphicsInterface
 			paul.move();
 		    g.drawMap(grid);
 			for(Node n : test.getWalkwayNodes()){
-				StdDraw.setPenColor(StdDraw.GREEN);
-				StdDraw.setPenRadius(0.005);
-				StdDraw.point(n.getMyX(), n.getMyY());
+				if(n.isWalkable()){
+					StdDraw.setPenColor(StdDraw.GREEN);
+					StdDraw.setPenRadius(0.005);
+					StdDraw.point(n.getMyX(), n.getMyY());
+				}
+				else{
+					StdDraw.setPenColor(StdDraw.RED);
+					StdDraw.setPenRadius(0.005);
+					StdDraw.point(n.getMyX(), n.getMyY());
+				}
+				if(n.getMyX() == startNode.getMyX() && n.getMyY() == startNode.getMyY())
+				{
+					StdDraw.setPenColor(StdDraw.BLUE);
+					StdDraw.setPenRadius(0.01);
+					StdDraw.point(n.getMyX(), n.getMyY());
+				}
 			}
 		    g.drawHuman(paul);
 		    StdDraw.show(30);
