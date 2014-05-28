@@ -17,10 +17,10 @@ public class Node {
 	
 	//A* variables
 	private List<Node> adjacentNodes = new ArrayList<Node>();
-	private int cost;
-	int f;
-    int g;
-    int h;
+	public int cost;
+	public int f;
+    public int g;
+    public int h;
 	Node parent;
 
 	public Node(int myX, int myY, boolean w){
@@ -112,73 +112,6 @@ public class Node {
 		return parent = aNode;
 	}
 	
-	public List<Node> aStar(Node goal) {
-		Node start = this;
-	    Set<Node> open = new HashSet<Node>();
-	    Set<Node> closed = new HashSet<Node>();
-
-	    start.g = 0;
-	    start.h = estimateDistance(start, goal);
-	    start.f = start.h;
-
-	    open.add(start);
-
-	    while (true) {
-	        Node current = null;
-
-	        if (open.size() == 0) {
-	            throw new RuntimeException("no route");
-	        }
-
-	        for (Node node : open) {
-	            if (current == null || node.f < current.f) {
-	                current = node;
-	            }
-	        }
-
-	        if (current == goal) {
-	            break;
-	        }
-
-	        open.remove(current);
-	        closed.add(current);
-
-	        for (Node neighbor : current.adjacentNodes) {
-	            if (neighbor == null) {
-	                continue;
-	            }
-
-	            int nextG = current.g + neighbor.cost;
-
-	            if (nextG < neighbor.g) {
-	                open.remove(neighbor);
-	                closed.remove(neighbor);
-	            }
-
-	            if (!open.contains(neighbor) && !closed.contains(neighbor)) {
-	                neighbor.g = nextG;
-	                neighbor.h = estimateDistance(neighbor, goal);
-	                neighbor.f = neighbor.g + neighbor.h;
-	                neighbor.parent = current;
-	                open.add(neighbor);
-	            }
-	        }
-	    }
-
-	    List<Node> nodes = new ArrayList<Node>();
-	    Node current = goal;
-	    while (current.parent != null) {
-	        nodes.add(current);
-	        current = current.parent;
-	    }
-	    nodes.add(start);
-
-	    return nodes;
-	}
-
-	public int estimateDistance(Node node1, Node node2) {
-	    return Math.abs(node1.x - node2.x) + Math.abs(node1.y - node2.y);
-	}
 	public String toString(){
 		return "X: " + x + " Y: " + y;
 	}

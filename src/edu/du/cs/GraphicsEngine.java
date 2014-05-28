@@ -122,12 +122,11 @@ public class GraphicsEngine implements GraphicsInterface
 		System.out.println(startNode.getAdjacentNodes().size());
 		Human paul = new Human((startNode.getX()), (startNode.getY()));
 		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-		List<Node> path = startNode.aStar(aRandomNode);
-		System.out.println("Path Size: " + path.size());
+		paul.aStar(startNode, aRandomNode);
+		
 
 		while(true){
 			StdDraw.clear();
-			paul.setPath(path);
 			paul.move();
 		    g.drawMap(grid);
 			for(Node n : test.getWalkwayNodes()){

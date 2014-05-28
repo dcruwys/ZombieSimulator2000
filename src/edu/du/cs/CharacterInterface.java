@@ -13,5 +13,6 @@ public interface CharacterInterface
 	public int getY();
 	public int getVel();
 	public void checkCollisions();
-	public void setPath(List<Node> pathIN);
+	public int estimateDistance(Node node1, Node node2);
+	public void aStar(Node start, Node goal);
 }

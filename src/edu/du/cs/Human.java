@@ -1,7 +1,9 @@
 package edu.du.cs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Human implements CharacterInterface 
 {
@@ -112,10 +114,70 @@ public class Human implements CharacterInterface
 		//GraphicsEngine.grid[][]
 		
 	}
+	public void aStar(Node start, Node goal) {
+	    Set<Node> open = new HashSet<Node>();
+	    Set<Node> closed = new HashSet<Node>();
 
-	@Override
-	public void setPath(List<Node> pathIN) {
-		path = pathIN;
-		
+	    start.g = 0;
+	    start.h = estimateDistance(start, goal);
+	    start.f = start.h;
+
+	    open.add(start);
+
+	    while (true) {
+	        Node current = null;
+
+	        if (open.size() == 0) {
+	            throw new RuntimeException("no route");
+	        }
+
+	        for (Node node : open) {
+	            if (current == null || node.f < current.f) {
+	                current = node;
+	            }
+	        }
+
+	        if (current == goal) {
+	            break;
+	        }
+
+	        open.remove(current);
+	        closed.add(current);
+
+	        for (Node neighbor : current.getAdjacentNodes()) {
+	            if (neighbor == null) {
+	                continue;
+	            }
+
+	            int nextG = current.g + neighbor.cost;
+
+	            if (nextG < neighbor.g) {
+	                open.remove(neighbor);
+	                closed.remove(neighbor);
+	            }
+
+	            if (!open.contains(neighbor) && !closed.contains(neighbor)) {
+	                neighbor.g = nextG;
+	                neighbor.h = estimateDistance(neighbor, goal);
+	                neighbor.f = neighbor.g + neighbor.h;
+	                neighbor.parent = current;
+	                open.add(neighbor);
+	            }
+	        }
+	    }
+
+	    List<Node> nodes = new ArrayList<Node>();
+	    Node current = goal;
+	    while (current.parent != null) {
+	        nodes.add(current);
+	        current = current.parent;
+	    }
+	    nodes.add(start);
+
+	   path = nodes;
+	}
+
+	public int estimateDistance(Node node1, Node node2) {
+	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}
 }

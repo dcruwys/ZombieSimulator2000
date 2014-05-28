@@ -94,9 +94,15 @@ public class Infected implements CharacterInterface
 		return vel;
 	}
 
+
 	@Override
-	public void setPath(List<Node> pathIN) {
+	public int estimateDistance(Node node1, Node node2) {
 		// TODO Auto-generated method stub
-		
+		return 0;
+	}
+
+	@Override
+	public void aStar(Node start, Node goal) {
+		// TODO Auto-generated method stub
 	}
 }
