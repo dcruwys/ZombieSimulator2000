@@ -44,7 +44,7 @@ public class AStarPathFinding {
 					F = Fmin;
 					BestNode = aNode;
 				}
-				//openList.remove(aNode);
+				openList.remove(aNode);
 				processed.add(aNode);
 			}
 		}

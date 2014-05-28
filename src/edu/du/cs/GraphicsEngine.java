@@ -118,13 +118,11 @@ public class GraphicsEngine implements GraphicsInterface
 		//start node doesnt have proper adjacent, but why?
 		g.randomNode();
 		Node aRandomNode = randomNode;
+		System.out.println(startNode.getAdjacentNodes().size());
 		Human paul = new Human((startNode.getMyX()), (startNode.getMyY()));
 		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-//		ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
-//		System.out.println("Path Size: " + path.size());
-//		for(int i = 0; i < path.size(); i++){
-//			System.out.println("Node: " + i + " X " + path.get(i).getMyX() + " Y " + path.get(i).getMyY());
-//		}
+		//ArrayList<Node> path = new AStarPathFinding(startNode, aRandomNode).findPath();
+		//System.out.println("Path Size: " + path.size());
 
 		while(true){
 			StdDraw.clear();
