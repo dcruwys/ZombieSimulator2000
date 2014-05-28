@@ -50,9 +50,10 @@ public class Simulate {
 				   grid[row][col] = 1;
 				   walkway.add(new Node((row*10-5), (col*10-5), false));
 				}
-				if(grid[row][col] == 3)
+				if(grid[row][col] == 3){
 					grid[row][col] = 0;
-				walkway.add(new Node((row*10-5), (col*10-5), false));
+					walkway.add(new Node((row*10-5), (col*10-5), false));
+				}
 			}
 		}
 		

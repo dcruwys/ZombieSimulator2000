@@ -28,14 +28,10 @@ public class AStarPathFinding {
 			if(!(processed.contains(adj))){
 				adj.setParent(Parent);
 				openList.add(adj);
-				System.out.println(Parent.getBottomNode());
-				System.out.println("Current Node: X:"+Parent.getMyX()+"Y: "+Parent.getMyY());
-				System.out.println("Adjacent Node: "+Parent.getAdjacentNodes().get(0));
 			}
 
 		}
 		openList.remove(Parent);processed.add(Parent);
-		System.out.println(openList.size());
 		while(openList.size() != 0){
 			
 			int Fmin;
