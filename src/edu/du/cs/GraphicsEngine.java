@@ -97,23 +97,24 @@ public class GraphicsEngine implements GraphicsInterface
 		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
-
-		for(int i = 0; i < 5; i++){
+		for(int i = 0; i < 10; i++){
 			Node randomN = g.randomNode();
 			Human aHuman = new Human(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
-	    	aHuman.aStar(randomN, g.randomNode());
+			aHuman.aStar(randomN, g.randomNode());
  		}
 		
 		while(true){
 			StdDraw.clear();
-		    g.drawMap(grid);
+			g.drawMap(grid);
+	
 		    for(Human h : humans){
 		    	g.drawHuman(h);
 		    	if(h.getPath().size() != 0){
 		    		h.move();
 		    	}
 		    }
+		    StdDraw.show(1000);
 	   }
 	}
 }

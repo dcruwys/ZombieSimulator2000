@@ -16,6 +16,8 @@ public class Human implements CharacterInterface
 	private int vel;
 	private boolean panic;
 	private List<Node> path;
+	private Node currentNode;
+	private Node nextNode;
 
 	public Human(int xIn, int yIn) {
 		hp = 10;
@@ -25,25 +27,25 @@ public class Human implements CharacterInterface
 		y = yIn;
 		panic = false;
 		path = new ArrayList<Node>();
+		currentNode = this.getNode(Simulate.walkway, x, y);
+		currentNode = nextNode;
 	}
 	
 	@Override
 	public void move() {
-		System.out.println("Path Size: " + path.size());
-		Collections.reverse(path);
 		Iterator<Node> itr = path.iterator();
-	
-		while(itr.hasNext()){
+		if(currentNode == nextNode){
 			Node temp = itr.next();
-
-			this.setX(temp.getX());
-			this.setY(temp.getY());
-			StdDraw.setPenColor(StdDraw.BOOK_RED);
-			StdDraw.filledSquare(temp.getX(), temp.getY(), 4);
-			itr.remove();
-			StdDraw.show(20);
+			nextNode = temp;
 		}
-		System.out.println("DONE!");
+		if(currentNode != nextNode){
+			int xDistance = x - nextNode.getX();
+			int yDistance = y - nextNode.getY();
+			//MOVE HERE
+		}
+			
+		itr.remove();
+		
 	}
 
 	@Override
@@ -170,21 +172,23 @@ public class Human implements CharacterInterface
 	        current = current.parent;
 	    }
 	    path.add(start);
+	    Collections.reverse(path);
 	}
 	
 	public List<Node> getPath(){
 		return path;
 	}
 	
-//	public Node getNode(ArrayList<Node> nodeList, int x, int y){
-//		Node tempNode = null;
-//		for(Node n : nodeList){
-//			if((n.getX() == x) && (n.getY() == y)){
-//				tempNode = n;
-//			}
-//		}
-//		return tempNode;
-//	}
+	public Node getNode(ArrayList<Node> nodeList, int x, int y){
+		Node tempNode = null;
+		for(Node n : nodeList){
+			if((n.getX() == x) && (n.getY() == y)){
+				tempNode = n;
+			}
+		}
+		return tempNode;
+	}
+	
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}
