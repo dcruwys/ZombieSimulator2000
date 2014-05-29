@@ -1,6 +1,7 @@
 package edu.du.cs;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -123,11 +124,10 @@ public class GraphicsEngine implements GraphicsInterface
 		Human paul = new Human((startNode.getX()), (startNode.getY()));
 		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
 		paul.aStar(startNode, aRandomNode);
-		
-
+		System.out.println("A Star Path Size: " + paul.getPath().size());
+		Iterator<Node> itr = paul.getPath().iterator();
 		while(true){
 			StdDraw.clear();
-			paul.move();
 		    g.drawMap(grid);
 			for(Node n : test.getWalkwayNodes()){
 				if(n.isWalkable()){
@@ -147,9 +147,20 @@ public class GraphicsEngine implements GraphicsInterface
 					StdDraw.setPenRadius(0.01);
 					StdDraw.point(n.getX(), n.getY());
 				}
+				while(itr.hasNext()){
+					Node temp = itr.next();
+					System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
+					System.out.println("Iter X: " + temp.getX());
+					System.out.println("Iter Y: " + temp.getY());
+					paul.setX(temp.getX());
+					paul.setY(temp.getY());
+					StdDraw.setPenColor(StdDraw.BOOK_RED);
+					StdDraw.filledSquare(paul.getX(), paul.getY(), 4);
+					
+				}
 			}
 		    g.drawHuman(paul);
-		    StdDraw.show(30);
+		    StdDraw.show(50);
 			
 		}
 		
