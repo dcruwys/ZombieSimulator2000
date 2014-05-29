@@ -1,108 +1,37 @@
 package edu.du.cs;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class Infected implements CharacterInterface 
-{
-	private int hp;
-	private int myX;
-	private int myY;
-	private String type;
-	private int vel;
-	
-	public Infected()
-	{
-		hp = 10;
-		type = "Infected";
-	}
-	
-	@Override
-	public void move() 
-	{
+public class Infected extends Human {
+	private int random;
+	private Node rNode;
+
+	public Infected(int xIn, int yIn) {
+		super(xIn, yIn);
+		rNode = this.randomNode();
 		
 	}
-
-	@Override
-	public void changeType( String newType ) 
-	{
-		
+	public void lineOfSight(ArrayList<Human> humans){
+		if(path.size() < 1){
+			for(Human h: humans){
+				if(Math.abs(h.getX() - this.x) < 100 && Math.abs(h.getY() - this.y) < 100){
+					this.aStar(this.getNode(Simulate.walkway, x, y), h.currentNode);
+				}
+			}
+		}
 	}
-
-	@Override
-	public void die() 
-	{
-		
-	}
-
-	@Override
-	public int getHP() 
-	{
-		return hp;
-	}
-
-	@Override
-	public String getType() 
-	{
-		return type;
-	}
-
-	@Override
-	public int getX() 
-	{
-		return myX;
-	}
-
-	@Override
-	public int getY() 
-	{ 
-		return myY;
-	}
-	
-	public void checkCollisions(){
-//		if(myX >= 500){
-//			myX = 500;
-//			direction = (int) (Math.random() * 360) % 360;
-//		}
-//		if(myY >= 500){
-//			myY = 500;
-//			direction = (int) (Math.random() * 360) % 360;
-//		}
-//		if(myX <= 0){
-//			myX = 0;
-//			direction = (int) (Math.random() * 360) % 360;
-//		}
-//		if(myX <= 0){
-//			myY = 0;
-//			direction = (int) (Math.random() * 360) % 360;	
-//		}
-	}
-
-	public void decay()
-	{
-		
-	}
-	
-	public void infect( Human aHuman )
-	{
-		
-	}
-
-
-	@Override
-	public int getVel() 
-	{
-		return vel;
-	}
-
-
-	@Override
-	public int estimateDistance(Node node1, Node node2) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void aStar(Node start, Node goal) {
-		// TODO Auto-generated method stub
+	public Node randomNode(){
+		Node tempNode = null;
+		random = (int )(Math.random() * Simulate.walkway.size());
+		if(Simulate.walkway.get(random).isWalkable() == true){
+			tempNode = Simulate.walkway.get(random);
+		} else if((Simulate.walkway.get(random).isWalkable() == false)){
+			return randomNode();
+		}
+		if(tempNode != null){
+			return tempNode;
+		}else {
+			return randomNode();
+		}
 	}
 }

@@ -39,10 +39,7 @@ public class GraphicsEngine implements GraphicsInterface
 		
 		StdDraw.setPenColor( StdDraw.GREEN ); //make all zombies green
 		
-		if( aZombie.getType().equalsIgnoreCase( "tank" )) //if tank make it bigger
-			StdDraw.filledSquare( aZombie.getX(), aZombie.getY(), 4); //draw tank
-		else
-			StdDraw.filledSquare( aZombie.getX(), aZombie.getY(), 2); // draw zombie
+		StdDraw.filledSquare( aZombie.getX(), aZombie.getY(), 4); // draw zombie
 	}
 
 	@Override
@@ -103,18 +100,23 @@ public class GraphicsEngine implements GraphicsInterface
 			humans.add(aHuman);
 			aHuman.aStar(randomN, g.randomNode());
  		}
+		Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
 		
 		while(true){
 			StdDraw.clear();
 			g.drawMap(grid);
-	
+			
+
 		    for(Human h : humans){
 		    	g.drawHuman(h);
 		    	if(h.getPath().size() != 0){
 		    		h.move();
 		    	}
 		    }
-		    StdDraw.show(1000);
+		    g.drawZombie(z);
+			z.move();
+			z.lineOfSight(humans);
+		    StdDraw.show(40);
 	   }
 	}
 }

@@ -9,43 +9,49 @@ import java.util.Set;
 
 public class Human implements CharacterInterface 
 {
-	private int hp;
-	private int x;
-	private int y;
-	private String type;
-	private int vel;
-	private boolean panic;
-	private List<Node> path;
-	private Node currentNode;
-	private Node nextNode;
+	protected int hp;
+	protected int x;
+	protected int y;
+	protected String type;
+	protected int vel;
+	protected boolean panic;
+	protected List<Node> path;
+	protected Node currentNode;
+	protected Node nextNode;
 
 	public Human(int xIn, int yIn) {
 		hp = 10;
 		type = "Human";
-		vel = (int) (Math.ceil(Math.random()*2) + 3);
+		vel = 1;
 		x = xIn;
 		y = yIn;
 		panic = false;
 		path = new ArrayList<Node>();
-		currentNode = this.getNode(Simulate.walkway, x, y);
-		currentNode = nextNode;
+		
 	}
 	
 	@Override
 	public void move() {
-		Iterator<Node> itr = path.iterator();
-		if(currentNode == nextNode){
-			Node temp = itr.next();
-			nextNode = temp;
-		}
-		if(currentNode != nextNode){
-			int xDistance = x - nextNode.getX();
-			int yDistance = y - nextNode.getY();
-			//MOVE HERE
-		}
+		if(path.size() > 1){
+		currentNode = path.get(0);
+			nextNode = path.get(1);
+			if(currentNode.getRightNode() == nextNode){
+				x += vel;
+			}
+			else if(currentNode.getLeftNode() == nextNode){
+				x -= vel;
+			}
+			else if(currentNode.getTopNode() == nextNode){
+				y += vel;
+			}
+			else if(currentNode.getBottomNode() == nextNode){
+				y -= vel;
+			}
 			
-		itr.remove();
-		
+			if(x == nextNode.getX() && y == nextNode.getY()){
+				path.remove(0);
+			}
+		}	
 	}
 
 	@Override
