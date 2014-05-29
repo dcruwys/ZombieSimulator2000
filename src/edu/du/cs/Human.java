@@ -24,6 +24,7 @@ public class Human implements CharacterInterface
 		x = xIn;
 		y = yIn;
 		panic = false;
+		path = new ArrayList<Node>();
 	}
 	
 	@Override
@@ -114,6 +115,7 @@ public class Human implements CharacterInterface
 	    Set<Node> open = new HashSet<Node>();
 	    Set<Node> closed = new HashSet<Node>();
 	    
+	    
 	    start.g = 0;
 
 	    start.h = estimateDistance(start, goal);
@@ -162,16 +164,12 @@ public class Human implements CharacterInterface
 	            }
 	        }
 	    }
-
-	    List<Node> nodes = new ArrayList<Node>();
 	    Node current = goal;
-	    while (current.parent != null) {
-	        nodes.add(current);
+	    while (current.parent != null && !path.contains(current.parent)) {
+	        path.add(current);
 	        current = current.parent;
 	    }
-	    nodes.add(start);
-	 
-	   path = nodes;
+	    path.add(start);
 	}
 	
 	public List<Node> getPath(){

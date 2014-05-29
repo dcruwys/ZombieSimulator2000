@@ -98,7 +98,7 @@ public class GraphicsEngine implements GraphicsInterface
 		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
 
-		for(int i = 0; i < 4; i++){
+		for(int i = 0; i < 5; i++){
 			Node randomN = g.randomNode();
 			Human aHuman = new Human(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
