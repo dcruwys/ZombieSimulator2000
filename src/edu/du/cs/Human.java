@@ -196,14 +196,11 @@ public class Human implements CharacterInterface
 	    nodes.add(start);
 	 
 	   path = nodes;
-<<<<<<< HEAD
-	   System.out.println(path.size());
-=======
+
 	   System.out.println("Path Size: " + path.size());
 	}
 	public List<Node> getPath(){
 		return path;
->>>>>>> FETCH_HEAD
 	}
 
 	public int estimateDistance(Node node1, Node node2) {
