@@ -35,7 +35,7 @@ public class GraphicsEngine implements GraphicsInterface
 			StdDraw.setPenColor( StdDraw.PINK );
 		
 		StdDraw.filledSquare( aHuman.getX(), aHuman.getY(), 4);
-		StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
+		//StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
 		StdDraw.filledSquare(aHuman.getX()-1, aHuman.getY()-1, 2);
 	}
 
@@ -129,30 +129,26 @@ public class GraphicsEngine implements GraphicsInterface
 		System.out.println("random: " + random);
 		g.randomNode();
 		randomNode = g.randomNode();
-		System.out.println("SHIT");
-		//System.out.println("rndmN: " + randomNode.toString());
-		//start node doesnt have proper adjacent, but why?
-		Node aRandomNode = g.randomNode();
-//		System.out.println(startNode.getAdjacentNodes().size());
-//		Human paul = new Human((startNode.getX()), (startNode.getY()));
-//		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-//		paul.aStar(startNode, aRandomNode);
-		//System.out.println("A Star Path Size: " + paul.getPath().size());
+
+
+		ArrayList<Node> randNodes = new ArrayList<Node>();
 		ArrayList<Human> humans = new ArrayList<Human>();
-		for(int i = 0; i < 7; i++){
+		for(int i = 0; i < 4; i++){
 			Node randomN = g.randomNode();
+			randNodes.add(randomN);
 			//System.out.println("Random Node: " + randomN.toString());
 			Human aHuman = new Human(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
 	    	aHuman.aStar(randomN, g.randomNode());
-			System.out.println("A FUCKING HUMAN WAS ADDED");
-		}
+ 		}
 		while(true){
 			StdDraw.clear();
 		    g.drawMap(grid);
 		    for(Human h : humans){
 		    	g.drawHuman(h);
-		    	h.move();
+		    	if(h.getPath().size() != 0){
+		    		h.move();
+		    	}
 		    }
 //		    if(paul.getPath().size() != 0){
 //		    	paul.move();   	
@@ -166,33 +162,30 @@ public class GraphicsEngine implements GraphicsInterface
 //					StdDraw.setPenRadius(0.005);
 //					StdDraw.point(n.getX(), n.getY());
 //				}
+				for(Human h : humans){
 				
-				if(n.getX() == startNode.getX() && n.getY() == startNode.getY())
-				{
-					StdDraw.setPenColor(StdDraw.BLUE);
-					StdDraw.setPenRadius(0.01);
-					StdDraw.point(n.getX(), n.getY());
+					//if(n.getX() == startNode.getX() && n.getY() == startNode.getY())
+					if(n.getX() == h.getX() && n.getY() == h.getY())
+					{
+						StdDraw.setPenColor(StdDraw.BLUE);
+						StdDraw.setPenRadius(0.01);
+						StdDraw.point(n.getX(), n.getY());
+					}
 				}
-				if(n.getX() == aRandomNode.getX() && n.getY() == aRandomNode.getY())
-				{
-					StdDraw.setPenColor(StdDraw.CYAN);
-					StdDraw.setPenRadius(0.01);
-					StdDraw.point(n.getX(), n.getY());
+				for(Node rn : randNodes){
+					//if(n.getX() == aRandomNode.getX() && n.getY() == aRandomNode.getY())
+					if(n.getX() == rn.getX() && n.getY() == rn.getY())
+
+					{
+						StdDraw.setPenColor(StdDraw.CYAN);
+						StdDraw.setPenRadius(0.01);
+						StdDraw.point(n.getX(), n.getY());
+					}
 				}
-//				while(itr.hasNext()){
-//					Node temp = itr.next();
-//					System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
-//					System.out.println("Iter X: " + temp.getX());
-//					System.out.println("Iter Y: " + temp.getY());
-//					paul.setX(temp.getX());
-//					paul.setY(temp.getY());
-//					StdDraw.setPenColor(StdDraw.BOOK_RED);
-//					StdDraw.filledSquare(paul.getX(), paul.getY(), 4);
-//					
-//				}
+
 			}
-		    StdDraw.show(100);
-		    System.out.println("Walkway size: " + walkwayNodes.size());
+		    StdDraw.show(300);
+		//    System.out.println("Walkway size: " + walkwayNodes.size());
 			
 		}
 		
