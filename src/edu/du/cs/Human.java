@@ -1,9 +1,11 @@
 package edu.du.cs;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 public class Human implements CharacterInterface 
@@ -41,18 +43,23 @@ public class Human implements CharacterInterface
 //			y += yVel;
 //		}
 //		this.checkCollisions();
-		Iterator<Node> itr = path.iterator();
 		System.out.println("Path Size: " + path.size());
+		Collections.reverse(path);
+		Iterator<Node> itr = path.iterator();
+	
+		//System.out.println("First item on iteratior: " + path.get(0).);
+		System.out.println(path);
 		while(itr.hasNext()){
 			Node temp = itr.next();
-			System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
-			System.out.println("Iter X: " + temp.getX());
-			System.out.println("Iter Y: " + temp.getY());
-			temp.setX(temp.getX());
-			temp.setY(temp.getY());
+//			System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
+//			System.out.println("Iter X: " + temp.getX());
+//			System.out.println("Iter Y: " + temp.getY());
+			this.setX(temp.getX());
+			this.setY(temp.getY());
 			StdDraw.setPenColor(StdDraw.BOOK_RED);
 			StdDraw.filledSquare(temp.getX(), temp.getY(), 4);
 			itr.remove();
+			StdDraw.show(20);
 		}
 		System.out.println("DONE!");
 	}
@@ -138,8 +145,10 @@ public class Human implements CharacterInterface
 	public void aStar(Node start, Node goal) {
 	    Set<Node> open = new HashSet<Node>();
 	    Set<Node> closed = new HashSet<Node>();
-
+	    //System.out.println("Start G: " + start.g);
 	    start.g = 0;
+	    System.out.println("Start G: " + start.g);
+
 	    start.h = estimateDistance(start, goal);
 	    start.f = start.h;
 
@@ -201,6 +210,15 @@ public class Human implements CharacterInterface
 	public List<Node> getPath(){
 		return path;
 	}
+//	public Node getNode(ArrayList<Node> nodeList, int x, int y){
+//		Node tempNode = null;
+//		for(Node n : nodeList){
+//			if((n.getX() == x) && (n.getY() == y)){
+//				tempNode = n;
+//			}
+//		}
+//		return tempNode;
+//	}
 
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());

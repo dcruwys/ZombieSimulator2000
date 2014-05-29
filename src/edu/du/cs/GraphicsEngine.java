@@ -88,17 +88,28 @@ public class GraphicsEngine implements GraphicsInterface
 		//printWalkwayNodes();
 
 	}
-	public void randomNode(){
+	public Node randomNode(){
+		Node tempNode = null;
 		random = (int )(Math.random() * test.getWalkwayNodes().size());
-		System.out.println("random: " + random);
+		System.out.println("random in generation: " + random);
 		if(walkwayNodes.get(random).isWalkable() == true){
-			randomNode = walkwayNodes.get(random);
+			tempNode = walkwayNodes.get(random);
 			System.out.println("random: " + random);
 			System.out.println("walkway size: " + test.getWalkwayNodes().size());
-		} else if(walkwayNodes.get(random).isWalkable() == false){
+		} else if((walkwayNodes.get(random).isWalkable() == false)){
 			System.out.println("Doh!");
-			randomNode();
+			return randomNode();
 		}
+		if(tempNode != null){
+			System.out.println("Random Node from GEN: " + tempNode);
+			return tempNode;
+			
+//			System.out.println("ITS FUCKING NULL");
+		}else {
+			return randomNode();
+		}
+//		System.out.println("Random Node from GEN: " + tempNode);
+//		return tempNode;
 	}
 	
 	public static void main(String[] args){
@@ -113,31 +124,48 @@ public class GraphicsEngine implements GraphicsInterface
 		StdDraw.setYscale(0.0, 500.0);
 	
 		
-		System.out.println("random: " + random);
+		
 		System.out.println("walkway size: " + test.getWalkwayNodes().size());
+		System.out.println("random: " + random);
 		g.randomNode();
-		startNode = randomNode;
+		randomNode = g.randomNode();
+		System.out.println("SHIT");
+		//System.out.println("rndmN: " + randomNode.toString());
 		//start node doesnt have proper adjacent, but why?
-		g.randomNode();
 		Node aRandomNode = randomNode;
-		System.out.println(startNode.getAdjacentNodes().size());
-		Human paul = new Human((startNode.getX()), (startNode.getY()));
-		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
-		paul.aStar(startNode, aRandomNode);
-		System.out.println("A Star Path Size: " + paul.getPath().size());
-		Iterator<Node> itr = paul.getPath().iterator();
+//		System.out.println(startNode.getAdjacentNodes().size());
+//		Human paul = new Human((startNode.getX()), (startNode.getY()));
+//		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
+//		paul.aStar(startNode, aRandomNode);
+		//System.out.println("A Star Path Size: " + paul.getPath().size());
+		ArrayList<Human> humans = new ArrayList<Human>();
+		for(int i = 0; i < 10; i++){
+			Node randomN = g.randomNode();
+			//System.out.println("Random Node: " + randomN.toString());
+			Human aHuman = new Human(randomN.getX(), randomN.getY());
+			humans.add(aHuman);
+			System.out.println("A FUCKING HUMAN WAS ADDED");
+		}
 		while(true){
 			StdDraw.clear();
 		    g.drawMap(grid);
-		    if(paul.getPath().size() != 0){
-		    	paul.move();
+		    for(Human h : humans){
+		    	h.aStar(startNode, aRandomNode);
+		    	g.drawHuman(h);
+		    	h.move();
 		    }
+//		    if(paul.getPath().size() != 0){
+//		    	paul.move();   	
+//		    }
+
+		    StdDraw.setPenColor(StdDraw.PINK);
+	    	//StdDraw.filledSquare(paul.getX(), paul.getY(), 4);
 			for(Node n : test.getWalkwayNodes()){
-				if(n.isWalkable()){
-					StdDraw.setPenColor(StdDraw.GREEN);
-					StdDraw.setPenRadius(0.005);
-					StdDraw.point(n.getX(), n.getY());
-				}
+//				if(n.isWalkable()){
+//					StdDraw.setPenColor(StdDraw.GREEN);
+//					StdDraw.setPenRadius(0.005);
+//					StdDraw.point(n.getX(), n.getY());
+//				}
 				if(n.getX() == startNode.getX() && n.getY() == startNode.getY())
 				{
 					StdDraw.setPenColor(StdDraw.BLUE);
@@ -162,7 +190,6 @@ public class GraphicsEngine implements GraphicsInterface
 //					
 //				}
 			}
-		    g.drawHuman(paul);
 		    StdDraw.show(100);
 			
 		}

@@ -111,6 +111,7 @@ public class Node {
 	public Node setParent(Node aNode){
 		return parent = aNode;
 	}
+
 	
 	public String toString(){
 		return "X: " + x + " Y: " + y;
