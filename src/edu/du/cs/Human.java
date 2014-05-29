@@ -2,6 +2,7 @@ package edu.du.cs;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +41,20 @@ public class Human implements CharacterInterface
 //			y += yVel;
 //		}
 //		this.checkCollisions();
+		Iterator<Node> itr = path.iterator();
+		System.out.println("Path Size: " + path.size());
+		while(itr.hasNext()){
+			Node temp = itr.next();
+			System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
+			System.out.println("Iter X: " + temp.getX());
+			System.out.println("Iter Y: " + temp.getY());
+			temp.setX(temp.getX());
+			temp.setY(temp.getY());
+			StdDraw.setPenColor(StdDraw.BOOK_RED);
+			StdDraw.filledSquare(temp.getX(), temp.getY(), 4);
+			itr.remove();
+		}
+		System.out.println("DONE!");
 	}
 
 	@Override
@@ -78,6 +93,12 @@ public class Human implements CharacterInterface
 	public int getY() 
 	{
 		return y;
+	}
+	public void setX(int myX){
+		x = myX;
+	}
+	public void setY(int myY){
+		y = myY;
 	}
 
 	@Override
@@ -175,7 +196,14 @@ public class Human implements CharacterInterface
 	    nodes.add(start);
 	 
 	   path = nodes;
+<<<<<<< HEAD
 	   System.out.println(path.size());
+=======
+	   System.out.println("Path Size: " + path.size());
+	}
+	public List<Node> getPath(){
+		return path;
+>>>>>>> FETCH_HEAD
 	}
 
 	public int estimateDistance(Node node1, Node node2) {
