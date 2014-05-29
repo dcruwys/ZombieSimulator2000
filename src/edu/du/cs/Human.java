@@ -173,8 +173,9 @@ public class Human implements CharacterInterface
 	        current = current.parent;
 	    }
 	    nodes.add(start);
-
+	 
 	   path = nodes;
+	   System.out.println(path.size());
 	}
 
 	public int estimateDistance(Node node1, Node node2) {
