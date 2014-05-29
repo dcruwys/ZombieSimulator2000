@@ -129,6 +129,9 @@ public class GraphicsEngine implements GraphicsInterface
 		while(true){
 			StdDraw.clear();
 		    g.drawMap(grid);
+		    if(paul.getPath().size() != 0){
+		    	paul.move();
+		    }
 			for(Node n : test.getWalkwayNodes()){
 				if(n.isWalkable()){
 					StdDraw.setPenColor(StdDraw.GREEN);
@@ -147,20 +150,20 @@ public class GraphicsEngine implements GraphicsInterface
 					StdDraw.setPenRadius(0.01);
 					StdDraw.point(n.getX(), n.getY());
 				}
-				while(itr.hasNext()){
-					Node temp = itr.next();
-					System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
-					System.out.println("Iter X: " + temp.getX());
-					System.out.println("Iter Y: " + temp.getY());
-					paul.setX(temp.getX());
-					paul.setY(temp.getY());
-					StdDraw.setPenColor(StdDraw.BOOK_RED);
-					StdDraw.filledSquare(paul.getX(), paul.getY(), 4);
-					
-				}
+//				while(itr.hasNext()){
+//					Node temp = itr.next();
+//					System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
+//					System.out.println("Iter X: " + temp.getX());
+//					System.out.println("Iter Y: " + temp.getY());
+//					paul.setX(temp.getX());
+//					paul.setY(temp.getY());
+//					StdDraw.setPenColor(StdDraw.BOOK_RED);
+//					StdDraw.filledSquare(paul.getX(), paul.getY(), 4);
+//					
+//				}
 			}
 		    g.drawHuman(paul);
-		    StdDraw.show(50);
+		    StdDraw.show(100);
 			
 		}
 		

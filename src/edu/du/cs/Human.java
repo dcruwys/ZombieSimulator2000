@@ -41,12 +41,20 @@ public class Human implements CharacterInterface
 //			y += yVel;
 //		}
 //		this.checkCollisions();
-//		Iterator<Node> itr = path.iterator();
-//		System.out.println("Path Size: " + path.size());
-//		while(itr.hasNext()){
-//			x = itr.next().getX();
-//			y = itr.next().getY();
-//		}
+		Iterator<Node> itr = path.iterator();
+		System.out.println("Path Size: " + path.size());
+		while(itr.hasNext()){
+			Node temp = itr.next();
+			System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
+			System.out.println("Iter X: " + temp.getX());
+			System.out.println("Iter Y: " + temp.getY());
+			temp.setX(temp.getX());
+			temp.setY(temp.getY());
+			StdDraw.setPenColor(StdDraw.BOOK_RED);
+			StdDraw.filledSquare(temp.getX(), temp.getY(), 4);
+			itr.remove();
+		}
+		System.out.println("DONE!");
 	}
 
 	@Override
