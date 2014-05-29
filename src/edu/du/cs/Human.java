@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Set;
 
 public class Human implements CharacterInterface 
@@ -106,15 +105,16 @@ public class Human implements CharacterInterface
 	{
 		
 	}
+	
 	public void checkCollisions(){
 		
 	}
+	
 	public void aStar(Node start, Node goal) {
 	    Set<Node> open = new HashSet<Node>();
 	    Set<Node> closed = new HashSet<Node>();
 	    
 	    start.g = 0;
-	    System.out.println("Start G: " + start.g);
 
 	    start.h = estimateDistance(start, goal);
 	    start.f = start.h;
@@ -173,6 +173,7 @@ public class Human implements CharacterInterface
 	 
 	   path = nodes;
 	}
+	
 	public List<Node> getPath(){
 		return path;
 	}
@@ -186,7 +187,6 @@ public class Human implements CharacterInterface
 //		}
 //		return tempNode;
 //	}
-	
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}

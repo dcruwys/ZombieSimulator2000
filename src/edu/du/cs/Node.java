@@ -1,9 +1,7 @@
 package edu.du.cs;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Node {
 	Node topNode;
@@ -29,10 +27,11 @@ public class Node {
 		
 		cost = 0;
 		walkable = w;
+		walkway = Simulate.walkway;
 	}
 	
 	public void setAdjacent(){
-		walkway = GraphicsEngine.walkwayNodes;
+		
 		Node temp = null;
 		temp = findNode(x+10, y);
 		if(temp != null && temp.isWalkable()==true){

@@ -3,17 +3,14 @@ package edu.du.cs;
 import java.util.ArrayList;
 
 public class Simulate {
-	private int[][] grid;
+	private static int mySize = 50;
+	public static int[][] grid = new int[mySize][mySize];
 	int myX, myY;
-	private int mySize;
-	public ArrayList<Node> walkway = new ArrayList<Node>();
+	public static ArrayList<Node> walkway = new ArrayList<Node>();
 	
-	public Simulate() {
-		mySize = 50;
-		grid = new int[mySize][mySize];
-	}
+
 	
-	public void generateBuildings(){
+	public static void generateBuildings(){
 		for (int row=0; row < mySize; row ++){
 			for (int col=0; col < mySize; col ++){
 				grid[row][col] = 8;
@@ -55,13 +52,6 @@ public class Simulate {
 		}
 		
 	}
-	
-	public ArrayList<Node> getWalkwayNodes(){
-		return walkway;
-	}
-	
-	public int[][] getGrid(){
-		return grid;
-	}
+
 	
 }

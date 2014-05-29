@@ -8,16 +8,15 @@ public class GraphicsEngine implements GraphicsInterface
 	public static int[][] grid;
 	public static ArrayList<Node> walkwayNodes;
 	public ArrayList<Human> humans;
-	public Simulate test;
+
 	public int random;
 	public Node startNode;
 	public Node randomNode;
 	
 	public GraphicsEngine(){
-		test = new Simulate();
-		test.generateBuildings();
-		walkwayNodes = test.getWalkwayNodes();
-		grid = test.getGrid();
+		Simulate.generateBuildings();
+		walkwayNodes = Simulate.walkway;
+		grid = Simulate.grid;
 		humans = new ArrayList<Human>(); //Create an array list of humans.
 		for(Node n: walkwayNodes)
 			n.setAdjacent();
@@ -76,7 +75,7 @@ public class GraphicsEngine implements GraphicsInterface
 	
 	public Node randomNode(){
 		Node tempNode = null;
-		random = (int )(Math.random() * test.getWalkwayNodes().size());
+		random = (int )(Math.random() * walkwayNodes.size());
 		if(walkwayNodes.get(random).isWalkable() == true){
 			tempNode = walkwayNodes.get(random);
 		} else if((walkwayNodes.get(random).isWalkable() == false)){
