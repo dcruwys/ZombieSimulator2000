@@ -203,8 +203,9 @@ public class Human implements CharacterInterface
 	        current = current.parent;
 	    }
 	    nodes.add(start);
-
+	 
 	   path = nodes;
+
 	   System.out.println("Path Size: " + path.size());
 	}
 	public List<Node> getPath(){
