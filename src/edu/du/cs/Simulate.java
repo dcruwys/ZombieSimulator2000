@@ -5,17 +5,14 @@ import java.util.ArrayList;
 public class Simulate {
 	private int[][] grid;
 	int myX, myY;
-	private int mySize; //Grid Size
-	//More node stuff
+	private int mySize;
 	public ArrayList<Node> walkway = new ArrayList<Node>();
 	
 	public Simulate() {
 		mySize = 50;
 		grid = new int[mySize][mySize];
 	}
-	//0 is walkway
-	//9 is intersection (walkway)
-	//1 is building
+	
 	public void generateBuildings(){
 		for (int row=0; row < mySize; row ++){
 			for (int col=0; col < mySize; col ++){

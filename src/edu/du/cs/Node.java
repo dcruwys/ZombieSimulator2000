@@ -29,8 +29,8 @@ public class Node {
 		
 		cost = 0;
 		walkable = w;
-
 	}
+	
 	public void setAdjacent(){
 		walkway = GraphicsEngine.walkwayNodes;
 		Node temp = null;
@@ -78,7 +78,6 @@ public class Node {
 			}
 		}
 		return null;
-		
 	}
 	
 	public void setX(int myX){

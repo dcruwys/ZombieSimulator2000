@@ -15,45 +15,27 @@ public class Human implements CharacterInterface
 	private int y;
 	private String type;
 	private int vel;
-	private int direction;
 	private boolean panic;
-	private int xVel;
-	private int yVel;
 	private List<Node> path;
 
 	public Human(int xIn, int yIn) {
 		hp = 10;
 		type = "Human";
-		direction = (int) (Math.random() * 360) % 360;
 		vel = (int) (Math.ceil(Math.random()*2) + 3);
 		x = xIn;
 		y = yIn;
-		//factor = vel / Math.sqrt(xSpeed * xSpeed + ySpeed * ySpeed);
-		
 		panic = false;
 	}
 	
 	@Override
 	public void move() {
-
-//		if(!panic){
-//			xVel = (int) (vel * Math.sin(direction));
-//			yVel = (int) (vel * Math.cos(direction));
-//			x += xVel;
-//			y += yVel;
-//		}
-//		this.checkCollisions();
 		System.out.println("Path Size: " + path.size());
 		Collections.reverse(path);
 		Iterator<Node> itr = path.iterator();
 	
-		//System.out.println("First item on iteratior: " + path.get(0).);
-		System.out.println(path);
 		while(itr.hasNext()){
 			Node temp = itr.next();
-//			System.out.println("Iter X & Y: " + temp.getX() + " " + temp.getY());
-//			System.out.println("Iter X: " + temp.getX());
-//			System.out.println("Iter Y: " + temp.getY());
+
 			this.setX(temp.getX());
 			this.setY(temp.getY());
 			StdDraw.setPenColor(StdDraw.BOOK_RED);
@@ -101,9 +83,11 @@ public class Human implements CharacterInterface
 	{
 		return y;
 	}
+	
 	public void setX(int myX){
 		x = myX;
 	}
+	
 	public void setY(int myY){
 		y = myY;
 	}
@@ -123,29 +107,12 @@ public class Human implements CharacterInterface
 		
 	}
 	public void checkCollisions(){
-		if(x > 500){
-			x = 500;
-			direction = (int) (Math.random() * 360) % 360;
-		}
-		else if(y > 500){
-			y = 500;
-			direction = (int) (Math.random() * 360) % 360;
-		}
-		else if(x < -10){
-			x = -10;
-			direction = (int) (Math.random() * 360) % 360;
-		}
-		else if(y < -10){
-			y = -10;
-			direction = (int) (Math.random() * 360) % 360;	
-		}
-		//GraphicsEngine.grid[][]
 		
 	}
 	public void aStar(Node start, Node goal) {
 	    Set<Node> open = new HashSet<Node>();
 	    Set<Node> closed = new HashSet<Node>();
-	    //System.out.println("Start G: " + start.g);
+	    
 	    start.g = 0;
 	    System.out.println("Start G: " + start.g);
 
@@ -205,12 +172,11 @@ public class Human implements CharacterInterface
 	    nodes.add(start);
 	 
 	   path = nodes;
-
-	   System.out.println("Path Size: " + path.size());
 	}
 	public List<Node> getPath(){
 		return path;
 	}
+	
 //	public Node getNode(ArrayList<Node> nodeList, int x, int y){
 //		Node tempNode = null;
 //		for(Node n : nodeList){
@@ -220,7 +186,7 @@ public class Human implements CharacterInterface
 //		}
 //		return tempNode;
 //	}
-
+	
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}
