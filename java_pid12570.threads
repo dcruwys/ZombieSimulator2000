@@ -1,0 +1,163 @@
+Thread 0x7dae00000
+  at java.util.Arrays.copyOfRange([CII)[C (Arrays.java:3209)
+  at java.lang.String.<init>([CII)V (String.java:215)
+  at java.lang.StringBuilder.toString()Ljava/lang/String; (StringBuilder.java:430)
+  at java.lang.Thread.<init>(Ljava/lang/ThreadGroup;Ljava/lang/Runnable;Z)V (Thread.java:476)
+
+  locals:
+    objectId=0x7dae00098, line=0
+    objectId=0x7dae000c8, line=1
+    objectId=0x7dae00098, line=1
+    objectId=0x7dae00080, line=2
+    objectId=0x7dae00000, line=3
+    objectId=0x7df0b2e68, line=3
+
+Thread 0x7deefb368
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at java.awt.EventQueue.getNextEvent()Ljava/awt/AWTEvent; (EventQueue.java:558)
+  at java.awt.EventDispatchThread.pumpOneEventForFilters(I)Z (EventDispatchThread.java:263)
+  at java.awt.EventDispatchThread.pumpEventsForFilter(ILjava/awt/Conditional;Ljava/awt/EventFilter;)V (EventDispatchThread.java:211)
+  at java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V (EventDispatchThread.java:201)
+  at java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V (EventDispatchThread.java:196)
+  at java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V (EventDispatchThread.java:188)
+  at java.awt.EventDispatchThread.run()V (EventDispatchThread.java:122)
+
+  locals:
+    objectId=0x7df00f768, line=1
+    objectId=0x7df00f768, line=2
+    objectId=0x7df00f768, line=2
+    objectId=0x7deefb368, line=3
+    objectId=0x7deefb368, line=4
+    objectId=0x7df02d638, line=4
+    objectId=0x7df02d650, line=4
+    objectId=0x7deefb368, line=5
+    objectId=0x7df02d638, line=5
+    objectId=0x7deefb368, line=6
+    objectId=0x7df02d638, line=6
+    objectId=0x7deefb368, line=7
+    objectId=0x7df02d638, line=7
+    objectId=0x7deefb368, line=8
+
+Thread 0x7deef9f20
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:118)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:134)
+  at sun.java2d.Disposer.run()V (Disposer.java:125)
+  at java.lang.Thread.run()V (Thread.java:695)
+
+  locals:
+    objectId=0x7df08f000, line=1
+    objectId=0x7df0d3f58, line=1
+    objectId=0x7df08f000, line=2
+    objectId=0x7df0d3f70, line=3
+    objectId=0x7deef9f20, line=4
+
+Thread 0x7df045980
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at sun.awt.AWTAutoShutdown.run()V (AWTAutoShutdown.java:265)
+  at java.lang.Thread.run()V (Thread.java:695)
+
+  locals:
+    objectId=0x7df0d3f88, line=1
+    objectId=0x7df104230, line=2
+    objectId=0x7df045980, line=2
+    objectId=0x7df0d3f88, line=2
+    objectId=0x7df045980, line=3
+
+Thread 0x7df0459f0
+  at java.awt.EventQueue.wakeup(Z)V (EventQueue.java:1138)
+  at java.awt.EventQueue.access$300(Ljava/awt/EventQueue;Z)V (EventQueue.java:82)
+  at java.awt.EventQueue$1.wakeup(Ljava/awt/EventQueue;Z)V (EventQueue.java:203)
+  at sun.awt.SunToolkit.wakeupEventQueue(Ljava/awt/EventQueue;Z)V (SunToolkit.java:310)
+  at sun.awt.PostEventQueue.postEvent(Ljava/awt/AWTEvent;)V (SunToolkit.java:1999)
+  at sun.awt.SunToolkit.postEvent(Lsun/awt/AppContext;Ljava/awt/AWTEvent;)V (SunToolkit.java:535)
+  at apple.awt.CToolkit.invokeAndWait(Ljava/lang/Runnable;Ljava/awt/Component;Z)V (CToolkit.java:1144)
+  at apple.awt.CToolkit.invokeAndWait(Ljava/lang/Runnable;Ljava/awt/Component;)V (CToolkit.java:1105)
+  at apple.awt.CToolkit.invokeAndWait(Ljava/util/concurrent/Callable;Ljava/awt/Component;)Ljava/lang/Object; (CToolkit.java:1110)
+  at apple.awt.CAccessibility.invokeAndWait(Ljava/util/concurrent/Callable;Ljava/awt/Component;)Ljava/lang/Object; (CAccessibility.java:55)
+  at apple.awt.CAccessibility.getFocusOwner(Ljava/awt/Component;)Ljavax/accessibility/Accessible; (CAccessibility.java:501)
+
+  locals:
+    objectId=0x7df00f768, line=0
+    objectId=0x7df00f768, line=0
+    objectId=0x7df00f768, line=1
+    objectId=0x7df04a2d8, line=2
+    objectId=0x7df00f768, line=2
+    objectId=0x7df00f768, line=3
+    objectId=0x7df028880, line=4
+    objectId=0x7dae5d7a0, line=4
+    objectId=0x7dae5d818, line=4
+    objectId=0x7df028880, line=4
+    objectId=0x7df09cb10, line=5
+    objectId=0x7dae5d7a0, line=5
+    objectId=0x7df028880, line=5
+    objectId=0x7dae5d788, line=6
+    objectId=0x7def01240, line=6
+    objectId=0x7dae5d7a0, line=6
+    objectId=0x7df09cb10, line=6
+    objectId=0x7dae5d788, line=7
+    objectId=0x7def01240, line=7
+    objectId=0x7dae5d778, line=8
+    objectId=0x7def01240, line=8
+    objectId=0x7dae5d788, line=8
+    objectId=0x7dae5d778, line=9
+    objectId=0x7def01240, line=9
+    objectId=0x7def01240, line=10
+
+Thread 0x7df045bb0
+
+  locals:
+
+Thread 0x7deef9618
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:118)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:134)
+  at java.lang.ref.Finalizer$FinalizerThread.run()V (Finalizer.java:171)
+
+  locals:
+    objectId=0x7df08f020, line=1
+    objectId=0x7df0d3fa0, line=1
+    objectId=0x7df08f020, line=2
+    objectId=0x7deef9618, line=3
+
+Thread 0x7df045c90
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at java.lang.ref.Reference$ReferenceHandler.run()V (Reference.java:116)
+
+  locals:
+    objectId=0x7df114e48, line=1
+    objectId=0x7df045c90, line=2
+    objectId=0x7df114e48, line=2
+
+Thread 0x7df015968
+  at java.lang.OutOfMemoryError.<init>()V (OutOfMemoryError.java:25)
+  at java.util.Arrays.copyOf([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object; (Arrays.java:2760)
+  at java.util.Arrays.copyOf([Ljava/lang/Object;I)[Ljava/lang/Object; (Arrays.java:2734)
+  at java.util.ArrayList.ensureCapacity(I)V (ArrayList.java:167)
+  at java.util.ArrayList.add(Ljava/lang/Object;)Z (ArrayList.java:351)
+  at edu.du.cs.Human.aStar(Ledu/du/cs/Node;Ledu/du/cs/Node;)V (Human.java:202)
+  at edu.du.cs.GraphicsEngine.draw(Ledu/du/cs/GraphicsEngine;)V (GraphicsEngine.java:147)
+  at edu.du.cs.GraphicsEngine.main([Ljava/lang/String;)V (GraphicsEngine.java:117)
+
+  locals:
+    objectId=0x7df2603a0, line=1
+    objectId=0x7faea7150, line=1
+    objectId=0x7df2603a0, line=2
+    objectId=0x7df0d3f10, line=4
+    objectId=0x7df08adc8, line=4
+    objectId=0x7df0b4d70, line=5
+    objectId=0x7df08adc8, line=5
+    objectId=0x7df0d3f10, line=5
+    objectId=0x7df08adc8, line=5
+    objectId=0x7df08f040, line=6
+    objectId=0x7df08f040, line=6
+    objectId=0x7df08ae08, line=6
+    objectId=0x7df0d3f28, line=6
+    objectId=0x7df08adc8, line=6
+    objectId=0x7df0b4d70, line=6
+    objectId=0x7df151300, line=7
+    objectId=0x7df08f040, line=7
+

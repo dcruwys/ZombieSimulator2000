@@ -132,25 +132,25 @@ public class GraphicsEngine implements GraphicsInterface
 		System.out.println("SHIT");
 		//System.out.println("rndmN: " + randomNode.toString());
 		//start node doesnt have proper adjacent, but why?
-		Node aRandomNode = randomNode;
+		Node aRandomNode = g.randomNode();
 //		System.out.println(startNode.getAdjacentNodes().size());
 //		Human paul = new Human((startNode.getX()), (startNode.getY()));
 //		System.out.println("Paul X and Y:" + paul.getX() + " " + paul.getY());
 //		paul.aStar(startNode, aRandomNode);
 		//System.out.println("A Star Path Size: " + paul.getPath().size());
 		ArrayList<Human> humans = new ArrayList<Human>();
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 7; i++){
 			Node randomN = g.randomNode();
 			//System.out.println("Random Node: " + randomN.toString());
 			Human aHuman = new Human(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
+	    	aHuman.aStar(randomN, g.randomNode());
 			System.out.println("A FUCKING HUMAN WAS ADDED");
 		}
 		while(true){
 			StdDraw.clear();
 		    g.drawMap(grid);
 		    for(Human h : humans){
-		    	h.aStar(startNode, aRandomNode);
 		    	g.drawHuman(h);
 		    	h.move();
 		    }
@@ -166,6 +166,7 @@ public class GraphicsEngine implements GraphicsInterface
 //					StdDraw.setPenRadius(0.005);
 //					StdDraw.point(n.getX(), n.getY());
 //				}
+				
 				if(n.getX() == startNode.getX() && n.getY() == startNode.getY())
 				{
 					StdDraw.setPenColor(StdDraw.BLUE);
@@ -191,6 +192,7 @@ public class GraphicsEngine implements GraphicsInterface
 //				}
 			}
 		    StdDraw.show(100);
+		    System.out.println("Walkway size: " + walkwayNodes.size());
 			
 		}
 		

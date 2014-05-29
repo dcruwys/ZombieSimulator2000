@@ -1,0 +1,115 @@
+Thread 0x7f4530e58
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at java.awt.EventQueue.getNextEvent()Ljava/awt/AWTEvent; (EventQueue.java:558)
+  at java.awt.EventDispatchThread.pumpOneEventForFilters(I)Z (EventDispatchThread.java:263)
+  at java.awt.EventDispatchThread.pumpEventsForFilter(ILjava/awt/Conditional;Ljava/awt/EventFilter;)V (EventDispatchThread.java:211)
+  at java.awt.EventDispatchThread.pumpEventsForHierarchy(ILjava/awt/Conditional;Ljava/awt/Component;)V (EventDispatchThread.java:201)
+  at java.awt.EventDispatchThread.pumpEvents(ILjava/awt/Conditional;)V (EventDispatchThread.java:196)
+  at java.awt.EventDispatchThread.pumpEvents(Ljava/awt/Conditional;)V (EventDispatchThread.java:188)
+  at java.awt.EventDispatchThread.run()V (EventDispatchThread.java:122)
+
+  locals:
+    objectId=0x7f43f8088, line=1
+    objectId=0x7f43f8088, line=2
+    objectId=0x7f43f8088, line=2
+    objectId=0x7f4530e58, line=3
+    objectId=0x7f4530e58, line=4
+    objectId=0x7f43cf910, line=4
+    objectId=0x7f43cf928, line=4
+    objectId=0x7f4530e58, line=5
+    objectId=0x7f43cf910, line=5
+    objectId=0x7f4530e58, line=6
+    objectId=0x7f43cf910, line=6
+    objectId=0x7f4530e58, line=7
+    objectId=0x7f43cf910, line=7
+    objectId=0x7f4530e58, line=8
+
+Thread 0x7f452eb08
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:118)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:134)
+  at sun.java2d.Disposer.run()V (Disposer.java:125)
+  at java.lang.Thread.run()V (Thread.java:695)
+
+  locals:
+    objectId=0x7f4530508, line=1
+    objectId=0x7f448d038, line=1
+    objectId=0x7f4530508, line=2
+    objectId=0x7f43cf940, line=3
+    objectId=0x7f452eb08, line=4
+
+Thread 0x7f452eb78
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at sun.awt.AWTAutoShutdown.run()V (AWTAutoShutdown.java:265)
+  at java.lang.Thread.run()V (Thread.java:695)
+
+  locals:
+    objectId=0x7f43cf958, line=1
+    objectId=0x7f44c70b8, line=2
+    objectId=0x7f452eb78, line=2
+    objectId=0x7f43cf958, line=2
+    objectId=0x7f452eb78, line=3
+
+Thread 0x7f452ebe8
+
+  locals:
+    objectId=0x7f452ebe8, line=-1
+    objectId=0x7f44e7d10, line=-1
+
+Thread 0x7f452e868
+
+  locals:
+
+Thread 0x7f471b0f0
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.ref.ReferenceQueue.remove(J)Ljava/lang/ref/Reference; (ReferenceQueue.java:118)
+  at java.lang.ref.ReferenceQueue.remove()Ljava/lang/ref/Reference; (ReferenceQueue.java:134)
+  at java.lang.ref.Finalizer$FinalizerThread.run()V (Finalizer.java:171)
+
+  locals:
+    objectId=0x7f4530ed8, line=1
+    objectId=0x7f43cf970, line=1
+    objectId=0x7f4530ed8, line=2
+    objectId=0x7f471b0f0, line=3
+
+Thread 0x7f452e948
+  at java.lang.Object.wait(J)V (Native Method)
+  at java.lang.Object.wait()V (Object.java:485)
+  at java.lang.ref.Reference$ReferenceHandler.run()V (Reference.java:116)
+
+  locals:
+    objectId=0x7f43cf988, line=1
+    objectId=0x7f452e948, line=2
+    objectId=0x7f43cf988, line=2
+
+Thread 0x7f471e330
+  at java.lang.OutOfMemoryError.<init>()V (OutOfMemoryError.java:25)
+  at java.util.Arrays.copyOf([Ljava/lang/Object;ILjava/lang/Class;)[Ljava/lang/Object; (Arrays.java:2760)
+  at java.util.Arrays.copyOf([Ljava/lang/Object;I)[Ljava/lang/Object; (Arrays.java:2734)
+  at java.util.ArrayList.ensureCapacity(I)V (ArrayList.java:167)
+  at java.util.ArrayList.add(Ljava/lang/Object;)Z (ArrayList.java:351)
+  at edu.du.cs.Human.aStar(Ledu/du/cs/Node;Ledu/du/cs/Node;)V (Human.java:202)
+  at edu.du.cs.GraphicsEngine.draw(Ledu/du/cs/GraphicsEngine;)V (GraphicsEngine.java:147)
+  at edu.du.cs.GraphicsEngine.main([Ljava/lang/String;)V (GraphicsEngine.java:117)
+
+  locals:
+    objectId=0x7f4720738, line=1
+    objectId=0x7faea7150, line=1
+    objectId=0x7f4720738, line=2
+    objectId=0x7f43cf9a0, line=4
+    objectId=0x7f452f8e8, line=4
+    objectId=0x7f471dee0, line=5
+    objectId=0x7f452f8e8, line=5
+    objectId=0x7f43cf9a0, line=5
+    objectId=0x7f452f8e8, line=5
+    objectId=0x7f4530ef8, line=6
+    objectId=0x7f4530ef8, line=6
+    objectId=0x7f45301a8, line=6
+    objectId=0x7f43cf8f8, line=6
+    objectId=0x7f452f8e8, line=6
+    objectId=0x7f471dee0, line=6
+    objectId=0x7f452ec70, line=7
+    objectId=0x7f4530ef8, line=7
+
