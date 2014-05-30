@@ -21,6 +21,12 @@ public class GraphicsEngine implements GraphicsInterface
 		for(Node n: walkwayNodes)
 			n.setAdjacent();
 	}
+	public void drawTalkBox(String msg, String gifSrc){
+		StdDraw.setPenColor(StdDraw.BLUE);
+		StdDraw.filledRectangle(150, 50, 150, 60);
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.text(170, 40, msg);
+	}
 	
 	@Override
 	public void drawHuman( Human aHuman ) {
@@ -105,7 +111,8 @@ public class GraphicsEngine implements GraphicsInterface
 		while(true){
 			StdDraw.clear();
 			g.drawMap(grid);
-			
+			//g.drawTalkBox("Hello World", "meh.gif");
+
 
 		    for(Human h : humans){
 		    	g.drawHuman(h);
