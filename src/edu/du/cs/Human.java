@@ -45,6 +45,9 @@ public class Human implements CharacterInterface
 		if(path.size() > 1){
 			currentNode = path.get(0);
 			nextNode = path.get(1);
+			if(currentNode == nextNode){
+				path.remove(0);
+			}
 			if(currentNode.getRightNode() == nextNode){
 				x += vel;
 			}

@@ -1,7 +1,5 @@
 package edu.du.cs;
 
-import java.util.List;
-
 public interface CharacterInterface 
 {	
 	public void move();
