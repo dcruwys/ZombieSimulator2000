@@ -3,7 +3,6 @@ package edu.du.cs;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -14,10 +13,12 @@ public class Human implements CharacterInterface
 	protected int y;
 	protected String type;
 	protected int vel;
+	private int random;
 	protected boolean panic;
 	protected List<Node> path;
 	protected Node currentNode;
 	protected Node nextNode;
+	private Node rNode;
 
 	public Human(int xIn, int yIn) {
 		hp = 10;
@@ -26,14 +27,18 @@ public class Human implements CharacterInterface
 		x = xIn;
 		y = yIn;
 		panic = false;
+		rNode = this.randomNode();
+		currentNode = this.getNode(Simulate.walkway, x, y);
 		path = new ArrayList<Node>();
+		this.aStar(currentNode, rNode);
+		
 		
 	}
 	
 	@Override
 	public void move() {
 		if(path.size() > 1){
-		currentNode = path.get(0);
+			currentNode = path.get(0);
 			nextNode = path.get(1);
 			if(currentNode.getRightNode() == nextNode){
 				x += vel;
@@ -52,6 +57,12 @@ public class Human implements CharacterInterface
 				path.remove(0);
 			}
 		}	
+		else{
+			currentNode = this.getNode(Simulate.walkway, x, y);
+			rNode = this.randomNode();
+			path.clear();
+			this.aStar(currentNode, rNode);
+		}
 	}
 
 	@Override
@@ -197,5 +208,20 @@ public class Human implements CharacterInterface
 	
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
+	}
+	
+	public Node randomNode(){
+		Node tempNode = null;
+		random = (int )(Math.random() * Simulate.walkway.size());
+		if(Simulate.walkway.get(random).isWalkable() == true){
+			tempNode = Simulate.walkway.get(random);
+		} else if((Simulate.walkway.get(random).isWalkable() == false)){
+			return randomNode();
+		}
+		if(tempNode != null){
+			return tempNode;
+		}else {
+			return randomNode();
+		}
 	}
 }

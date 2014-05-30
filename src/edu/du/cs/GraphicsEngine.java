@@ -100,11 +100,10 @@ public class GraphicsEngine implements GraphicsInterface
 		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
-		for(int i = 0; i < 10; i++){
+		for(int i = 0; i < 1; i++){
 			Node randomN = g.randomNode();
 			Human aHuman = new Human(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
-			aHuman.aStar(randomN, g.randomNode());
  		}
 		Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
 		
@@ -122,7 +121,7 @@ public class GraphicsEngine implements GraphicsInterface
 		    }
 		    g.drawZombie(z);
 			z.move();
-			z.lineOfSight(humans);
+			//z.lineOfSight(humans);
 		    StdDraw.show(40);
 	   }
 	}
