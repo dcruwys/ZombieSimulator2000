@@ -105,7 +105,7 @@ public class GraphicsEngine implements GraphicsInterface
 			Human aHuman = new Human(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
  		}
-		Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
+		//Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
 		
 		while(true){
 			StdDraw.clear();
@@ -115,12 +115,10 @@ public class GraphicsEngine implements GraphicsInterface
 
 		    for(Human h : humans){
 		    	g.drawHuman(h);
-		    	if(h.getPath().size() != 0){
-		    		h.move();
-		    	}
+		    	h.move();
 		    }
-		    g.drawZombie(z);
-			z.move();
+		    //g.drawZombie(z);
+			//z.move();
 			//z.lineOfSight(humans);
 		    StdDraw.show(40);
 	   }

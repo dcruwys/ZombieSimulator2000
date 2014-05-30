@@ -31,6 +31,11 @@ public class Human implements CharacterInterface
 		currentNode = this.getNode(Simulate.walkway, x, y);
 		path = new ArrayList<Node>();
 		this.aStar(currentNode, rNode);
+		System.out.println("START OF THE LINE...");
+		System.out.println("Current Node: "+currentNode);
+		System.out.println("Random Node: "+rNode);
+		System.out.println("Path: "+path);
+		System.out.println();
 		
 		
 	}
@@ -58,10 +63,14 @@ public class Human implements CharacterInterface
 			}
 		}	
 		else{
-			currentNode = this.getNode(Simulate.walkway, x, y);
-			rNode = this.randomNode();
 			path.clear();
+			rNode = this.randomNode();
 			this.aStar(currentNode, rNode);
+			
+			System.out.println("END OF THE LINE...");
+			System.out.println("Current Node: "+currentNode);
+			System.out.println("Random Node: "+rNode);
+			System.out.println("Path: "+path);
 		}
 	}
 
@@ -133,7 +142,6 @@ public class Human implements CharacterInterface
 	public void aStar(Node start, Node goal) {
 	    Set<Node> open = new HashSet<Node>();
 	    Set<Node> closed = new HashSet<Node>();
-	    
 	    
 	    start.g = 0;
 
