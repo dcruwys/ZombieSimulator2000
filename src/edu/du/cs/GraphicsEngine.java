@@ -1,6 +1,10 @@
 package edu.du.cs;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 
 public class GraphicsEngine implements GraphicsInterface 
@@ -22,11 +26,29 @@ public class GraphicsEngine implements GraphicsInterface
 			n.setAdjacent();
 	}
 	public void drawTalkBox(String msg, String gifSrc){
+		boolean hasPlayedStartSound = false;
+		Player playRadioStart = null;
+		Player playRadioStop = null;
+		
+		try{
+			FileInputStream radioStartIN = new FileInputStream("RadioTransmissionStart.mp3");
+			FileInputStream radioEndIN = new FileInputStream("RadioTransmissionEnd.mp3");
+			playRadioStart = new Player(radioStartIN);
+			playRadioStop = new Player(radioEndIN);
+		} catch(Exception exc){
+			exc.printStackTrace();
+			System.out.println("FAILED TO DO A BARREL ROLL");
+		}
 		StdDraw.setPenColor(StdDraw.BLUE);
 		StdDraw.filledRectangle(150, 50, 150, 60);
 		StdDraw.setPenColor(StdDraw.BLACK);
 		StdDraw.text(170, 40, msg);
+		if(hasPlayedStartSound == false){
+			try { playRadioStart.play(); } catch(JavaLayerException e){System.out.println(e.getMessage());}
+			hasPlayedStartSound = true;
+		}
 	}
+	
 	
 	@Override
 	public void drawHuman( Human aHuman ) {
