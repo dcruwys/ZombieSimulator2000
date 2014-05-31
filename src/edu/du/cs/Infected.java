@@ -19,7 +19,7 @@ public class Infected extends Human {
 	
 	public void move(){
 		for(Node n: Simulate.walkway){
-			if(Math.abs(n.getX() - this.x) < 30 && Math.abs(n.getY() - this.y) < 30){
+			if(Math.abs(n.getX() - this.x) < 30 && Math.abs(n.getY() - this.y) < 30 && !infected.contains(n)){
 				n.cost += 10;	
 				infected.add(n);
 			}

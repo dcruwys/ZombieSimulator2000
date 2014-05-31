@@ -12,6 +12,7 @@ public class GraphicsEngine implements GraphicsInterface
 	public static int[][] grid;
 	public static ArrayList<Node> walkwayNodes;
 	public ArrayList<Human> humans;
+	public ArrayList<Infected> zombies;
 
 	public int random;
 	public Node startNode;
@@ -22,6 +23,7 @@ public class GraphicsEngine implements GraphicsInterface
 		walkwayNodes = Simulate.walkway;
 		grid = Simulate.grid;
 		humans = new ArrayList<Human>(); //Create an array list of humans.
+		zombies = new ArrayList<Infected>();
 		for(Node n: walkwayNodes)
 			n.setAdjacent();
 	}
@@ -122,12 +124,15 @@ public class GraphicsEngine implements GraphicsInterface
 		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
-		for(int i = 0; i < 1; i++){
-			Node randomN = g.randomNode();
-			Human aHuman = new Human(randomN.getX(), randomN.getY());
+		for(int i = 0; i < Simulate.mySize / 5 ; i++){
+			Human aHuman = new Human(g.randomNode().getX(), g.randomNode().getY());
 			humans.add(aHuman);
+			if(humans.size() % 5 == 0){
+				Infected aZombie = new Infected(g.randomNode().getX(), g.randomNode().getY());
+				zombies.add(aZombie);
+			}
  		}
-		Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
+		
 		
 		while(true){
 			StdDraw.clear();
@@ -139,8 +144,10 @@ public class GraphicsEngine implements GraphicsInterface
 		    	g.drawHuman(h);
 		    	h.move();
 		    }
-		    g.drawZombie(z);
-			z.move();
+		    for(Infected z: zombies){
+		    	g.drawZombie(z);
+				z.move();
+		    }
 			//z.lineOfSight(humans);
 		    StdDraw.show(40);
 	   }

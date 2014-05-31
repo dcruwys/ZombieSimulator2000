@@ -31,7 +31,6 @@ public class Node {
 	}
 	
 	public void setAdjacent(){
-		
 		Node temp = null;
 		temp = findNode(x+10, y);
 		if(temp != null && temp.isWalkable()==true){
