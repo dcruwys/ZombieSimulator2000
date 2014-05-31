@@ -27,8 +27,8 @@ public class Human implements CharacterInterface
 		x = xIn;
 		y = yIn;
 		panic = false;
-		rNode = this.randomNode();
 		currentNode = this.getNode(Simulate.walkway, x, y);
+		rNode = this.randomNode();
 		path = new ArrayList<Node>();
 		this.aStar(currentNode, rNode);
 		System.out.println("START OF THE LINE...");
@@ -223,14 +223,28 @@ public class Human implements CharacterInterface
 	
 	public Node randomNode(){
 		Node tempNode = null;
-		random = (int )(Math.random() * Simulate.walkway.size());
-		if(Simulate.walkway.get(random).isWalkable() == true){
-			tempNode = Simulate.walkway.get(random);
-		} else if((Simulate.walkway.get(random).isWalkable() == false)){
+		ArrayList<Node> radiusList = new ArrayList<Node>();
+		int radius = 70; //Random Node Radius
+		for(Node n : Simulate.walkway){
+			if(this.estimateDistance(currentNode, n)<radius){
+				radiusList.add(n);
+			}
+		}
+		random = (int )(Math.random() * (radiusList.size()));
+		System.out.println("Random: " + random);
+
+		if(radiusList.get(random).isWalkable() == true){
+			tempNode = radiusList.get(random);
+//			if(((this.estimateDistance(currentNode, tempNode) > 30)||(this.estimateDistance(currentNode, tempNode) < 5))&&(tempNode!=null)){
+//				System.out.println("FUCK, distance: " + this.estimateDistance(currentNode, tempNode) );
+//				randomNode();
+//			}
+		} else if((radiusList.get(random).isWalkable() == false)){
 			return randomNode();
 		}
 		if(tempNode != null){
 			return tempNode;
+			
 		}else {
 			return randomNode();
 		}
