@@ -27,8 +27,8 @@ public class Human implements CharacterInterface
 		x = xIn;
 		y = yIn;
 		panic = false;
-		rNode = this.randomNode();
 		currentNode = this.getNode(Simulate.walkway, x, y);
+		rNode = this.randomNode();
 		path = new ArrayList<Node>();
 		this.aStar(currentNode, rNode);
 		System.out.println("START OF THE LINE...");
@@ -70,10 +70,10 @@ public class Human implements CharacterInterface
 			rNode = this.randomNode();
 			this.aStar(currentNode, rNode);
 			
-//			System.out.println("END OF THE LINE...");
-//			System.out.println("Current Node: "+currentNode);
-//			System.out.println("Random Node: "+rNode);
-//			System.out.println("Path: "+path);
+			System.out.println("END OF THE LINE...");
+			System.out.println("Current Node: "+currentNode);
+			System.out.println("Random Node: "+rNode);
+			System.out.println("Path: "+path);
 		}
 	}
 
@@ -143,66 +143,65 @@ public class Human implements CharacterInterface
 	}
 	
 	public void aStar(Node start, Node goal) {
-		path.clear();
-        Set<Node> open = new HashSet<Node>();
-        Set<Node> closed = new HashSet<Node>();
-        
-        start.g = 0;
+	    Set<Node> open = new HashSet<Node>();
+	    Set<Node> closed = new HashSet<Node>();
+	    
+	    start.g = 0;
 
-        start.h = estimateDistance(start, goal);
-        start.f = start.h;
+	    start.h = estimateDistance(start, goal);
+	    start.f = start.h;
 
-        open.add(start);
+	    open.add(start);
 
-        while (true) {
-            Node current = null;
+	    while (true) {
+	        Node current = null;
 
-            if (open.size() == 0) {
-                throw new RuntimeException("no route");
-            }
+	        if (open.size() == 0) {
+	            throw new RuntimeException("no route");
+	        }
 
-            for (Node node : open) {
-                if (current == null || node.f < current.f) {
-                    current = node;
-                }
-            }
+	        for (Node node : open) {
+	            if (current == null || node.f < current.f) {
+	                current = node;
+	            }
+	        }
 
-            if (current == goal) {
-                break;
-            }
+	        if (current == goal) {
+	            break;
+	        }
 
-            open.remove(current);
-            closed.add(current);
+	        open.remove(current);
+	        closed.add(current);
 
-            for (Node neighbor : current.getAdjacentNodes()) {
-                if (neighbor == null) {
-                    continue;
-                }
+	        for (Node neighbor : current.getAdjacentNodes()) {
+	            if (neighbor == null) {
+	                continue;
+	            }
 
-                int nextG = current.g + neighbor.cost;
+	            int nextG = current.g + neighbor.cost;
 
-                if (nextG < neighbor.g) {
-                    open.remove(neighbor);
-                    closed.remove(neighbor);
-                }
+	            if (nextG < neighbor.g) {
+	                open.remove(neighbor);
+	                closed.remove(neighbor);
+	            }
 
-                if (!open.contains(neighbor) && !closed.contains(neighbor)) {
-                    neighbor.g = nextG;
-                    neighbor.h = estimateDistance(neighbor, goal);
-                    neighbor.f = neighbor.g + neighbor.h;
-                    neighbor.parent = current;
-                    open.add(neighbor);
-                }
-            }
-        }
-        Node current = goal;
-        while (current.parent != null && !path.contains(current.parent)) {
-            path.add(current);
-            current = current.parent;
-        }
-        path.add(start);
-        Collections.reverse(path);
-    }
+	            if (!open.contains(neighbor) && !closed.contains(neighbor)) {
+	                neighbor.g = nextG;
+	                neighbor.h = estimateDistance(neighbor, goal);
+	                neighbor.f = neighbor.g + neighbor.h;
+	                neighbor.parent = current;
+	                open.add(neighbor);
+	            }
+	        }
+	    }
+	    Node current = goal;
+	    while (current.parent != null && !path.contains(current.parent)) {
+	        path.add(current);
+	        current = current.parent;
+	    }
+	    path.add(start);
+	    Collections.reverse(path);
+	}
 	
 	public List<Node> getPath(){
 		return path;
@@ -221,17 +220,31 @@ public class Human implements CharacterInterface
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}
-	//??????
+	
 	public Node randomNode(){
 		Node tempNode = null;
-		random = (int )(Math.random() * Simulate.walkway.size());
-		if(Simulate.walkway.get(random).isWalkable() == true){
-			tempNode = Simulate.walkway.get(random);
-		} else if((Simulate.walkway.get(random).isWalkable() == false)){
+		ArrayList<Node> radiusList = new ArrayList<Node>();
+		int radius = 70; //Random Node Radius
+		for(Node n : Simulate.walkway){
+			if(this.estimateDistance(currentNode, n)<radius){
+				radiusList.add(n);
+			}
+		}
+		random = (int )(Math.random() * (radiusList.size()));
+		System.out.println("Random: " + random);
+
+		if(radiusList.get(random).isWalkable() == true){
+			tempNode = radiusList.get(random);
+//			if(((this.estimateDistance(currentNode, tempNode) > 30)||(this.estimateDistance(currentNode, tempNode) < 5))&&(tempNode!=null)){
+//				System.out.println("FUCK, distance: " + this.estimateDistance(currentNode, tempNode) );
+//				randomNode();
+//			}
+		} else if((radiusList.get(random).isWalkable() == false)){
 			return randomNode();
 		}
 		if(tempNode != null){
 			return tempNode;
+			
 		}else {
 			return randomNode();
 		}
