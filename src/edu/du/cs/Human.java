@@ -42,12 +42,16 @@ public class Human implements CharacterInterface
 	
 	@Override
 	public void move() {
-		if(path.size() > 1){
+		if(path.size() <= 1){
+			path.clear();
+			rNode = this.randomNode();
+			currentNode = this.getNode(Simulate.walkway, x, y);
+			this.aStar(currentNode, rNode);
+		}
+		else if(path.size() > 1){
 			currentNode = path.get(0);
 			nextNode = path.get(1);
-			if(currentNode == nextNode){
-				path.remove(0);
-			}
+			
 			if(currentNode.getRightNode() == nextNode){
 				x += vel;
 			}
@@ -60,20 +64,9 @@ public class Human implements CharacterInterface
 			else if(currentNode.getBottomNode() == nextNode){
 				y -= vel;
 			}
-			
 			if(x == nextNode.getX() && y == nextNode.getY()){
 				path.remove(0);
 			}
-		}	
-		else{
-			path.clear();
-			rNode = this.randomNode();
-			this.aStar(currentNode, rNode);
-			
-			System.out.println("END OF THE LINE...");
-			System.out.println("Current Node: "+currentNode);
-			System.out.println("Random Node: "+rNode);
-			System.out.println("Path: "+path);
 		}
 	}
 
@@ -201,6 +194,9 @@ public class Human implements CharacterInterface
 	    }
 	    path.add(start);
 	    Collections.reverse(path);
+	    if(path.get(0) == path.get(1)){
+	    	path.remove(0);
+	    }
 	}
 	
 	public List<Node> getPath(){
@@ -224,29 +220,18 @@ public class Human implements CharacterInterface
 	public Node randomNode(){
 		Node tempNode = null;
 		ArrayList<Node> radiusList = new ArrayList<Node>();
-		int radius = 70; //Random Node Radius
+		int radius = 100; //Random Node Radius
 		for(Node n : Simulate.walkway){
-			if(this.estimateDistance(currentNode, n)<radius){
+			if((this.estimateDistance(n, currentNode)<radius) && this.estimateDistance(n, currentNode) > 50){
 				radiusList.add(n);
 			}
 		}
 		random = (int )(Math.random() * (radiusList.size()));
-		System.out.println("Random: " + random);
 
-		if(radiusList.get(random).isWalkable() == true){
-			tempNode = radiusList.get(random);
-//			if(((this.estimateDistance(currentNode, tempNode) > 30)||(this.estimateDistance(currentNode, tempNode) < 5))&&(tempNode!=null)){
-//				System.out.println("FUCK, distance: " + this.estimateDistance(currentNode, tempNode) );
-//				randomNode();
-//			}
-		} else if((radiusList.get(random).isWalkable() == false)){
-			return randomNode();
-		}
-		if(tempNode != null){
-			return tempNode;
-			
-		}else {
-			return randomNode();
-		}
+		if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+			return tempNode = radiusList.get(random);
+		} 
+	return randomNode();
+		
 	}
 }

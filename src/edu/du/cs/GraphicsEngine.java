@@ -132,6 +132,10 @@ public class GraphicsEngine implements GraphicsInterface
 				zombies.add(aZombie);
 			}
  		}
+//		
+//			Human aHuman = new Human(g.randomNode().getX(), g.randomNode().getY());
+//			humans.add(aHuman);
+//		
 		
 		
 		while(true){
