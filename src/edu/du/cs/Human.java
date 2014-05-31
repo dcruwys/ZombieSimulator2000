@@ -34,6 +34,11 @@ public abstract class Human
 	}
 	
 	public void move() {
+		for(Node n: Simulate.walkway){
+			if(Math.abs(n.getX() - this.x) < 100 && Math.abs(n.getY() - this.y) < 100){
+				
+			}
+		}
 		if(path.size() <= 1){
 			path.clear();
 			rNode = this.randomNode();

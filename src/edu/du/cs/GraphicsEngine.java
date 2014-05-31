@@ -91,16 +91,12 @@ public class GraphicsEngine
 	public Node randomNode(){
 		Node tempNode = null;
 		random = (int )(Math.random() * walkwayNodes.size());
-		if(walkwayNodes.get(random).isWalkable() == true){
-			tempNode = walkwayNodes.get(random);
-		} else if((walkwayNodes.get(random).isWalkable() == false)){
-			return randomNode();
-		}
-		if(tempNode != null){
+		tempNode = walkwayNodes.get(random);
+		if(tempNode.isWalkable() && tempNode.getBottomNode() != null && tempNode.getTopNode() != null && tempNode.getLeftNode() != null && tempNode.getRightNode() != null){
 			return tempNode;
-		}else {
-			return randomNode();
-		}
+		} 
+		return randomNode();
+		
 	}
 	
 	public static void main(String[] args){
