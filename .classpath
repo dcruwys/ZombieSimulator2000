@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/dancruwys/Git/ZombieSimulator2001/jl1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/David/Downloads/jl1.0.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

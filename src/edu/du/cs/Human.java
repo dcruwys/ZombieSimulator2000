@@ -6,9 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Human implements CharacterInterface 
+public abstract class Human
 {
-	protected int hp;
 	protected int x;
 	protected int y;
 	protected String type;
@@ -21,26 +20,19 @@ public class Human implements CharacterInterface
 	private Node rNode;
 
 	public Human(int xIn, int yIn) {
-		hp = 10;
-		type = "Human";
-		vel = 1;
 		x = xIn;
 		y = yIn;
-		panic = false;
-		currentNode = this.getNode(Simulate.walkway, x, y);
-		rNode = this.randomNode();
+		currentNode = getNode(Simulate.walkway, x, y);
+		rNode = randomNode();
 		path = new ArrayList<Node>();
-		this.aStar(currentNode, rNode);
+		aStar(currentNode, rNode);
 		System.out.println("START OF THE LINE...");
 		System.out.println("Current Node: "+currentNode);
 		System.out.println("Random Node: "+rNode);
 		System.out.println("Path: "+path);
 		System.out.println();
-		
-		
 	}
 	
-	@Override
 	public void move() {
 		if(path.size() <= 1){
 			path.clear();
@@ -70,39 +62,33 @@ public class Human implements CharacterInterface
 		}
 	}
 
-	@Override
-	public void changeType(String newType) 
+	public void changeType(char newType) 
 	{
-		// TODO Auto-generated method stub
-
+		switch(newType)
+		{
+		case 'z':
+			type = "Infected"; break;
+		case 'm':
+			type = "Medic"; break;
+		case 'c':
+			type = "Cop"; break;
+		case 'n':
+			type = "Normal"; break;
+		}
 	}
 
-	@Override
-	public void die() 
-	{
-		// TODO Auto-generated method stub
+	public abstract void die();
 
-	}
-
-	@Override
-	public int getHP() 
-	{
-		return hp;
-	}
-
-	@Override
 	public String getType() 
 	{
 		return type;
 	}
 
-	@Override
 	public int getX() 
 	{
 		return x;
 	}
 
-	@Override
 	public int getY() 
 	{
 		return y;
@@ -116,7 +102,6 @@ public class Human implements CharacterInterface
 		y = myY;
 	}
 
-	@Override
 	public int getVel() 
 	{
 		return vel;
@@ -126,15 +111,6 @@ public class Human implements CharacterInterface
 		return panic;
 	}
 
-	public void starve()
-	{
-		
-	}
-	
-	public void checkCollisions(){
-		
-	}
-	
 	public void aStar(Node start, Node goal) {
 	    Set<Node> open = new HashSet<Node>();
 	    Set<Node> closed = new HashSet<Node>();

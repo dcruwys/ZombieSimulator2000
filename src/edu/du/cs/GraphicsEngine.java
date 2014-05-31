@@ -7,12 +7,11 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
 
-public class GraphicsEngine implements GraphicsInterface 
+public class GraphicsEngine
 {	
 	public static int[][] grid;
 	public static ArrayList<Node> walkwayNodes;
 	public ArrayList<Human> humans;
-	public ArrayList<Infected> zombies;
 
 	public int random;
 	public Node startNode;
@@ -23,7 +22,6 @@ public class GraphicsEngine implements GraphicsInterface
 		walkwayNodes = Simulate.walkway;
 		grid = Simulate.grid;
 		humans = new ArrayList<Human>(); //Create an array list of humans.
-		zombies = new ArrayList<Infected>();
 		for(Node n: walkwayNodes)
 			n.setAdjacent();
 	}
@@ -51,28 +49,19 @@ public class GraphicsEngine implements GraphicsInterface
 		}
 	}
 	
-	
-	@Override
-	public void drawHuman( Human aHuman ) {
+	public static void drawHuman( Human aHuman ) {
 		if( aHuman.getType().equalsIgnoreCase( "medic" )) //if human is medic, make it red
 			StdDraw.setPenColor( StdDraw.RED );
 		else if( aHuman.getType().equalsIgnoreCase( "cop" )) //if human is cop make it blue
 			StdDraw.setPenColor( StdDraw.BLUE );
-		else if( aHuman.getType().equalsIgnoreCase( "human" ))//if human is normal make it pink
+		else if( aHuman.getType().equalsIgnoreCase( "normal" ))//if human is normal make it pink
 			StdDraw.setPenColor( StdDraw.MAGENTA );
+		else if( aHuman.getType().equalsIgnoreCase("infected"))
+			StdDraw.setPenColor( StdDraw.GREEN );
 		
 		StdDraw.filledSquare( aHuman.getX(), aHuman.getY(), 4); //draw human
 	}
 
-	@Override
-	public void drawZombie(Infected aZombie) {
-		
-		StdDraw.setPenColor( StdDraw.GREEN ); //make all zombies green
-		
-		StdDraw.filledSquare( aZombie.getX(), aZombie.getY(), 4); // draw zombie
-	}
-
-	@Override
 	public void drawSupply(Supplies someSupply) {
 		
 		StdDraw.setPenColor( StdDraw.ORANGE ); //make all supplies orange
@@ -81,7 +70,6 @@ public class GraphicsEngine implements GraphicsInterface
 		
 	}
 
-	@Override
 	public void drawMap( int[][] grid ) {
 		for(int row=0;row<grid.length; row++){
 			   for(int col=0;col<grid.length;col++){
@@ -124,34 +112,24 @@ public class GraphicsEngine implements GraphicsInterface
 		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
-		for(int i = 0; i < Simulate.mySize / 5 ; i++){
-			Human aHuman = new Human(g.randomNode().getX(), g.randomNode().getY());
+		for(int i = 0; i < 1; i++){
+			Node randomN = g.randomNode();
+			Human aHuman = new Normal(randomN.getX(), randomN.getY());
 			humans.add(aHuman);
-			if(humans.size() % 5 == 0){
-				Infected aZombie = new Infected(g.randomNode().getX(), g.randomNode().getY());
-				zombies.add(aZombie);
-			}
  		}
-//		
-//			Human aHuman = new Human(g.randomNode().getX(), g.randomNode().getY());
-//			humans.add(aHuman);
-//		
-		
+		//Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
 		
 		while(true){
 			StdDraw.clear();
 			g.drawMap(grid);
 			//g.drawTalkBox("Hello World", "meh.gif");
 
-
 		    for(Human h : humans){
 		    	g.drawHuman(h);
 		    	h.move();
 		    }
-		    for(Infected z: zombies){
-		    	g.drawZombie(z);
-				z.move();
-		    }
+		    //g.drawZombie(z);
+			//z.move();
 			//z.lineOfSight(humans);
 		    StdDraw.show(40);
 	   }

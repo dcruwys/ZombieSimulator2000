@@ -4,25 +4,46 @@ public class Cop extends Human
 {
 	private int ammo;
 	
-	public Cop(int x, int y){
-		super(x, y);
-		ammo = 0;
-		this.changeType("Cop");
+	public Cop(int xIn, int yIn) {
+		super(xIn, yIn);
+		changeType('c');
+		vel = 1 + (int) Math.round( Math.random() * 2);
+		ammo = 25;
 	}
+
+	@Override
+	public void die() {
+		changeType('z');	
+		GraphicsEngine.drawHuman( this );
+	}
+	
 	public int getAmmo()
 	{
 		return ammo;
 	}
-
-	public void findSupplies( Supplies someSupply )
+	
+	public void findSupply( Supplies someSupply )
 	{
-		//increases ammo
-		
+		ammo += (someSupply.getAmount() * 10);
+	}
+	
+	public void move()
+	{
+		if(panic)
+		{
+			attack( getInSight() );
+		}
+		else
+			super.move();
 	}
 	
 	public void attack( Infected zombie )
 	{
-		ammo--;
-		//Attacks zombie
+		//attack zombie
+	}
+	
+	public Infected getInSight()
+	{
+		return null;
 	}
 }
