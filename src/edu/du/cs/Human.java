@@ -221,7 +221,7 @@ public class Human implements CharacterInterface
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}
-	
+	//??????
 	public Node randomNode(){
 		Node tempNode = null;
 		random = (int )(Math.random() * Simulate.walkway.size());
