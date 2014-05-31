@@ -127,7 +127,7 @@ public class GraphicsEngine
 		    //g.drawZombie(z);
 			//z.move();
 			//z.lineOfSight(humans);
-		    StdDraw.show(40);
+		    StdDraw.show(30);
 	   }
 	}
 }
