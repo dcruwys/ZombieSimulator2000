@@ -9,7 +9,6 @@ public abstract class Uninfected extends Human
 		super(xIn, yIn);
 		vel = 1;
 		hNodes = new ArrayList<Node>();
-		type = 'u';
 	}
 
 	public void die()	{
@@ -27,31 +26,31 @@ public abstract class Uninfected extends Human
 			if(n.zcost == 12){
 			}
 			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){
-				n.zcost = 0;	
+				n.zcost = 1;	
 				hNodes.add(n);
 			}
-			else if(Math.abs(n.getX() - this.x) <= 10 && Math.abs(n.getY() - this.y) <= 10 && n.zcost != 0){
-				n.zcost = 1;	
-				if(!hNodes.contains(n))
-					hNodes.add(n);
-			}
-			else if(Math.abs(n.getX() - this.x) <= 20 && Math.abs(n.getY() - this.y) <= 20 && n.zcost != 1){
+			else if(Math.abs(n.getX() - this.x) <= 10 && Math.abs(n.getY() - this.y) <= 10 && n.zcost != 1){
 				n.zcost = 2;	
 				if(!hNodes.contains(n))
 					hNodes.add(n);
 			}
-			else if(Math.abs(n.getX() - this.x) <= 30 && Math.abs(n.getY() - this.y) <= 30 && n.zcost != 2){
+			else if(Math.abs(n.getX() - this.x) <= 20 && Math.abs(n.getY() - this.y) <= 20 && n.zcost != 2){
 				n.zcost = 3;	
 				if(!hNodes.contains(n))
 					hNodes.add(n);
 			}
-			else if(Math.abs(n.getX() - this.x) <= 40 && Math.abs(n.getY() - this.y) <= 40 && n.zcost != 3){
+			else if(Math.abs(n.getX() - this.x) <= 30 && Math.abs(n.getY() - this.y) <= 30 && n.zcost != 3){
 				n.zcost = 4;	
 				if(!hNodes.contains(n))
 					hNodes.add(n);
 			}
-			else if(Math.abs(n.getX() - this.x) <= 50 && Math.abs(n.getY() - this.y) <= 50 && n.zcost != 4){
+			else if(Math.abs(n.getX() - this.x) <= 40 && Math.abs(n.getY() - this.y) <= 40 && n.zcost != 4){
 				n.zcost = 5;	
+				if(!hNodes.contains(n))
+					hNodes.add(n);
+			}
+			else if(Math.abs(n.getX() - this.x) <= 50 && Math.abs(n.getY() - this.y) <= 50 && n.zcost != 5){
+				n.zcost = 6;	
 				if(!hNodes.contains(n))
 					hNodes.add(n);
 			}

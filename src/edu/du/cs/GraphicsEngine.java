@@ -29,13 +29,9 @@ public class GraphicsEngine
 		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
 		StdDraw.setYscale(0.0, Simulate.mySize*10); //Set scale to 500
 		
-		for(int i = 0; i < Simulate.mySize; i++){
+		for(int i = 0; i < Simulate.mySize+10; i++){
 			Node randomN = this.randomNode();
-//			if(i % 15 == 0){
-//				Human aHuman = new Infected(randomN.getX(), randomN.getY());
-//				infected.add((Infected)aHuman);
-//				humans.add(aHuman);
-//			}
+			
 			Human aHuman = new Normal(randomN.getX(), randomN.getY());
 			uninfected.add((Uninfected) aHuman);
 			humans.add(aHuman);
