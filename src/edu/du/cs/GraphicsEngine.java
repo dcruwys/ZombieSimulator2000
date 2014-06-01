@@ -130,7 +130,8 @@ public class GraphicsEngine
 		    	h.move();
 		    	if(h instanceof Infected){
 		    		List<Node> path = h.getPath();
-		    		target = path.get(path.size()-1);
+		    		if(path.size() > 0)
+		    			target = path.get(path.size()-1);
 		    	}
 		    	if(target != null)	{
 		    		StdDraw.filledCircle(target.getX(), target.getY(), 2);

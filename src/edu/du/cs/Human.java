@@ -21,54 +21,101 @@ public abstract class Human
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn;
-    
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
         //aStar(currentNode, rNode);
     }
     
-    public void move() {
-		if(path.size() <= 1){
-			path.clear();
-			rNode = this.randomNode();
-			currentNode = this.getNode(walkway, x, y);
+//    public void move() {
+//		if(path.size() <= 1){
+//			rNode = this.randomNode();
+//			currentNode = this.getNode(Simulate.walkway, x, y);
+//			this.aStar(currentNode, rNode);
+//		}
+//		else if(path.size() > 1){
+//			currentNode = path.get(0);
+//			nextNode = path.get(1);
+//			if(currentNode == null){
+//				System.out.println("Yep");
+//				x = Math.round(x/5) * 5;
+//				y = Math.round(y/5) * 5;
+//				currentNode = this.getNode(Simulate.walkway, x, y);
+//			}
+//			if(x == nextNode.getX() && y == nextNode.getY()){
+//				rNode = this.randomNode();
+//				currentNode = this.getNode(Simulate.walkway, x, y);
+//				this.aStar(currentNode, rNode);
+//			}
+//			else{
+//				currentNode = path.get(0);
+//				nextNode = path.get(1);
+//				if(x == nextNode.getX() && y == nextNode.getY()){
+//					path.remove(0);
+//					currentNode = path.get(0);
+//					nextNode = path.get(1);
+//				}
+//				if(currentNode.getRightNode() == nextNode && currentNode.getRightNode() != null){
+//					x += vel;
+//				}
+//				else if(currentNode.getLeftNode() == nextNode && currentNode.getLeftNode() != null){
+//					x -= vel;
+//				}
+//				else if(currentNode.getTopNode() == nextNode &&  currentNode.getTopNode() != null){
+//					y += vel;
+//				}
+//				else if(currentNode.getBottomNode() == nextNode  && currentNode.getBottomNode() != null){
+//					y -= vel;
+//				}
+//				else{
+//					rNode = this.randomNode();
+//					currentNode = this.getNode(Simulate.walkway, x, y);
+//					this.aStar(currentNode, rNode);
+//				}
+//			}
+//		}
+//	}
+    public void move(){
+    	if(path.size() <= 1){
+    		rNode = this.randomNode();
+			currentNode = this.getNode(Simulate.walkway, x, y);
 			this.aStar(currentNode, rNode);
-		}
-		else if(path.size() > 1){
-			currentNode = path.get(0);
-			nextNode = path.get(1);
-			if(nextNode == currentNode)
-				path.remove(nextNode);
-			if(currentNode.getRightNode() == nextNode){
-				x += vel;
-			}
-			else if(currentNode.getLeftNode() == nextNode){
-				x -= vel;
-			}
-			else if(currentNode.getTopNode() == nextNode){
-				y += vel;
-			}
-			else if(currentNode.getBottomNode() == nextNode){
-				y -= vel;
+			return;
+    	}
+    	if(path.size() > 1){
+    		currentNode = path.get(0);
+        	nextNode = path.get(1);
+			
+			if(currentNode == nextNode){
+				path.remove(0);
+				currentNode = path.get(0);
+	        	nextNode = path.get(1);
 			}
 			else{
-				path.clear();
-				rNode = this.randomNode();
-				currentNode = this.getNode(Simulate.walkway, x, y);
-				this.aStar(currentNode, rNode);
-			}
-			if(x == nextNode.getX() && y == nextNode.getY()){
-				path.remove(0);
-				if(path.size() <= 1){
-					path.clear();
+				if(currentNode.getRightNode() == nextNode && currentNode.getRightNode() != null){
+					x += vel;
+				}
+				else if(currentNode.getLeftNode() == nextNode && currentNode.getLeftNode() != null){
+					x -= vel;
+				}
+				else if(currentNode.getTopNode() == nextNode &&  currentNode.getTopNode() != null){
+					y += vel;
+				}
+				else if(currentNode.getBottomNode() == nextNode  && currentNode.getBottomNode() != null){
+					y -= vel;
+				}
+				else {
 					rNode = this.randomNode();
-					currentNode = this.getNode(walkway, x, y);
+					currentNode = this.getNode(Simulate.walkway, x, y);
 					this.aStar(currentNode, rNode);
+					return;
+				}
+				if(x == nextNode.getX() && y == nextNode.getY()){
+					path.remove(0);
 				}
 			}
-		}
-	}
+    	}
+    }
 
     public void changeType(char newType) 
     {
@@ -102,8 +149,7 @@ public abstract class Human
     }
 
     public void aStar(Node start, Node goal) {
-    	System.out.println(start);
-    	System.out.println(currentNode);
+    	path.clear();
         Set<Node> open = new HashSet<Node>();
         Set<Node> closed = new HashSet<Node>();
         
@@ -118,7 +164,7 @@ public abstract class Human
 
         while (true) {
             Node current = null;
-            System.out.println("Open list size: " + open.size());
+            //System.out.println("Open list size: " + open.size());
             if (open.size() == 0) {
             	aStar(this.getNode(walkway, x, y), this.randomNode());
                 throw new RuntimeException("no route");
@@ -194,9 +240,9 @@ public abstract class Human
     public Node randomNode() {
         Node tempNode = null;
         ArrayList<Node> radiusList = new ArrayList<Node>();
-        int radius = 70; //Random Node Radius
+        int radius = 80; //Random Node Radius
         for(Node n : walkway){
-            if((this.estimateDistance(n, currentNode)<radius) && (this.estimateDistance(n, currentNode)>=20)){
+            if((this.estimateDistance(n, currentNode)<radius)){
                 radiusList.add(n);
             }
         }
