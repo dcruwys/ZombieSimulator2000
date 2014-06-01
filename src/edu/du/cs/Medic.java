@@ -6,8 +6,8 @@ public class Medic extends Uninfected
 	
 	public Medic(int xIn, int yIn) {
 		super(xIn, yIn);
-		changeType('m');
 		medicine = 3;
+		type = 'm';
 	}
 	
 	public void cure( Infected zombie )
@@ -15,9 +15,9 @@ public class Medic extends Uninfected
 		if(medicine > 0)
 		{
 			medicine--;
-			if(Math.random() > .5)
-				zombie.changeType('n');
-			else
+//			if(Math.random() > .5)
+//				zombie.changeType('n');
+//			else
 				die();
 		}
 		else

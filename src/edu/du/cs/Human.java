@@ -17,6 +17,8 @@ public abstract class Human
     protected Node nextNode;
     private Node rNode;
     protected ArrayList<Node> walkway = Simulate.walkway;
+    protected boolean isDead;
+    protected char type;
 
     public Human(int xIn, int yIn) {
         x = xIn;
@@ -24,57 +26,10 @@ public abstract class Human
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
+        isDead = false;
         //aStar(currentNode, rNode);
     }
     
-//    public void move() {
-//		if(path.size() <= 1){
-//			rNode = this.randomNode();
-//			currentNode = this.getNode(Simulate.walkway, x, y);
-//			this.aStar(currentNode, rNode);
-//		}
-//		else if(path.size() > 1){
-//			currentNode = path.get(0);
-//			nextNode = path.get(1);
-//			if(currentNode == null){
-//				System.out.println("Yep");
-//				x = Math.round(x/5) * 5;
-//				y = Math.round(y/5) * 5;
-//				currentNode = this.getNode(Simulate.walkway, x, y);
-//			}
-//			if(x == nextNode.getX() && y == nextNode.getY()){
-//				rNode = this.randomNode();
-//				currentNode = this.getNode(Simulate.walkway, x, y);
-//				this.aStar(currentNode, rNode);
-//			}
-//			else{
-//				currentNode = path.get(0);
-//				nextNode = path.get(1);
-//				if(x == nextNode.getX() && y == nextNode.getY()){
-//					path.remove(0);
-//					currentNode = path.get(0);
-//					nextNode = path.get(1);
-//				}
-//				if(currentNode.getRightNode() == nextNode && currentNode.getRightNode() != null){
-//					x += vel;
-//				}
-//				else if(currentNode.getLeftNode() == nextNode && currentNode.getLeftNode() != null){
-//					x -= vel;
-//				}
-//				else if(currentNode.getTopNode() == nextNode &&  currentNode.getTopNode() != null){
-//					y += vel;
-//				}
-//				else if(currentNode.getBottomNode() == nextNode  && currentNode.getBottomNode() != null){
-//					y -= vel;
-//				}
-//				else{
-//					rNode = this.randomNode();
-//					currentNode = this.getNode(Simulate.walkway, x, y);
-//					this.aStar(currentNode, rNode);
-//				}
-//			}
-//		}
-//	}
     public void move(){
     	if(path.size() <= 1){
     		rNode = this.randomNode();
@@ -117,11 +72,6 @@ public abstract class Human
     	}
     }
 
-    public void changeType(char newType) 
-    {
-       
-    }
-
     public abstract void die();
 
 
@@ -142,10 +92,15 @@ public abstract class Human
     public void setY(int myY){
         y = myY;
     }
-
+    public void setType(char t){
+    	type = t;
+    }
     public int getVel() 
     {
         return vel;
+    }
+    public boolean isDead(){
+    	return isDead;
     }
 
     public void aStar(Node start, Node goal) {
@@ -154,9 +109,9 @@ public abstract class Human
         Set<Node> closed = new HashSet<Node>();
         
         start.g = 0;
-        if(this instanceof Infected )
+        if(this.type == 'i' )
         	start.h = estimateDistance(start, goal) + goal.zcost;
-        if(this instanceof Uninfected )
+        else if(this.type != 'i')
         	start.h = estimateDistance(start, goal) + goal.hcost;
         start.f = start.h;
 
@@ -188,9 +143,9 @@ public abstract class Human
                     continue;
                 }
                 int nextG = 0;
-                if(this instanceof Infected)
+                if(this.type == 'i')
                 	nextG = current.g + neighbor.zcost;
-                if(this instanceof Uninfected)
+                else if(this.type != 'i')
                 	nextG = current.g + neighbor.hcost;
 
                 if (nextG < neighbor.g) {
@@ -240,23 +195,30 @@ public abstract class Human
     public Node randomNode() {
         Node tempNode = null;
         ArrayList<Node> radiusList = new ArrayList<Node>();
-        int radius = 80; //Random Node Radius
+        int radius = 60; //Random Node Radius
         for(Node n : walkway){
-            if((this.estimateDistance(n, currentNode)<radius)){
+            if((this.estimateDistance(n, currentNode)<radius) && (this.estimateDistance(n, currentNode) >= 30)){
                 radiusList.add(n);
             }
         }
         random = (int)(Math.random() * (radiusList.size()));
         tempNode = radiusList.get(random);
         for(Node n: radiusList){
-        	if(this instanceof Infected && n.isWalkable() && n.zcost < tempNode.zcost)
+        	if(this.type == 'i' && n.isWalkable() && n.zcost < tempNode.zcost)
         		tempNode = n;
-        	else if(this instanceof Uninfected && n.isWalkable() && n.hcost < tempNode.hcost)
+        	else if(this.type != 'i' && n.isWalkable() && n.hcost < tempNode.hcost)
         		tempNode = n;
+        	else{
+        		 if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+        	            return tempNode;
+        	        } 
+        	}
         }
         if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+        	radiusList.clear();
             return tempNode;
         } 
+        radiusList.clear();
         return randomNode();
     }
 }

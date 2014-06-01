@@ -5,7 +5,7 @@ public class Normal extends Uninfected
 
 	public Normal(int xIn, int yIn) {
 		super(xIn, yIn);
-		changeType('n');
+		type = 'n';
 	}
 	
 	public void findSupply( Supplies someSupply )
@@ -13,9 +13,9 @@ public class Normal extends Uninfected
 		double random = Math.random();
 		if( random < .5 )
 			return; //does nothing
-		else if( (random < .7) && (random >= .5) )
-			changeType('m');
-		else if ((random >= .7))
-			changeType('c');
+//		else if( (random < .7) && (random >= .5) )
+//			changeType('m');
+//		else if ((random >= .7))
+//			changeType('c');
 	}
 }

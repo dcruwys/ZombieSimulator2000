@@ -3,20 +3,17 @@ package edu.du.cs;
 import java.util.ArrayList;
 
 public class Infected extends Human 
-{
-    private boolean isDead;
-    
+{   
     private int hp;
     private ArrayList<Node> zNodes;
+    
     public Infected(int xIn, int yIn) {
         super(xIn, yIn);
-
-        
-        isDead = false;
-        changeType('z');
         hp = 10;
         vel = 1;
         zNodes = new ArrayList<Node>();
+        isDead = false;
+        type = 'i';
     }
 
     public void die() 
@@ -59,9 +56,9 @@ public class Infected extends Human
 						n.hcost = 10;
 						zNodes.remove(n);
 					}
-				}	        }
-	        super.move();
-	           
+				}	       
+	        }
+	        super.move();   
         }
     }
     

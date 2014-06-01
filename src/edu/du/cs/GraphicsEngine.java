@@ -12,6 +12,8 @@ public class GraphicsEngine
 {	
 	public static ArrayList<Node> walkwayNodes;
 	public ArrayList<Human> humans;
+	public ArrayList<Infected> infected;
+	public ArrayList<Uninfected> uninfected;
 
 	public int random;
 	public Node startNode;
@@ -19,9 +21,31 @@ public class GraphicsEngine
 	
 	public GraphicsEngine(){
 		Simulate.generateBuildings();
-		
+		infected = new ArrayList<Infected>();
+		uninfected = new ArrayList<Uninfected>();
 		humans = new ArrayList<Human>(); //Create an array list of humans.
+		
+		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
+		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
+		StdDraw.setYscale(0.0, Simulate.mySize*10); //Set scale to 500
+		
+		for(int i = 0; i < Simulate.mySize; i++){
+			Node randomN = this.randomNode();
+//			if(i % 15 == 0){
+//				Human aHuman = new Infected(randomN.getX(), randomN.getY());
+//				infected.add((Infected)aHuman);
+//				humans.add(aHuman);
+//			}
+			Human aHuman = new Normal(randomN.getX(), randomN.getY());
+			uninfected.add((Uninfected) aHuman);
+			humans.add(aHuman);
+		}
+		Node randomN = this.randomNode();
+		Human aHuman = new Infected(randomN.getX(), randomN.getY());
+		infected.add((Infected)aHuman);
+		humans.add(aHuman);
 	}
+
 	public void drawTalkBox(String msg, String gifSrc){
 		boolean hasPlayedStartSound = false;
 		Player playRadioStart = null;
@@ -47,13 +71,13 @@ public class GraphicsEngine
 	}
 	
 	public void drawHuman( Human aHuman ) {
-		if( aHuman instanceof Medic) //if human is medic, make it red
+		if( aHuman.type == 'm') //if human is medic, make it red
 			StdDraw.setPenColor( StdDraw.RED );
-		else if( aHuman instanceof Cop) //if human is cop make it blue
+		else if( aHuman.type == 'c') //if human is cop make it blue
 			StdDraw.setPenColor( StdDraw.BLUE );
-		else if( aHuman instanceof Normal)//if human is normal make it pink
+		else if( aHuman.type == 'n')//if human is normal make it pink
 			StdDraw.setPenColor( StdDraw.MAGENTA );
-		else if( aHuman instanceof Infected)
+		else if( aHuman.type == 'i')
 			StdDraw.setPenColor( StdDraw.GREEN );
 		
 		StdDraw.filledSquare( aHuman.getX(), aHuman.getY(), 4); //draw human
@@ -98,37 +122,46 @@ public class GraphicsEngine
 	
 	public static void main(String[] args){
 		GraphicsEngine g = new GraphicsEngine();
-		g.draw(g);
+		
+			g.draw(g);
 	}
 	
 	public void draw(GraphicsEngine g){
-		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
-		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
-		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
-		for(int i = 0; i < (int)Simulate.mySize/5; i++){
-			Node randomN = g.randomNode();
-			if(i % 4 == 0){
-				Human aHuman = new Infected(randomN.getX(), randomN.getY());
-				humans.add(aHuman);
-			}
-			else{
-				Uninfected aHuman = new Normal(randomN.getX(), randomN.getY());
-				humans.add(aHuman);
-			}
-			
- 		}
-		//Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
-		//humans.add(z);
-
+		ArrayList<Human> deadList = new ArrayList<Human>();
+		
 		while(true){
+			System.out.println("H: "+uninfected.size());
+		    System.out.println("Z: "+infected.size());
+		    
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
 			//g.drawTalkBox("Hello World", "meh.gif");
+		    for(Human h : uninfected){
+		    	for(Human z: infected){
+		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 ){
+		    			((Infected) z).attack((Uninfected) h);
+		    		}
+		    		if( h.isDead && !deadList.contains(h)){
+		    			deadList.add(h);	
+		    		}
+		    	}
+		    }			    
+		    //System.out.println(deadList.size());
+		    for(Human h: deadList){
+		    	uninfected.remove(h);
+		    	humans.remove(h);
+		    	Human temp = new Infected(h.currentNode.getX(), h.currentNode.getY());
+		    	infected.add((Infected) temp);
+		    	humans.add(temp);
+		    	h = null;
+		    }
+		    deadList.clear();
+		    
 		    for(Human h : humans){
 		    	Node target = null;
 		    	g.drawHuman(h);
 		    	h.move();
-		    	if(h instanceof Infected){
+		    	if(h.type == 'i'){
 		    		List<Node> path = h.getPath();
 		    		if(path.size() > 0)
 		    			target = path.get(path.size()-1);
@@ -136,12 +169,10 @@ public class GraphicsEngine
 		    	if(target != null)	{
 		    		StdDraw.filledCircle(target.getX(), target.getY(), 2);
 		    	}
-		    }	
-		    
-		    //g.drawZombie(z);
-			//z.move();
-			//z.lineOfSight(humans);
+
+		    }
+		  
 		    StdDraw.show(30);
-	   }
+		}
 	}
 }

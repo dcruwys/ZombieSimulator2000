@@ -7,14 +7,20 @@ public abstract class Uninfected extends Human
 	private ArrayList<Node> hNodes;
 	public Uninfected(int xIn, int yIn) {
 		super(xIn, yIn);
-	
 		vel = 1;
 		hNodes = new ArrayList<Node>();
+		type = 'u';
 	}
 
-	public void die() 
-	{
-		changeType('z');
+	public void die()	{
+		for(Node n: Simulate.walkway){
+			if(hNodes.contains(n)){
+			n.zcost = 10;
+			hNodes.remove(n);
+			}
+		}
+		isDead = true;
+		
 	}
 	public void move(){
 		for(Node n: Simulate.walkway){

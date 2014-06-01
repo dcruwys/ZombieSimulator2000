@@ -6,7 +6,7 @@ public class Cop extends Uninfected
 	
 	public Cop(int xIn, int yIn) {
 		super(xIn, yIn);
-		changeType('c');
+		type = 'c';
 		ammo = 25;
 	}
 	
