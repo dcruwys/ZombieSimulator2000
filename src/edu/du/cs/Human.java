@@ -214,16 +214,11 @@ public abstract class Human
         	else if(this.type != 'i' && n.isWalkable() && n.hcost < tempNode.hcost)
         		tempNode = n;
         	}
-<<<<<<< HEAD
- 
-        radiusList.clear();
-=======
 	        if(radiusList.get(random).isWalkable() && tempNode != currentNode){
 	        	radiusList.clear();
 	 	       return tempNode;
 	        }
 	    radiusList.clear();
->>>>>>> FETCH_HEAD
         return randomNode();
     }
 }
