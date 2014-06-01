@@ -103,7 +103,7 @@ public class GraphicsEngine
 			      case 1:StdDraw.setPenColor( StdDraw.BLACK ); //if the tile is 1, draw Gray
 		      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
 			       break;
-			      case 8:StdDraw.setPenColor( StdDraw.BLACK ); //if the tile is 1, draw Gray
+			      case 8:StdDraw.setPenColor( StdDraw.GRAY ); //if the tile is 1, draw Gray
 	      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
 	      		   break;
 			     }
