@@ -14,7 +14,8 @@ public class Node {
 	
 	//A* variables
 	protected List<Node> adjacentNodes = new ArrayList<Node>();
-	protected int cost;
+	protected int hcost;
+	protected int zcost;
 	protected int f;
     protected int g;
     protected int h;
@@ -25,7 +26,8 @@ public class Node {
 		x = myX;
 		y = myY;
 		
-		cost = 10;
+		hcost = 10;
+		zcost = 10;
 		walkable = w;
 	}
 	public Node(Node n){
@@ -39,7 +41,8 @@ public class Node {
 		walkable = n.walkable;
 		
 		adjacentNodes = n.adjacentNodes;
-		cost = 10;
+		hcost = 10;
+		zcost = 10;
 			
 	}
 	
@@ -93,8 +96,11 @@ public class Node {
 	public void setY(int myY){
 		y = myY;
 	}
-	public void setMyCost(int c){
-		cost = c;
+	public void setHCost(int c){
+		hcost = c;
+	}
+	public void setzCost(int c){
+		zcost = c;
 	}
 	public Node getTopNode(){
 		return topNode;
@@ -108,8 +114,11 @@ public class Node {
 	public Node getLeftNode(){
 		return leftNode;
 	}
-	public int getCost(){
-		return cost;
+	public int getZCost(){
+		return zcost;
+	}
+	public int gethCost(){
+		return hcost;
 	}
 	public List<Node> getAdjacentNodes(){
 		return adjacentNodes;

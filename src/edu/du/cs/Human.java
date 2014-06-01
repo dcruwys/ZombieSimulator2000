@@ -10,7 +10,6 @@ public abstract class Human
 {
     protected int x;
     protected int y;
-    protected String type;
     protected int vel;
     private int random;
     protected List<Node> path;
@@ -26,14 +25,14 @@ public abstract class Human
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
-        aStar(currentNode, rNode);
+        //aStar(currentNode, rNode);
     }
     
     public void move() {
 		if(path.size() <= 1){
 			path.clear();
 			rNode = this.randomNode();
-			currentNode = this.getNode(Simulate.walkway, x, y);
+			currentNode = this.getNode(walkway, x, y);
 			this.aStar(currentNode, rNode);
 		}
 		else if(path.size() > 1){
@@ -61,6 +60,12 @@ public abstract class Human
 			}
 			if(x == nextNode.getX() && y == nextNode.getY()){
 				path.remove(0);
+				if(path.size() <= 1){
+					path.clear();
+					rNode = this.randomNode();
+					currentNode = this.getNode(walkway, x, y);
+					this.aStar(currentNode, rNode);
+				}
 			}
 		}
 	}
@@ -72,10 +77,6 @@ public abstract class Human
 
     public abstract void die();
 
-    public String getType() 
-    {
-        return type;
-    }
 
     public int getX() 
     {
@@ -101,12 +102,16 @@ public abstract class Human
     }
 
     public void aStar(Node start, Node goal) {
+    	System.out.println(start);
+    	System.out.println(currentNode);
         Set<Node> open = new HashSet<Node>();
         Set<Node> closed = new HashSet<Node>();
         
         start.g = 0;
-
-        start.h = estimateDistance(start, goal) + goal.cost;
+        if(this instanceof Infected )
+        	start.h = estimateDistance(start, goal) + goal.zcost;
+        if(this instanceof Uninfected )
+        	start.h = estimateDistance(start, goal) + goal.hcost;
         start.f = start.h;
 
         open.add(start);
@@ -135,8 +140,11 @@ public abstract class Human
                 if (neighbor == null) {
                     continue;
                 }
-
-                int nextG = current.g + neighbor.cost;
+                int nextG = 0;
+                if(this instanceof Infected)
+                	nextG = current.g + neighbor.zcost;
+                if(this instanceof Uninfected)
+                	nextG = current.g + neighbor.hcost;
 
                 if (nextG < neighbor.g) {
                     open.remove(neighbor);
@@ -194,7 +202,9 @@ public abstract class Human
         random = (int)(Math.random() * (radiusList.size()));
         tempNode = radiusList.get(random);
         for(Node n: radiusList){
-        	if(n.isWalkable() && n.cost < tempNode.cost)
+        	if(this instanceof Infected && n.isWalkable() && n.zcost < tempNode.zcost)
+        		tempNode = n;
+        	else if(this instanceof Uninfected && n.isWalkable() && n.hcost < tempNode.hcost)
         		tempNode = n;
         }
         if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){

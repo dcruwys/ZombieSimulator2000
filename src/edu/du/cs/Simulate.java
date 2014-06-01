@@ -6,8 +6,6 @@ public class Simulate {
 	protected static int mySize = 51;
 	protected static int[][] grid = new int[mySize][mySize];
 	protected static ArrayList<Node> walkway = new ArrayList<Node>();
-	protected static ArrayList<Node> zWalkway = new ArrayList<Node>();
-	protected static ArrayList<Node> hWalkway = new ArrayList<Node>();
 	
 	public static void generateBuildings(){
 		for (int row=0; row < mySize; row ++){
@@ -55,13 +53,7 @@ public class Simulate {
 		for(Node n: walkway){
 			n.setAdjacent();
 		}
-		for(Node n: walkway){
-			zWalkway.add(new Node(n));
-			hWalkway.add(new Node(n));
-		}
-		System.out.println(walkway.size());
-		System.out.println(zWalkway.size());
-		System.out.println(hWalkway.size());
+
 		
 	}
 
