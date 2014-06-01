@@ -107,17 +107,13 @@ public class GraphicsEngine
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
 		for(int i = 0; i < (int)Simulate.mySize/5; i++){
 			Node randomN = g.randomNode();
-//			if(i % 4 == 0){
-//				Human aHuman = new Infected(randomN.getX(), randomN.getY());
-//				humans.add(aHuman);
-//			}
-//			else{
 				Human aHuman = new Normal(randomN.getX(), randomN.getY());
+				System.out.println("A human was spawned");
 				humans.add(aHuman);
-			//}
 			
  		}
 		Human z = new Infected(g.randomNode().getX(), g.randomNode().getY());
+		System.out.println("A zombie was spawned");
 		humans.add(z);
 		while(true){
 			StdDraw.clear();
