@@ -12,8 +12,8 @@ public class Infected extends Human
         super(xIn, yIn);
         hp = 10;
         vel = 1;
-        myNode.setX(x);
-        myNode.setY(y);
+//        myNode.setX(x);
+//        myNode.setY(y);
         zNodes = new ArrayList<Node>();
         isDead = false;
         type = 'i';
