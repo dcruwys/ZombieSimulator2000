@@ -19,7 +19,7 @@ public class GraphicsEngine
 	
 	public GraphicsEngine(){
 		Simulate.generateBuildings();
-		walkwayNodes = Simulate.walkway;
+		
 		grid = Simulate.grid;
 		humans = new ArrayList<Human>(); //Create an array list of humans.
 		for(Node n: walkwayNodes)

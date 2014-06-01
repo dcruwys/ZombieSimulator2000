@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Simulate {
 	protected static int mySize = 51;
 	protected static int[][] grid = new int[mySize][mySize];
-	protected static ArrayList<Node> walkway = new ArrayList<Node>();
-	
+	private static ArrayList<Node> walkway = new ArrayList<Node>();
+	protected static ArrayList<Node> hWalkway;
+	protected static ArrayList<Node> zWalkway;
 
 	
 	public static void generateBuildings(){
@@ -49,7 +50,8 @@ public class Simulate {
 					walkway.add(new Node((row*10-5), (col*10-5), false));
 			}
 		}
-		
+		zWalkway = new ArrayList<Node>(walkway);
+		hWalkway = new ArrayList<Node>(walkway);
 	}
 
 	

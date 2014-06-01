@@ -18,13 +18,16 @@ public abstract class Human
 	protected Node currentNode;
 	protected Node nextNode;
 	private Node rNode;
+	protected static ArrayList<Node> walkway;
 
 	public Human(int xIn, int yIn) {
+		walkway = Simulate.hWalkway;
 		x = xIn;
 		y = yIn;
-		currentNode = getNode(Simulate.walkway, x, y);
+		currentNode = getNode(walkway, x, y);
 		rNode = randomNode();
 		path = new ArrayList<Node>();
+		panic = false;
 		aStar(currentNode, rNode);
 		System.out.println("START OF THE LINE...");
 		System.out.println("Current Node: "+currentNode);
@@ -34,7 +37,7 @@ public abstract class Human
 	}
 	
 	public void move() {
-		for(Node n: Simulate.walkway){
+		for(Node n: walkway){
 			if(Math.abs(n.getX() - this.x) < 100 && Math.abs(n.getY() - this.y) < 100){
 				
 			}
@@ -42,7 +45,7 @@ public abstract class Human
 		if(path.size() <= 1){
 			path.clear();
 			rNode = this.randomNode();
-			currentNode = this.getNode(Simulate.walkway, x, y);
+			currentNode = this.getNode(walkway, x, y);
 			this.aStar(currentNode, rNode);
 		}
 		else if(path.size() > 1){
@@ -202,7 +205,7 @@ public abstract class Human
 		Node tempNode = null;
 		ArrayList<Node> radiusList = new ArrayList<Node>();
 		int radius = 100; //Random Node Radius
-		for(Node n : Simulate.walkway){
+		for(Node n : walkway){
 			if((this.estimateDistance(n, currentNode)<radius) && this.estimateDistance(n, currentNode) > 50){
 				radiusList.add(n);
 			}

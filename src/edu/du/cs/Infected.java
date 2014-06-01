@@ -6,9 +6,10 @@ public class Infected extends Human
 
 	public Infected(int xIn, int yIn) {
 		super(xIn, yIn);
+		walkway = Simulate.zWalkway;
 		changeType('z');
 		hp = 10;
-		vel = 1 + (int) Math.floor(Math.random() * 6);
+		vel = 1 + (int) Math.floor(Math.random() * 5);
 	}
 
 	@Override
