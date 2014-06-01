@@ -1,10 +1,14 @@
 package edu.du.cs;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 public abstract class Human
 {
@@ -29,45 +33,115 @@ public abstract class Human
     }
     
     public void move() {
-		if(path.size() <= 1){
-			path.clear();
-			rNode = this.randomNode();
-			currentNode = this.getNode(walkway, x, y);
-			this.aStar(currentNode, rNode);
-		}
-		else if(path.size() > 1){
-			currentNode = path.get(0);
-			nextNode = path.get(1);
-			if(nextNode == currentNode)
-				path.remove(nextNode);
-			if(currentNode.getRightNode() == nextNode){
-				x += vel;
-			}
-			else if(currentNode.getLeftNode() == nextNode){
-				x -= vel;
-			}
-			else if(currentNode.getTopNode() == nextNode){
-				y += vel;
-			}
-			else if(currentNode.getBottomNode() == nextNode){
-				y -= vel;
-			}
-			else{
+			if(path.size() <= 1){
 				path.clear();
 				rNode = this.randomNode();
-				currentNode = this.getNode(Simulate.walkway, x, y);
-				this.aStar(currentNode, rNode);
-			}
-			if(x == nextNode.getX() && y == nextNode.getY()){
-				path.remove(0);
-				if(path.size() <= 1){
-					path.clear();
-					rNode = this.randomNode();
-					currentNode = this.getNode(walkway, x, y);
+				currentNode = this.getNode(walkway, x, y);
+				if((x > 500) || (y > 500) || (x < 0) || (y < 0)){
+					System.out.println("Aw shit nigga, we got a runner ONE");
+					System.out.println("Runner X: " +  x + " Y: " + y);
+					System.out.println("Current Node X: " + currentNode.getX() + " Y: " + currentNode.getY());
+					System.out.println("Next Node X: " + nextNode.getX() + " Y: " + nextNode.getY());
+					System.out.println("Path" + path);
+					int tempVel = vel;
+					vel = 0;
+					Node fixNode = randomNode();
+					x = fixNode.getX();
+					y = fixNode.getY();
+					
+					rNode = randomNode();
 					this.aStar(currentNode, rNode);
+					move();
+					vel = tempVel;
+					Player playPoof = null;
+					
+					try{
+						FileInputStream playPoofIN = new FileInputStream("Portal2_sfx_portal_gun_fire_blue.mp3");
+						playPoof = new Player(playPoofIN);
+						playPoof.play();
+					} catch(Exception exc){
+						exc.printStackTrace();
+						System.out.println("FAILED TO DO A BARREL ROLL");
+					}
+					
+
+				}
+				this.aStar(currentNode, rNode);
+			
+			}
+			else if(path.size() > 1){
+				currentNode = path.get(0);
+				nextNode = path.get(1);
+									
+					
+					
+					if(nextNode == currentNode)
+						path.remove(nextNode);
+					if(currentNode.getRightNode() == nextNode){
+						x = x + 1;
+					}
+					else if(currentNode.getLeftNode() == nextNode){
+						x = x - 1;
+					}
+					else if(currentNode.getTopNode() == nextNode){
+						y = y + 1;
+					}
+					else if(currentNode.getBottomNode() == nextNode){
+						y = y - 1;
+					}
+					else{
+						path.clear();
+						rNode = this.randomNode();
+						
+						
+						currentNode = this.getNode(Simulate.walkway, x, y);
+						
+						this.aStar(currentNode, rNode);
+					}
+					
+				if((x > 500) || (y > 500) || (x < 0) || (y < 0)){
+					System.out.println("Aw shit nigga, we got a runner TWO");
+					System.out.println("Runner X: " +  x + " Y: " + y);
+					System.out.println("Current Node X: " + currentNode.getX() + " Y: " + currentNode.getY());
+					System.out.println("Next Node X: " + nextNode.getX() + " Y: " + nextNode.getY());
+					System.out.println("Path" + path);
+					Node fixNode = randomNode();
+					x = fixNode.getX();
+					y = fixNode.getY();
+					int tempVel = vel;
+					vel = 0;
+					
+					rNode = randomNode();
+					this.aStar(currentNode, rNode);
+					move();
+					vel = tempVel;
+					Player playPoof = null;
+					
+					try{
+						FileInputStream playPoofIN = new FileInputStream("Portal2_sfx_portal_gun_fire_blue.mp3");
+						playPoof = new Player(playPoofIN);
+						playPoof.play();
+					} catch(Exception exc){
+						exc.printStackTrace();
+						System.out.println("FAILED TO DO A BARREL ROLL");
+					}
+
+					
+				}
+				if(x == nextNode.getX() && y == nextNode.getY()){
+					path.remove(0);
+					if(path.size() <= 1){
+						path.clear();
+						rNode = this.randomNode();
+						//currentNode = this.getNode(walkway, x, y);
+						this.aStar(currentNode, rNode);
+					}
+					if((x > 500) || (y > 500) || (x < 0) || (y < 0)){
+						vel *= -1;
+						
+					}
 				}
 			}
-		}
 	}
 
     public void changeType(char newType) 
@@ -120,7 +194,6 @@ public abstract class Human
             Node current = null;
             System.out.println("Open list size: " + open.size());
             if (open.size() == 0) {
-            	aStar(this.getNode(walkway, x, y), this.randomNode());
                 throw new RuntimeException("no route");
             }
 
@@ -186,7 +259,6 @@ public abstract class Human
         return null;
         
     }
-    
     public int estimateDistance(Node node1, Node node2) {
         return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
     }
@@ -208,9 +280,9 @@ public abstract class Human
         	else if(this instanceof Uninfected && n.isWalkable() && n.hcost < tempNode.hcost)
         		tempNode = n;
         }
-        if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+        if((radiusList.get(random).isWalkable() == true) && (tempNode != currentNode)){
             return tempNode;
-        } 
+        }
         return randomNode();
     }
 }
