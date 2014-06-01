@@ -142,7 +142,7 @@ public abstract class Human
                 if (neighbor == null) {
                     continue;
                 }
-                int nextG = 0;
+                int nextG = 0;      	
                 if(this.type == 'i')
                 	nextG = current.g + neighbor.zcost;
                 else if(this.type != 'i')
@@ -155,6 +155,7 @@ public abstract class Human
 
                 if (!open.contains(neighbor) && !closed.contains(neighbor)) {
                     neighbor.g = nextG;
+                    
                     neighbor.h = estimateDistance(neighbor, goal);
                     neighbor.f = neighbor.g + neighbor.h;
                     neighbor.parent = current;
@@ -202,7 +203,9 @@ public abstract class Human
         }
         random = (int)(Math.random() * (radiusList.size()));
         tempNode = radiusList.get(random);
+        
         for(Node n: radiusList){
+        	
         	if(this.type == 'i' && n.isWalkable() && n.zcost < tempNode.zcost)
         		tempNode = n;
         	else if(this.type != 'i' && n.isWalkable() && n.hcost < tempNode.hcost)
@@ -211,6 +214,7 @@ public abstract class Human
         	            return tempNode;
         	        } 
         	}
+ 
         radiusList.clear();
         return randomNode();
     }

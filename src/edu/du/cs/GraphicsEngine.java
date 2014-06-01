@@ -36,6 +36,7 @@ public class GraphicsEngine
 //				infected.add((Infected)aHuman);
 //				humans.add(aHuman);
 //			}
+
 			Human aHuman = new Normal(randomN.getX(), randomN.getY());
 			uninfected.add((Uninfected) aHuman);
 			humans.add(aHuman);
@@ -44,6 +45,12 @@ public class GraphicsEngine
 		Human aHuman = new Infected(randomN.getX(), randomN.getY());
 		infected.add((Infected)aHuman);
 		humans.add(aHuman);
+		for(int i = 0; i < 10; i++){
+			randomN = this.randomNode();
+			Human aCop = new Cop(randomN.getX(), randomN.getY());
+			uninfected.add((Uninfected) aCop);
+			humans.add(aCop);
+		}
 	}
 
 	public void drawTalkBox(String msg, String gifSrc){
@@ -68,6 +75,7 @@ public class GraphicsEngine
 			try { playRadioStart.play(); } catch(JavaLayerException e){System.out.println(e.getMessage());}
 			hasPlayedStartSound = true;
 		}
+
 	}
 	
 	public void drawHuman( Human aHuman ) {
@@ -130,8 +138,8 @@ public class GraphicsEngine
 		ArrayList<Human> deadList = new ArrayList<Human>();
 		
 		while(true){
-			System.out.println("H: "+uninfected.size());
-		    System.out.println("Z: "+infected.size());
+//			System.out.println("H: "+uninfected.size());
+//		    System.out.println("Z: "+infected.size());
 		    
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
@@ -139,7 +147,15 @@ public class GraphicsEngine
 		    for(Human h : uninfected){
 		    	for(Human z: infected){
 		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 ){
-		    			((Infected) z).attack((Uninfected) h);
+		    			if(h.type == 'c'){
+		    				((Cop) h).attack((Infected) z);
+		    				System.out.println("Infected Detected. Attacking!");
+
+		    			} else {
+		    				((Infected) z).attack((Uninfected) h);
+		    				System.out.println("ARRHHHHHHHH BRAIIINS");
+		    			}
+		    			
 		    		}
 		    		if( h.isDead && !deadList.contains(h)){
 		    			deadList.add(h);	
@@ -158,6 +174,14 @@ public class GraphicsEngine
 		    deadList.clear();
 		    
 		    for(Human h : humans){
+		    	if(h.type == 'c'){
+		    		for(Infected z : infected){
+		    			if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 30 ){
+		    				((Cop) h).attack((Infected) z);
+		    				System.out.println("Infected Detected. Attacking!");
+		    			}
+		    		}
+		    	}
 		    	Node target = null;
 		    	g.drawHuman(h);
 		    	h.move();

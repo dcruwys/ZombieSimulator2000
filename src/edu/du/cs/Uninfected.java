@@ -61,6 +61,9 @@ public abstract class Uninfected extends Human
 					hNodes.remove(n);
 				}
 			}
+			if(this.type == 'c'){
+				
+			}
         }
 		super.move();
 	}

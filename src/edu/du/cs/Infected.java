@@ -5,12 +5,15 @@ import java.util.ArrayList;
 public class Infected extends Human 
 {   
     private int hp;
+    private Node myNode;
     private ArrayList<Node> zNodes;
     
     public Infected(int xIn, int yIn) {
         super(xIn, yIn);
         hp = 10;
         vel = 1;
+        myNode.setX(x);
+        myNode.setY(y);
         zNodes = new ArrayList<Node>();
         isDead = false;
         type = 'i';
