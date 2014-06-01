@@ -7,7 +7,9 @@ public abstract class Uninfected extends Human
 	private ArrayList<Node> hNodes;
 	public Uninfected(int xIn, int yIn) {
 		super(xIn, yIn);
+		
 		walkway = Simulate.hWalkway;
+        
 		vel = 1 + (int) Math.round( Math.random() * 2);
 		hNodes = new ArrayList<Node>();
 	}
@@ -18,6 +20,9 @@ public abstract class Uninfected extends Human
 	}
 	public void move(){
 		for(Node n: Simulate.zWalkway){
+			if(n.cost == 12){
+				System.out.println("DONE FUCKED");
+			}
 			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){
 				n.cost = 0;	
 				hNodes.add(n);

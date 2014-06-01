@@ -17,29 +17,16 @@ public abstract class Human
     protected Node currentNode;
     protected Node nextNode;
     private Node rNode;
-    protected ArrayList<Node> walkway = null;
+    protected ArrayList<Node> walkway = Simulate.walkway;
 
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn;
-        if(this instanceof Infected){
-        	walkway = Simulate.zWalkway;
-        	System.out.println("ZAMBIE");
-        }
-        else if(this instanceof Uninfected){
-        	walkway = Simulate.hWalkway;
-        }
+    
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
         aStar(currentNode, rNode);
-        if(this instanceof Infected){
-	        System.out.println("START OF THE LINE...");
-	        System.out.println("Current Node: "+currentNode);
-	        System.out.println("Random Node: "+rNode);
-	        System.out.println("Path: "+path);
-	        System.out.println();
-        }
     }
     
     public void move() {
@@ -204,7 +191,7 @@ public abstract class Human
                 radiusList.add(n);
             }
         }
-        random = (int )(Math.random() * (radiusList.size()));
+        random = (int)(Math.random() * (radiusList.size()));
         tempNode = radiusList.get(random);
         for(Node n: radiusList){
         	if(n.isWalkable() && n.cost < tempNode.cost)

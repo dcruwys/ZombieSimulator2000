@@ -56,9 +56,12 @@ public class Simulate {
 			n.setAdjacent();
 		}
 		for(Node n: walkway){
-			zWalkway.add(n);
-			hWalkway.add(n);
+			zWalkway.add(new Node(n));
+			hWalkway.add(new Node(n));
 		}
+		System.out.println(walkway.size());
+		System.out.println(zWalkway.size());
+		System.out.println(hWalkway.size());
 		
 	}
 

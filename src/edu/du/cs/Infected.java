@@ -10,7 +10,9 @@ public class Infected extends Human
     private ArrayList<Node> zNodes;
     public Infected(int xIn, int yIn) {
         super(xIn, yIn);
+        
         walkway = Simulate.zWalkway;
+        
         isDead = false;
         changeType('z');
         hp = 10;
@@ -31,10 +33,6 @@ public class Infected extends Human
     @Override
     public void move()
     {
-       	for(Node n: this.getNode(walkway, currentNode.getX(), currentNode.getY()).getAdjacentNodes()){
-    		System.out.println(n);
-    		System.out.println(n.cost);
-    	}
         if(!isDead)
         {
 	        for(Node n: Simulate.hWalkway){

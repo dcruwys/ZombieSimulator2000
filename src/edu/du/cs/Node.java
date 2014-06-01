@@ -4,40 +4,43 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Node {
-	Node topNode;
-	Node bottomNode;
-	Node leftNode;
-	Node rightNode;
-	private int x;
-	private int y;
-	private boolean walkable;
-	private int alpha;
+	protected Node topNode;
+	protected Node bottomNode;
+	protected Node leftNode;
+	protected Node rightNode;
+	protected int x;
+	protected int y;
+	protected boolean walkable;
 	
 	//A* variables
-	private List<Node> adjacentNodes = new ArrayList<Node>();
-	public int cost;
-	public int f;
-    public int g;
-    public int h;
-	Node parent;
-	
-	public int getAlpha()
-	{
-		return alpha;
-	}
-	
-	public void setAlpha( int x )
-	{
-		alpha = x;
-	}
+	protected List<Node> adjacentNodes = new ArrayList<Node>();
+	protected int cost;
+	protected int f;
+    protected int g;
+    protected int h;
+	protected Node parent;
+
 
 	public Node(int myX, int myY, boolean w){
 		x = myX;
 		y = myY;
 		
 		cost = 10;
-		alpha = 1;
 		walkable = w;
+	}
+	public Node(Node n){
+		
+		topNode = n.topNode;
+		leftNode = n.leftNode;
+		rightNode = n.rightNode;
+		bottomNode = n.bottomNode;
+		x = n.x;
+		y = n.y;
+		walkable = n.walkable;
+		
+		adjacentNodes = n.adjacentNodes;
+		cost = 10;
+			
 	}
 	
 	public void setAdjacent(){
