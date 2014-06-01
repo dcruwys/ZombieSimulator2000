@@ -25,7 +25,6 @@ public abstract class Uninfected extends Human
 	public void move(){
 		for(Node n: Simulate.walkway){
 			if(n.zcost == 12){
-				System.out.println("DONE FUCKED");
 			}
 			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){
 				n.zcost = 0;	
