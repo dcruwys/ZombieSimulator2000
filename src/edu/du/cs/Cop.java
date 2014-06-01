@@ -1,20 +1,13 @@
 package edu.du.cs;
 
-public class Cop extends Human 
+public class Cop extends Uninfected
 {
 	private int ammo;
 	
 	public Cop(int xIn, int yIn) {
 		super(xIn, yIn);
 		changeType('c');
-		vel = 1 + (int) Math.round( Math.random() * 2);
 		ammo = 25;
-	}
-
-	@Override
-	public void die() {
-		changeType('z');	
-		GraphicsEngine.drawHuman( this );
 	}
 	
 	public int getAmmo()
@@ -27,16 +20,6 @@ public class Cop extends Human
 		ammo += (someSupply.getAmount() * 10);
 	}
 	
-	public void move()
-	{
-		if(panic)
-		{
-			attack( getInSight() );
-		}
-		else
-			super.move();
-	}
-	
 	public void attack( Infected zombie )
 	{
 		//attack zombie
@@ -45,5 +28,11 @@ public class Cop extends Human
 	public Infected getInSight()
 	{
 		return null;
+	}
+	
+	@Override
+	public Node randomNode()
+	{
+		
 	}
 }

@@ -13,12 +13,16 @@ public abstract class Human
 	protected String type;
 	protected int vel;
 	private int random;
-	protected boolean panic;
 	protected List<Node> path;
 	protected Node currentNode;
 	protected Node nextNode;
 	private Node rNode;
+<<<<<<< HEAD
 	protected static ArrayList<Node> walkway;
+=======
+	protected static ArrayList<Node> zombieNodes = new ArrayList<Node> (Simulate.walkway);
+	protected static ArrayList<Node> humanNodes = new ArrayList<Node> (Simulate.walkway);
+>>>>>>> FETCH_HEAD
 
 	public Human(int xIn, int yIn) {
 		walkway = Simulate.hWalkway;
@@ -36,8 +40,14 @@ public abstract class Human
 		System.out.println();
 	}
 	
+<<<<<<< HEAD
 	public void move() {
 		for(Node n: walkway){
+=======
+	public void move()
+	{
+		for(Node n: Simulate.walkway){
+>>>>>>> FETCH_HEAD
 			if(Math.abs(n.getX() - this.x) < 100 && Math.abs(n.getY() - this.y) < 100){
 				
 			}
@@ -75,7 +85,8 @@ public abstract class Human
 		switch(newType)
 		{
 		case 'z':
-			type = "Infected"; break;
+			type = "Infected"; 
+			break;
 		case 'm':
 			type = "Medic"; break;
 		case 'c':
@@ -83,6 +94,7 @@ public abstract class Human
 		case 'n':
 			type = "Normal"; break;
 		}
+		GraphicsEngine.drawHuman( this );
 	}
 
 	public abstract void die();
@@ -114,10 +126,6 @@ public abstract class Human
 	{
 		return vel;
 	}
-	
-	public boolean getPanic(){
-		return panic;
-	}
 
 	public void aStar(Node start, Node goal) {
 	    Set<Node> open = new HashSet<Node>();
@@ -125,7 +133,7 @@ public abstract class Human
 	    
 	    start.g = 0;
 
-	    start.h = estimateDistance(start, goal);
+	    start.h = estimateDistance(start, goal) * goal.getAlpha() + goal.cost;
 	    start.f = start.h;
 
 	    open.add(start);
@@ -188,19 +196,20 @@ public abstract class Human
 	}
 	
 	public Node getNode(ArrayList<Node> nodeList, int x, int y){
-		Node tempNode = null;
 		for(Node n : nodeList){
 			if((n.getX() == x) && (n.getY() == y)){
-				tempNode = n;
+				return n;
 			}
 		}
-		return tempNode;
+		return null;
+		
 	}
 	
 	public int estimateDistance(Node node1, Node node2) {
 	    return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
 	}
 	
+<<<<<<< HEAD
 	public Node randomNode(){
 		Node tempNode = null;
 		ArrayList<Node> radiusList = new ArrayList<Node>();
@@ -218,4 +227,24 @@ public abstract class Human
 	return randomNode();
 		
 	}
+=======
+	public abstract Node randomNode();
+	
+//	{
+//		Node tempNode = null;
+//		ArrayList<Node> radiusList = new ArrayList<Node>();
+//		int radius = 100; //Random Node Radius
+//		for(Node n : Simulate.walkway){
+//			if((this.estimateDistance(n, currentNode)<radius) && this.estimateDistance(n, currentNode) > 50){
+//				radiusList.add(n);
+//			}
+//		}
+//		random = (int )(Math.random() * (radiusList.size()));
+//
+//		if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+//			return tempNode = radiusList.get(random);
+//		} 
+//		return randomNode();
+//	}
+>>>>>>> FETCH_HEAD
 }

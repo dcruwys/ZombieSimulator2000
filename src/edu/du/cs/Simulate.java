@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Simulate {
 	protected static int mySize = 51;
 	protected static int[][] grid = new int[mySize][mySize];
-	private static ArrayList<Node> walkway = new ArrayList<Node>();
+	protected static ArrayList<Node> walkway = new ArrayList<Node>();
 	protected static ArrayList<Node> hWalkway;
 	protected static ArrayList<Node> zWalkway;
 
