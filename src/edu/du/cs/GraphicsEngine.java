@@ -45,14 +45,14 @@ public class GraphicsEngine
 		}
 	}
 	
-	public static void drawHuman( Human aHuman ) {
-		if( aHuman.getType().equalsIgnoreCase( "medic" )) //if human is medic, make it red
+	public void drawHuman( Human aHuman ) {
+		if( aHuman instanceof Medic) //if human is medic, make it red
 			StdDraw.setPenColor( StdDraw.RED );
-		else if( aHuman.getType().equalsIgnoreCase( "cop" )) //if human is cop make it blue
+		else if( aHuman instanceof Cop) //if human is cop make it blue
 			StdDraw.setPenColor( StdDraw.BLUE );
-		else if( aHuman.getType().equalsIgnoreCase( "normal" ))//if human is normal make it pink
+		else if( aHuman instanceof Normal)//if human is normal make it pink
 			StdDraw.setPenColor( StdDraw.MAGENTA );
-		else if( aHuman.getType().equalsIgnoreCase("infected"))
+		else if( aHuman instanceof Infected)
 			StdDraw.setPenColor( StdDraw.GREEN );
 		
 		StdDraw.filledSquare( aHuman.getX(), aHuman.getY(), 4); //draw human
@@ -104,13 +104,20 @@ public class GraphicsEngine
 		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, 500.0); //Set scale to 500
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
-		for(int i = 0; i < 1; i++){
+		for(int i = 0; i < (int)Simulate.mySize/5; i++){
 			Node randomN = g.randomNode();
-			Human aHuman = new Normal(randomN.getX(), randomN.getY());
-			humans.add(aHuman);
+			if(i % 4 == 0){
+				Human aHuman = new Infected(randomN.getX(), randomN.getY());
+				humans.add(aHuman);
+			}
+			else{
+				Human aHuman = new Normal(randomN.getX(), randomN.getY());
+				humans.add(aHuman);
+			}
+			
  		}
-		//Infected z = new Infected(g.randomNode().getX(), g.randomNode().getY());
-		
+//		Human z = new Infected(g.randomNode().getX(), g.randomNode().getY());
+//		humans.add(z);
 		while(true){
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
@@ -120,6 +127,7 @@ public class GraphicsEngine
 		    	g.drawHuman(h);
 		    	h.move();
 		    }
+		 
 		    //g.drawZombie(z);
 			//z.move();
 			//z.lineOfSight(humans);

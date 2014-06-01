@@ -17,12 +17,12 @@ public abstract class Human
     protected Node currentNode;
     protected Node nextNode;
     private Node rNode;
-    protected ArrayList<Node> walkway;
+    protected ArrayList<Node> walkway = Simulate.walkway;
 
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn;
-        walkway = Simulate.walkway;
+        
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
@@ -37,11 +37,7 @@ public abstract class Human
     
     public void move()
     {
-        for(Node n: walkway){
-            if(Math.abs(n.getX() - this.x) < 100 && Math.abs(n.getY() - this.y) < 100){
-                
-            }
-        }
+        
         if(path.size() <= 1){
             path.clear();
             rNode = this.randomNode();
@@ -52,6 +48,9 @@ public abstract class Human
             currentNode = path.get(0);
             nextNode = path.get(1);
             
+            if(currentNode == nextNode){
+            	path.remove(0);
+            }
             if(currentNode.getRightNode() == nextNode){
                 x += vel;
             }
@@ -72,19 +71,7 @@ public abstract class Human
 
     public void changeType(char newType) 
     {
-        switch(newType)
-        {
-        case 'z':
-            type = "Infected"; 
-            break;
-        case 'm':
-            type = "Medic"; break;
-        case 'c':
-            type = "Cop"; break;
-        case 'n':
-            type = "Normal"; break;
-        }
-        GraphicsEngine.drawHuman( this );
+       
     }
 
     public abstract void die();
