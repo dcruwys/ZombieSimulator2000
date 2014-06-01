@@ -7,9 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
-
 public abstract class Human
 {
     protected int x;
@@ -25,124 +22,101 @@ public abstract class Human
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn;
-    
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
         //aStar(currentNode, rNode);
     }
     
-    public void move() {
-			if(path.size() <= 1){
-				path.clear();
-				rNode = this.randomNode();
-				currentNode = this.getNode(walkway, x, y);
-				if((x > 500) || (y > 500) || (x < 0) || (y < 0)){
-					System.out.println("Aw shit nigga, we got a runner ONE");
-					System.out.println("Runner X: " +  x + " Y: " + y);
-					System.out.println("Current Node X: " + currentNode.getX() + " Y: " + currentNode.getY());
-					System.out.println("Next Node X: " + nextNode.getX() + " Y: " + nextNode.getY());
-					System.out.println("Path" + path);
-					int tempVel = vel;
-					vel = 0;
-					Node fixNode = randomNode();
-					x = fixNode.getX();
-					y = fixNode.getY();
-					
-					rNode = randomNode();
-					this.aStar(currentNode, rNode);
-					move();
-					vel = tempVel;
-					Player playPoof = null;
-					
-					try{
-						FileInputStream playPoofIN = new FileInputStream("Portal2_sfx_portal_gun_fire_blue.mp3");
-						playPoof = new Player(playPoofIN);
-						playPoof.play();
-					} catch(Exception exc){
-						exc.printStackTrace();
-						System.out.println("FAILED TO DO A BARREL ROLL");
-					}
-					
-
-				}
-				this.aStar(currentNode, rNode);
+//    public void move() {
+//		if(path.size() <= 1){
+//			rNode = this.randomNode();
+//			currentNode = this.getNode(Simulate.walkway, x, y);
+//			this.aStar(currentNode, rNode);
+//		}
+//		else if(path.size() > 1){
+//			currentNode = path.get(0);
+//			nextNode = path.get(1);
+//			if(currentNode == null){
+//				System.out.println("Yep");
+//				x = Math.round(x/5) * 5;
+//				y = Math.round(y/5) * 5;
+//				currentNode = this.getNode(Simulate.walkway, x, y);
+//			}
+//			if(x == nextNode.getX() && y == nextNode.getY()){
+//				rNode = this.randomNode();
+//				currentNode = this.getNode(Simulate.walkway, x, y);
+//				this.aStar(currentNode, rNode);
+//			}
+//			else{
+//				currentNode = path.get(0);
+//				nextNode = path.get(1);
+//				if(x == nextNode.getX() && y == nextNode.getY()){
+//					path.remove(0);
+//					currentNode = path.get(0);
+//					nextNode = path.get(1);
+//				}
+//				if(currentNode.getRightNode() == nextNode && currentNode.getRightNode() != null){
+//					x += vel;
+//				}
+//				else if(currentNode.getLeftNode() == nextNode && currentNode.getLeftNode() != null){
+//					x -= vel;
+//				}
+//				else if(currentNode.getTopNode() == nextNode &&  currentNode.getTopNode() != null){
+//					y += vel;
+//				}
+//				else if(currentNode.getBottomNode() == nextNode  && currentNode.getBottomNode() != null){
+//					y -= vel;
+//				}
+//				else{
+//					rNode = this.randomNode();
+//					currentNode = this.getNode(Simulate.walkway, x, y);
+//					this.aStar(currentNode, rNode);
+//				}
+//			}
+//		}
+//	}
+    public void move(){
+    	if(path.size() <= 1){
+    		rNode = this.randomNode();
+			currentNode = this.getNode(Simulate.walkway, x, y);
+			this.aStar(currentNode, rNode);
+			return;
+    	}
+    	if(path.size() > 1){
+    		currentNode = path.get(0);
+        	nextNode = path.get(1);
 			
-			}
-			else if(path.size() > 1){
+			if(currentNode == nextNode){
+				path.remove(0);
 				currentNode = path.get(0);
-				nextNode = path.get(1);
-									
-					
-					
-					if(nextNode == currentNode)
-						path.remove(nextNode);
-					if(currentNode.getRightNode() == nextNode){
-						x = x + 1;
-					}
-					else if(currentNode.getLeftNode() == nextNode){
-						x = x - 1;
-					}
-					else if(currentNode.getTopNode() == nextNode){
-						y = y + 1;
-					}
-					else if(currentNode.getBottomNode() == nextNode){
-						y = y - 1;
-					}
-					else{
-						path.clear();
-						rNode = this.randomNode();
-						
-						
-						currentNode = this.getNode(Simulate.walkway, x, y);
-						
-						this.aStar(currentNode, rNode);
-					}
-					
-				if((x > 500) || (y > 500) || (x < 0) || (y < 0)){
-					System.out.println("Aw shit nigga, we got a runner TWO");
-					System.out.println("Runner X: " +  x + " Y: " + y);
-					System.out.println("Current Node X: " + currentNode.getX() + " Y: " + currentNode.getY());
-					System.out.println("Next Node X: " + nextNode.getX() + " Y: " + nextNode.getY());
-					System.out.println("Path" + path);
-					Node fixNode = randomNode();
-					x = fixNode.getX();
-					y = fixNode.getY();
-					int tempVel = vel;
-					vel = 0;
-					
-					rNode = randomNode();
+	        	nextNode = path.get(1);
+			}
+			else{
+				if(currentNode.getRightNode() == nextNode && currentNode.getRightNode() != null){
+					x += vel;
+				}
+				else if(currentNode.getLeftNode() == nextNode && currentNode.getLeftNode() != null){
+					x -= vel;
+				}
+				else if(currentNode.getTopNode() == nextNode &&  currentNode.getTopNode() != null){
+					y += vel;
+				}
+				else if(currentNode.getBottomNode() == nextNode  && currentNode.getBottomNode() != null){
+					y -= vel;
+				}
+				else {
+					rNode = this.randomNode();
+					currentNode = this.getNode(Simulate.walkway, x, y);
 					this.aStar(currentNode, rNode);
-					move();
-					vel = tempVel;
-					Player playPoof = null;
-					
-					try{
-						FileInputStream playPoofIN = new FileInputStream("Portal2_sfx_portal_gun_fire_blue.mp3");
-						playPoof = new Player(playPoofIN);
-						playPoof.play();
-					} catch(Exception exc){
-						exc.printStackTrace();
-						System.out.println("FAILED TO DO A BARREL ROLL");
-					}
-
-					
+					return;
 				}
 				if(x == nextNode.getX() && y == nextNode.getY()){
 					path.remove(0);
-					if(path.size() <= 1){
-						path.clear();
-						rNode = this.randomNode();
-						//currentNode = this.getNode(walkway, x, y);
-						this.aStar(currentNode, rNode);
-					}
-					if((x > 500) || (y > 500) || (x < 0) || (y < 0)){
-						vel *= -1;
-						
-					}
 				}
 			}
-	}
+    	}
+    }
 
     public void changeType(char newType) 
     {
@@ -176,8 +150,7 @@ public abstract class Human
     }
 
     public void aStar(Node start, Node goal) {
-    	System.out.println(start);
-    	System.out.println(currentNode);
+    	path.clear();
         Set<Node> open = new HashSet<Node>();
         Set<Node> closed = new HashSet<Node>();
         
@@ -192,7 +165,7 @@ public abstract class Human
 
         while (true) {
             Node current = null;
-            System.out.println("Open list size: " + open.size());
+            //System.out.println("Open list size: " + open.size());
             if (open.size() == 0) {
                 throw new RuntimeException("no route");
             }
@@ -266,9 +239,9 @@ public abstract class Human
     public Node randomNode() {
         Node tempNode = null;
         ArrayList<Node> radiusList = new ArrayList<Node>();
-        int radius = 70; //Random Node Radius
+        int radius = 80; //Random Node Radius
         for(Node n : walkway){
-            if((this.estimateDistance(n, currentNode)<radius) && (this.estimateDistance(n, currentNode)>=20)){
+            if((this.estimateDistance(n, currentNode)<radius)){
                 radiusList.add(n);
             }
         }

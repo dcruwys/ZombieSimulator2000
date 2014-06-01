@@ -15,7 +15,7 @@ public class Infected extends Human
         isDead = false;
         changeType('z');
         hp = 10;
-        vel = 2 + (int) Math.floor(Math.random() * 2);
+        vel = 1;
         zNodes = new ArrayList<Node>();
     }
 
