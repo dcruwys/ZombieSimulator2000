@@ -30,9 +30,4 @@ public class Cop extends Uninfected
 		return null;
 	}
 	
-	@Override
-	public Node randomNode()
-	{
-		
-	}
 }

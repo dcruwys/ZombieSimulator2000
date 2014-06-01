@@ -14,8 +14,4 @@ public abstract class Uninfected extends Human
 		changeType('z');
 	}
 
-	public Node randomNode()
-	{
-		
-	}
 }

@@ -50,6 +50,11 @@ public class Simulate {
 					walkway.add(new Node((row*10-5), (col*10-5), false));
 			}
 		}
+		
+		for(Node n: walkway){
+			n.setAdjacent();
+		}
+		
 		zWalkway = new ArrayList<Node>(walkway);
 		hWalkway = new ArrayList<Node>(walkway);
 	}

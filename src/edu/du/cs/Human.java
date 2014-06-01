@@ -199,22 +199,20 @@ public abstract class Human
         return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
     }
     
-    public abstract Node randomNode();
-    
-//    {
-//        Node tempNode = null;
-//        ArrayList<Node> radiusList = new ArrayList<Node>();
-//        int radius = 100; //Random Node Radius
-//        for(Node n : walkway){
-//            if((this.estimateDistance(n, currentNode)<radius) && this.estimateDistance(n, currentNode) > 50){
-//                radiusList.add(n);
-//            }
-//        }
-//        random = (int )(Math.random() * (radiusList.size()));
-//
-//        if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
-//            return tempNode = radiusList.get(random);
-//        } 
-//        return randomNode();
-//    }
+    public Node randomNode() {
+        Node tempNode = null;
+        ArrayList<Node> radiusList = new ArrayList<Node>();
+        int radius = 100; //Random Node Radius
+        for(Node n : walkway){
+            if((this.estimateDistance(n, currentNode)<radius) && this.estimateDistance(n, currentNode) > 50){
+                radiusList.add(n);
+            }
+        }
+        random = (int )(Math.random() * (radiusList.size()));
+
+        if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+            return tempNode = radiusList.get(random);
+        } 
+        return randomNode();
+    }
 }

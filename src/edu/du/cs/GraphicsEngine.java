@@ -9,7 +9,6 @@ import javazoom.jl.player.Player;
 
 public class GraphicsEngine
 {	
-	public static int[][] grid;
 	public static ArrayList<Node> walkwayNodes;
 	public ArrayList<Human> humans;
 
@@ -20,10 +19,7 @@ public class GraphicsEngine
 	public GraphicsEngine(){
 		Simulate.generateBuildings();
 		
-		grid = Simulate.grid;
 		humans = new ArrayList<Human>(); //Create an array list of humans.
-		for(Node n: walkwayNodes)
-			n.setAdjacent();
 	}
 	public void drawTalkBox(String msg, String gifSrc){
 		boolean hasPlayedStartSound = false;
@@ -90,8 +86,8 @@ public class GraphicsEngine
 	
 	public Node randomNode(){
 		Node tempNode = null;
-		random = (int )(Math.random() * walkwayNodes.size());
-		tempNode = walkwayNodes.get(random);
+		random = (int )(Math.random() * Simulate.walkway.size());
+		tempNode = Simulate.walkway.get(random);
 		if(tempNode.isWalkable() && tempNode.getBottomNode() != null && tempNode.getTopNode() != null && tempNode.getLeftNode() != null && tempNode.getRightNode() != null){
 			return tempNode;
 		} 
@@ -117,7 +113,7 @@ public class GraphicsEngine
 		
 		while(true){
 			StdDraw.clear();
-			g.drawMap(grid);
+			g.drawMap(Simulate.grid);
 			//g.drawTalkBox("Hello World", "meh.gif");
 
 		    for(Human h : humans){
