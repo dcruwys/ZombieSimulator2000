@@ -1,27 +1,21 @@
 package edu.du.cs;
 
-public class Normal extends Human
+public class Normal extends Uninfected
 {
 
 	public Normal(int xIn, int yIn) {
 		super(xIn, yIn);
 		changeType('n');
-		vel = 1 + (int) Math.round( Math.random() * 2);
-	}
-
-	@Override
-	public void die() {
-		changeType('z');	
-		GraphicsEngine.drawHuman( this );
 	}
 	
-	public void move()
+	public void findSupply( Supplies someSupply )
 	{
-		if(panic)
-		{
-			//run away from zombie
-		}
-		else
-			super.move();
+		double random = Math.random();
+		if( random < .5 )
+			return; //does nothing
+		else if( (random < .7) && (random >= .5) )
+			changeType('m');
+		else if ((random >= .7))
+			changeType('c');
 	}
 }

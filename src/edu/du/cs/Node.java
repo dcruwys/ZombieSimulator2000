@@ -12,6 +12,7 @@ public class Node {
 	private int y;
 	private boolean walkable;
 	private static ArrayList<Node> walkway;
+	private int alpha = 1;
 	
 	//A* variables
 	private List<Node> adjacentNodes = new ArrayList<Node>();
@@ -20,6 +21,16 @@ public class Node {
     public int g;
     public int h;
 	Node parent;
+	
+	public int getAlpha()
+	{
+		return alpha;
+	}
+	
+	public void setAlpha( int x )
+	{
+		alpha = x;
+	}
 
 	public Node(int myX, int myY, boolean w){
 		x = myX;
