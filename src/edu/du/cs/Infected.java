@@ -28,8 +28,9 @@ public class Infected extends Human
     @Override
     public void move()
     {
-        while(!isDead)
+        if(!isDead)
         {
+        	
             super.move();
         }
     }

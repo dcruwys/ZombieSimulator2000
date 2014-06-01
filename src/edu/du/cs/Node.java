@@ -11,8 +11,7 @@ public class Node {
 	private int x;
 	private int y;
 	private boolean walkable;
-	private static ArrayList<Node> walkway;
-	private int alpha = 1;
+	private int alpha;
 	
 	//A* variables
 	private List<Node> adjacentNodes = new ArrayList<Node>();
@@ -37,8 +36,8 @@ public class Node {
 		y = myY;
 		
 		cost = 0;
+		alpha = 1;
 		walkable = w;
-		walkway = Simulate.walkway;
 	}
 	
 	public void setAdjacent(){
@@ -81,7 +80,7 @@ public class Node {
 		return walkable;
 	}
 	public Node findNode(int x, int y){
-		for(Node n : walkway){
+		for(Node n : Simulate.walkway){
 			if((n.getX() == x) && (n.getY() == y)){
 				return n;
 			}
