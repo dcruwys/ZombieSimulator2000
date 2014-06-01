@@ -1,5 +1,6 @@
 package edu.du.cs;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -121,7 +122,6 @@ public abstract class Human
             Node current = null;
             //System.out.println("Open list size: " + open.size());
             if (open.size() == 0) {
-            	aStar(this.getNode(walkway, x, y), this.randomNode());
                 throw new RuntimeException("no route");
             }
 
@@ -187,7 +187,6 @@ public abstract class Human
         return null;
         
     }
-    
     public int estimateDistance(Node node1, Node node2) {
         return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
     }
@@ -214,8 +213,8 @@ public abstract class Human
         	        } 
         	}
         }
-        if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
-        	radiusList.clear();
+
+        if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){;
             return tempNode;
         } 
         radiusList.clear();
