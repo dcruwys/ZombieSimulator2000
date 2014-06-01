@@ -207,16 +207,10 @@ public abstract class Human
         		tempNode = n;
         	else if(this.type != 'i' && n.isWalkable() && n.hcost < tempNode.hcost)
         		tempNode = n;
-        	else{
-        		 if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
+        	if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
         	            return tempNode;
         	        } 
         	}
-        }
-
-        if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){;
-            return tempNode;
-        } 
         radiusList.clear();
         return randomNode();
     }
