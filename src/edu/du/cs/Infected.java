@@ -14,7 +14,7 @@ public class Infected extends Human
         isDead = false;
         changeType('z');
         hp = 10;
-        vel = 1 + (int) Math.floor(Math.random() * 3);
+        vel = 2 + (int) Math.floor(Math.random() * 2);
         zNodes = new ArrayList<Node>();
     }
 
@@ -31,20 +31,38 @@ public class Infected extends Human
     @Override
     public void move()
     {
+       	for(Node n: this.getNode(walkway, currentNode.getX(), currentNode.getY()).getAdjacentNodes()){
+    		System.out.println(n);
+    		System.out.println(n.cost);
+    	}
         if(!isDead)
         {
-	        for(Node n: Simulate.zWalkway){
-	        	if(Math.abs(n.getX() - this.x) < 30 && Math.abs(n.getY() - this.y) < 30 && !zNodes.contains(n)){
-	        		n.setAlpha(0);
-					n.cost = 10;	
+	        for(Node n: Simulate.hWalkway){
+	        	if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !zNodes.contains(n)){
+	        		n.cost = 14;	
 					zNodes.add(n);
 				}
-	        	else {
-					n.setAlpha(1);
-					n.cost = 10;
-					zNodes.remove(n);
+				else if(Math.abs(n.getX() - this.x) <= 10 && Math.abs(n.getY() - this.y) <= 10 && n.cost != 14){
+					n.cost = 13;	
+					if(!zNodes.contains(n))
+						zNodes.add(n);
 				}
-	        }
+				else if(Math.abs(n.getX() - this.x) <= 20 && Math.abs(n.getY() - this.y) <= 20 && n.cost != 13){
+					n.cost = 12;	
+					if(!zNodes.contains(n))
+						zNodes.add(n);
+				}
+				else if(Math.abs(n.getX() - this.x) <= 30 && Math.abs(n.getY() - this.y) <= 30 && n.cost != 12){
+					n.cost = 11;	
+					if(!zNodes.contains(n))
+						zNodes.add(n);
+				}
+	        	else {
+	        		if(zNodes.contains(n)){
+						n.cost = 10;
+						zNodes.remove(n);
+					}
+				}	        }
 	        super.move();
 	           
         }

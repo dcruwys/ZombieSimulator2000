@@ -17,16 +17,41 @@ public abstract class Uninfected extends Human
 		changeType('z');
 	}
 	public void move(){
-		for(Node n: Simulate.hWalkway){
-			if(Math.abs(n.getX() - this.x) < 60 && Math.abs(n.getY() - this.y) < 60 && !hNodes.contains(n)){
-        		n.setAlpha(0);
-				n.cost = 10;	
+		for(Node n: Simulate.zWalkway){
+			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){
+				n.cost = 0;	
 				hNodes.add(n);
 			}
+			else if(Math.abs(n.getX() - this.x) <= 10 && Math.abs(n.getY() - this.y) <= 10 && n.cost != 0){
+				n.cost = 1;	
+				if(!hNodes.contains(n))
+					hNodes.add(n);
+			}
+			else if(Math.abs(n.getX() - this.x) <= 20 && Math.abs(n.getY() - this.y) <= 20 && n.cost != 1){
+				n.cost = 2;	
+				if(!hNodes.contains(n))
+					hNodes.add(n);
+			}
+			else if(Math.abs(n.getX() - this.x) <= 30 && Math.abs(n.getY() - this.y) <= 30 && n.cost != 2){
+				n.cost = 3;	
+				if(!hNodes.contains(n))
+					hNodes.add(n);
+			}
+			else if(Math.abs(n.getX() - this.x) <= 40 && Math.abs(n.getY() - this.y) <= 40 && n.cost != 3){
+				n.cost = 4;	
+				if(!hNodes.contains(n))
+					hNodes.add(n);
+			}
+			else if(Math.abs(n.getX() - this.x) <= 50 && Math.abs(n.getY() - this.y) <= 50 && n.cost != 4){
+				n.cost = 5;	
+				if(!hNodes.contains(n))
+					hNodes.add(n);
+			}
         	else {
-				n.setAlpha(1);
-				n.cost = 10;
-				hNodes.remove(n);
+        		if(hNodes.contains(n)){
+					n.cost = 10;
+					hNodes.remove(n);
+				}
 			}
         }
 		super.move();

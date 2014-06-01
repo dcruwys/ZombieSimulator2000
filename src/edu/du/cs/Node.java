@@ -35,7 +35,7 @@ public class Node {
 		x = myX;
 		y = myY;
 		
-		cost = 0;
+		cost = 10;
 		alpha = 1;
 		walkable = w;
 	}
@@ -45,28 +45,24 @@ public class Node {
 		temp = findNode(x+10, y);
 		if(temp != null && temp.isWalkable()==true){
 			rightNode = temp;
-			rightNode.setMyCost(10);
 			adjacentNodes.add(rightNode);
 		}
 		//Left adjacent node
 		temp = findNode(x-10, y);
 		if(temp != null && temp.isWalkable()==true) {
 			leftNode = temp;
-			leftNode.setMyCost(10);
 			adjacentNodes.add(leftNode);
 		}
 		//above node
 		temp = findNode(x, y+10);
 		if(temp != null && temp.isWalkable()==true){
 			topNode = temp;
-			topNode.setMyCost(10);
 			adjacentNodes.add(topNode);
 		}
 		//Bottom node
 		temp = findNode(x, y-10);
 		if(temp != null && temp.isWalkable()==true){
 			bottomNode = temp;
-			bottomNode.setMyCost(10);
 			adjacentNodes.add(bottomNode);
 		}
 	}

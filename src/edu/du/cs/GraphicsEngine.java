@@ -2,6 +2,7 @@ package edu.du.cs;
 
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
@@ -106,28 +107,35 @@ public class GraphicsEngine
 		StdDraw.setYscale(0.0, 500.0); //Set scale to 500
 		for(int i = 0; i < (int)Simulate.mySize/5; i++){
 			Node randomN = g.randomNode();
-			if(i % 4 == 0){
-				Human aHuman = new Infected(randomN.getX(), randomN.getY());
-				humans.add(aHuman);
-			}
-			else{
+//			if(i % 4 == 0){
+//				Human aHuman = new Infected(randomN.getX(), randomN.getY());
+//				humans.add(aHuman);
+//			}
+//			else{
 				Human aHuman = new Normal(randomN.getX(), randomN.getY());
 				humans.add(aHuman);
-			}
+			//}
 			
  		}
-//		Human z = new Infected(g.randomNode().getX(), g.randomNode().getY());
-//		humans.add(z);
+		Human z = new Infected(g.randomNode().getX(), g.randomNode().getY());
+		humans.add(z);
 		while(true){
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
 			//g.drawTalkBox("Hello World", "meh.gif");
-
 		    for(Human h : humans){
+		    	Node target = null;
 		    	g.drawHuman(h);
 		    	h.move();
-		    }
-		 
+		    	if(h instanceof Infected){
+		    		List<Node> path = h.getPath();
+		    		target = path.get(path.size()-1);
+		    	}
+		    	if(target != null)	{
+		    		StdDraw.filledCircle(target.getX(), target.getY(), 2);
+		    	}
+		    }	
+		    
 		    //g.drawZombie(z);
 			//z.move();
 			//z.lineOfSight(humans);

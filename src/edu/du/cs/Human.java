@@ -17,57 +17,66 @@ public abstract class Human
     protected Node currentNode;
     protected Node nextNode;
     private Node rNode;
-    protected ArrayList<Node> walkway = Simulate.walkway;
+    protected ArrayList<Node> walkway = null;
 
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn;
-        
+        if(this instanceof Infected){
+        	walkway = Simulate.zWalkway;
+        	System.out.println("ZAMBIE");
+        }
+        else if(this instanceof Uninfected){
+        	walkway = Simulate.hWalkway;
+        }
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
         aStar(currentNode, rNode);
-        
-        System.out.println("START OF THE LINE...");
-        System.out.println("Current Node: "+currentNode);
-        System.out.println("Random Node: "+rNode);
-        System.out.println("Path: "+path);
-        System.out.println();
+        if(this instanceof Infected){
+	        System.out.println("START OF THE LINE...");
+	        System.out.println("Current Node: "+currentNode);
+	        System.out.println("Random Node: "+rNode);
+	        System.out.println("Path: "+path);
+	        System.out.println();
+        }
     }
     
-    public void move()
-    {
-        
-        if(path.size() <= 1){
-            path.clear();
-            rNode = this.randomNode();
-            currentNode = this.getNode(walkway, x, y);
-            this.aStar(currentNode, rNode);
-        }
-        else if(path.size() > 1){
-            currentNode = path.get(0);
-            nextNode = path.get(1);
-            
-            if(currentNode == nextNode){
-            	path.remove(0);
-            }
-            if(currentNode.getRightNode() == nextNode){
-                x += vel;
-            }
-            else if(currentNode.getLeftNode() == nextNode){
-                x -= vel;
-            }
-            else if(currentNode.getTopNode() == nextNode){
-                y += vel;
-            }
-            else if(currentNode.getBottomNode() == nextNode){
-                y -= vel;
-            }
-            if(x == nextNode.getX() && y == nextNode.getY()){
-                path.remove(0);
-            }
-        }
-    }
+    public void move() {
+		if(path.size() <= 1){
+			path.clear();
+			rNode = this.randomNode();
+			currentNode = this.getNode(Simulate.walkway, x, y);
+			this.aStar(currentNode, rNode);
+		}
+		else if(path.size() > 1){
+			currentNode = path.get(0);
+			nextNode = path.get(1);
+			if(nextNode == currentNode)
+				path.remove(nextNode);
+			if(currentNode.getRightNode() == nextNode){
+				x += vel;
+			}
+			else if(currentNode.getLeftNode() == nextNode){
+				x -= vel;
+			}
+			else if(currentNode.getTopNode() == nextNode){
+				y += vel;
+			}
+			else if(currentNode.getBottomNode() == nextNode){
+				y -= vel;
+			}
+			else{
+				path.clear();
+				rNode = this.randomNode();
+				currentNode = this.getNode(Simulate.walkway, x, y);
+				this.aStar(currentNode, rNode);
+			}
+			if(x == nextNode.getX() && y == nextNode.getY()){
+				path.remove(0);
+			}
+		}
+	}
 
     public void changeType(char newType) 
     {
@@ -110,7 +119,7 @@ public abstract class Human
         
         start.g = 0;
 
-        start.h = estimateDistance(start, goal) * goal.getAlpha() + goal.cost;
+        start.h = estimateDistance(start, goal) + goal.cost;
         start.f = start.h;
 
         open.add(start);
@@ -189,16 +198,20 @@ public abstract class Human
     public Node randomNode() {
         Node tempNode = null;
         ArrayList<Node> radiusList = new ArrayList<Node>();
-        int radius = 100; //Random Node Radius
+        int radius = 70; //Random Node Radius
         for(Node n : walkway){
-            if((this.estimateDistance(n, currentNode)<radius) && this.estimateDistance(n, currentNode) > 50){
+            if((this.estimateDistance(n, currentNode)<radius) && (this.estimateDistance(n, currentNode)>=20)){
                 radiusList.add(n);
             }
         }
         random = (int )(Math.random() * (radiusList.size()));
-
+        tempNode = radiusList.get(random);
+        for(Node n: radiusList){
+        	if(n.isWalkable() && n.cost < tempNode.cost)
+        		tempNode = n;
+        }
         if(radiusList.get(random).isWalkable() == true && tempNode != currentNode){
-            return tempNode = radiusList.get(random);
+            return tempNode;
         } 
         return randomNode();
     }
