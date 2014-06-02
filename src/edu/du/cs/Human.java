@@ -203,29 +203,38 @@ public abstract class Human
         ArrayList<Node> radiusList = new ArrayList<Node>();
         int radius = 70; //Random Node Radius
         for(Node n : walkway){
-            if(this.type != 'i' && (this.estimateDistance(n, currentNode)<=(radius-30)) && (this.estimateDistance(n, currentNode) >= 20)){
+        	if(this.type == 'i' && (this.estimateDistance(n, currentNode)<=(radius)) && (this.estimateDistance(n, currentNode) >= 30)){
                 radiusList.add(n);
             }
-            else if(this.type == 'i' && (this.estimateDistance(n, currentNode)<=(radius)) && (this.estimateDistance(n, currentNode) >= 30)){
+        	else if(this.type == 'c' && (this.estimateDistance(n, currentNode)<=(radius+10)) && (this.estimateDistance(n, currentNode) >= 30)){
+        		radiusList.add(n);
+        	}
+        	else if(this.type != 'i' && this.type != 'c' && (this.estimateDistance(n, currentNode)<=(radius-30)) && (this.estimateDistance(n, currentNode) >= 20)){
                 radiusList.add(n);
             }
+            
             
         }
         random = (int)(Math.random() * (radiusList.size()));
         tempNode = radiusList.get(random);
         
-        for(Node n: radiusList){
-        	if(this.type == 'c' && n.isWalkable() && n.zcost > tempNode.zcost){
-        		tempNode = n;
-        	}
-        	else if(this.type != 'i' && this.type != 'c' && n.isWalkable() && n.hcost < tempNode.hcost)
-        		tempNode = n;
-        	}
-	        if(radiusList.get(random).isWalkable() && tempNode != currentNode){
-	        	radiusList.clear();
-	 	       return tempNode;
-	        }
-	    radiusList.clear();
-        return randomNode();
+		    for(Node n: radiusList){
+		    	if(this.type == 'i' && n.isWalkable() && n.zcost < tempNode.zcost){
+		    		tempNode = n;
+		    	}
+		    	else if(this.type != 'i' && this.type != 'c' && n.isWalkable() && n.hcost < tempNode.hcost){
+		    		tempNode = n;
+		    	}
+		    	else if(this.type != 'c'  && tempNode.isWalkable() && tempNode != currentNode){
+		    		radiusList.clear();
+		    		return tempNode;
+		    	}
+		    }
+		    if(tempNode.isWalkable() && tempNode != currentNode){
+		    	radiusList.clear();
+		    	return tempNode;
+		    }
+		    radiusList.clear();
+		    return randomNode();
     }
 }
