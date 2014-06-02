@@ -125,7 +125,6 @@ public abstract class Human
 
         while (true) {
             Node current = null;
-            //System.out.println("Open list size: " + open.size());
             if (open.size() == 0) {
                 throw new RuntimeException("no route");
             }

@@ -6,7 +6,6 @@ public class Cop extends Uninfected
 {
 	private int ammo;
 	private ArrayList<Node> hNodes;
-	private int targetX; private int targetY;
 	public Cop(int xIn, int yIn) {
 		super(xIn, yIn);
 		type = 'c';
@@ -26,10 +25,6 @@ public class Cop extends Uninfected
 	
 	public void attack(Infected zombie )
 	{
-		StdDraw.setPenColor(StdDraw.RED);
-		targetX = zombie.getX(); targetY = zombie.getY();
-		StdDraw.filledCircle(zombie.getX(), zombie.getY(), 2); //draws targeting sight
-	
 		int bulletSX = x; int bulletSY = y;
 		int bulletEX = zombie.getX(); int bulletEY = zombie.getY();
 
@@ -37,15 +32,12 @@ public class Cop extends Uninfected
 				StdDraw.setPenColor(StdDraw.DARK_GRAY);
 				StdDraw.line(bulletSX, bulletSY, bulletEX, bulletEY);
 				ammo--;
-				System.out.println("Ammo: " + ammo);
 				zombie.attacked();
-				System.out.println( zombie.getHP() );
 		}
 		move();
 	}
 	
 	public void move(){
- 
 		for(Node n: Simulate.walkway){
 			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){
 				n.hcost = 1;	

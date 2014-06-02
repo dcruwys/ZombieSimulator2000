@@ -1,11 +1,15 @@
 package edu.du.cs;
 
-//import java.io.FileInputStream;
+import java.io.FileInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.LockSupport;
 
-//import javazoom.jl.decoder.JavaLayerException;
-//import javazoom.jl.player.Player;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 
 
 public class GraphicsEngine
@@ -25,7 +29,7 @@ public class GraphicsEngine
 		uninfected = new ArrayList<Uninfected>();
 		humans = new ArrayList<Human>(); //Creat an array list of humans.
 		
-		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
+		StdDraw.setCanvasSize(700, 700); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
 		StdDraw.setYscale(0.0, Simulate.mySize*10); //Set scale to 500
 		
@@ -34,25 +38,26 @@ public class GraphicsEngine
 			Human aHuman = new Normal(randomN.getX(), randomN.getY());
 			uninfected.add((Uninfected) aHuman);
 			humans.add(aHuman);
+			if(i%20 == 0){
+				randomN = this.randomNode();
+				Human cop = new Cop(randomN.getX(), randomN.getY());
+				uninfected.add((Uninfected) cop);
+				humans.add(cop);
+			}
+			if(i%10 == 0){
+				randomN = this.randomNode();
+				Human doc = new Medic(randomN.getX(), randomN.getY());
+				uninfected.add((Uninfected) doc);
+				humans.add(doc);
+			}
+			if(i%25==0){
+				randomN = this.randomNode();
+				Human someHuman = new Infected(randomN.getX(), randomN.getY());
+				infected.add((Infected) someHuman);
+				humans.add(someHuman);
+			}
 		}
 		
-		for( int i =0; i < 5; i++)
-		{
-			Node randomN = this.randomNode();
-			Human someHuman = new Infected(randomN.getX(), randomN.getY());
-			infected.add((Infected) someHuman);
-			humans.add(someHuman);
-		}
-		Node randomN = this.randomNode();
-		Human aHuman = new Infected(randomN.getX(), randomN.getY());
-		infected.add((Infected)aHuman);
-		humans.add(aHuman);
-		for(int i = 0; i < 10; i++){
-			randomN = this.randomNode();
-			Human doc = new Medic(randomN.getX(), randomN.getY());
-			uninfected.add((Uninfected) doc);
-			humans.add(doc);
-		}
 	}
 
 //	public void drawTalkBox(String msg, String gifSrc){
@@ -102,19 +107,19 @@ public class GraphicsEngine
 
 	public void drawMap( int[][] grid ) {
 		for(int row=0;row<grid.length; row++){
-			   for(int col=0;col<grid.length;col++){
-			     switch(grid[row][col]){
-			      case 0:StdDraw.setPenColor( StdDraw.LIGHT_GRAY ); //if the tile is 0, draw white
-			      		StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
-			       break;
-			      case 1:StdDraw.setPenColor( StdDraw.BLACK ); //if the tile is 1, draw Gray
-		      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
-			       break;
-			      case 8:StdDraw.setPenColor( StdDraw.GRAY ); //if the tile is 1, draw Gray
+		   for(int col=0;col<grid.length;col++){
+		     switch(grid[row][col]){
+		      case 0:StdDraw.setPenColor( StdDraw.LIGHT_GRAY ); //if the tile is 0, draw white
+		      		StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
+		       break;
+		      case 1:StdDraw.setPenColor( StdDraw.BLACK ); //if the tile is 1, draw Gray
 	      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
-	      		   break;
-			     }
-			   }  
+		       break;
+		      case 8:StdDraw.setPenColor( StdDraw.GRAY ); //if the tile is 1, draw Gray
+      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
+      		   break;
+		     }
+		   }  
 		}
 	}
 	
@@ -131,8 +136,62 @@ public class GraphicsEngine
 	
 	public static void main(String[] args){
 		GraphicsEngine g = new GraphicsEngine();
-		while(true){
+		try {
+			g.splash(g);
+		} catch (JavaLayerException e) {
+			e.printStackTrace();
+		}
 		g.draw(g);
+	}
+	
+	public void splash(GraphicsEngine g) throws JavaLayerException{
+		while(true){
+			String file = "splash/splashscreen.jpg";
+			FileInputStream fileIn = null;
+			FileInputStream welcome = null;
+			FileInputStream game = null;
+			try {
+				welcome = new FileInputStream("splash/welcome.mp3");
+				fileIn = new FileInputStream(file);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			StdDraw.picture(305.0, 305.0, file, 650.0, 650.0);
+		
+			final AtomicBoolean pause = new AtomicBoolean(false);
+			final  Player player = new Player(welcome);
+	        Thread playerThread = new Thread() {
+	            @Override
+	            public void run() {
+	                try {
+	                	if(!pause.get()) {
+		                	while (player.play(1)) {
+		            			if(pause.get()) {
+		            				LockSupport.park();
+		            			}
+		                    }
+	                	}
+	                }
+	                catch (Exception e) {
+	                    System.err.printf("%s\n", e.getMessage());
+	                }
+	            }
+	        };
+	   
+	        playerThread.start();
+	        while(true){
+	        	pause.set(!pause.get());
+	            if (!pause.get()) {
+	                LockSupport.unpark(playerThread);
+	            }
+	            if(StdDraw.hasNextKeyTyped()){
+	            	pause.set(!pause.get());
+	            	return;
+	            }
+	        }
 		}
 	}
 	
@@ -141,8 +200,7 @@ public class GraphicsEngine
 		ArrayList<Human> zdeadList = new ArrayList<Human>();
 		ArrayList<Infected> cured = new ArrayList<Infected>();
 		while(true){
-		    
-			StdDraw.clear();
+		    StdDraw.clear();
 			g.drawMap(Simulate.grid);
 		    for(Human h : uninfected)
 		    {
@@ -162,12 +220,11 @@ public class GraphicsEngine
 		    				if(cureWorks < .5)
 		    				{
 		    					((Infected) z).setCured(true);
-		    			    	System.out.println("Cure Worked!");
 		    				}
 		    				else
 		    				{
 		    					((Infected) z).attack((Uninfected) h);
-		    					System.out.println("Cure failed.");
+		    					
 		    				}
 		    			}
 		    			else
@@ -221,20 +278,11 @@ public class GraphicsEngine
 		    			}
 		    		}
 		    	}
-		    	Node target = null;
 		    	g.drawHuman(h);
 		    	h.move();
-		    	if(h.type == 'i'){
-		    		List<Node> path = h.getPath();
-		    		if(path.size() > 0)
-		    			target = path.get(path.size()-1);
-		    	}
-		    	if(target != null)	{
-		    		StdDraw.filledCircle(target.getX(), target.getY(), 2);
-		    	}
 
 		    }
-		    StdDraw.show(3);
+		    StdDraw.show(2);
 		}
 	}
 }
