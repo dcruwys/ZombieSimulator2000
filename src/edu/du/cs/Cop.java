@@ -93,19 +93,22 @@ public class Cop extends Uninfected
 	public void move(){
  
 		for(Node n: Simulate.walkway){
-			if(n.zcost == 12){
+			if(n.hcost == 12){
 			}
 			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){
-				n.zcost = 1;	
+				n.hcost = 1;	
+				n.zcost = 1;
 				hNodes.add(n);
 			}
 			else if(Math.abs(n.getX() - this.x) <= 10 && Math.abs(n.getY() - this.y) <= 10 && n.zcost != 1){
-				n.zcost = 2;	
+				n.hcost = 2;
+				n.zcost = 1;
 				if(!hNodes.contains(n))
 					hNodes.add(n);
 			}
 			else if(Math.abs(n.getX() - this.x) <= 20 && Math.abs(n.getY() - this.y) <= 20 && n.zcost != 2){
-				n.zcost = 3;	
+				n.hcost = 3;
+				n.zcost = 1;
 				if(!hNodes.contains(n))
 					hNodes.add(n);
 			}
@@ -126,12 +129,10 @@ public class Cop extends Uninfected
 			}
         	else {
         		if(hNodes.contains(n)){
+					n.hcost = 10;
 					n.zcost = 10;
 					hNodes.remove(n);
 				}
-			}
-			if(this.type == 'c'){
-				
 			}
         }
 		super.move();

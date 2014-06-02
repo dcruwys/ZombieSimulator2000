@@ -215,9 +215,7 @@ public abstract class Human
         tempNode = radiusList.get(random);
         
         for(Node n: radiusList){
-        	if(this.type == 'i' && n.isWalkable() && n.zcost < tempNode.zcost)
-        		tempNode = n;
-        	else if(this.type == 'c' && n.isWalkable() && n.zcost > tempNode.zcost){
+        	if(this.type == 'c' && n.isWalkable() && n.zcost > tempNode.zcost){
         		tempNode = n;
         	}
         	else if(this.type != 'i' && this.type != 'c' && n.isWalkable() && n.hcost < tempNode.hcost)

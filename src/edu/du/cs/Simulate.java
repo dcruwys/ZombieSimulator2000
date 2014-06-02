@@ -3,7 +3,7 @@ package edu.du.cs;
 import java.util.ArrayList;
 
 public class Simulate {
-	protected static int mySize = 20;
+	protected static int mySize = 71;
 	protected static int[][] grid = new int[mySize][mySize];
 	protected static ArrayList<Node> walkway = new ArrayList<Node>();
 	

@@ -39,12 +39,12 @@ public class GraphicsEngine
 		Human aHuman = new Infected(randomN.getX(), randomN.getY());
 		infected.add((Infected)aHuman);
 		humans.add(aHuman);
-//		for(int i = 0; i < 10; i++){
-//			randomN = this.randomNode();
-//			Human aCop = new Cop(randomN.getX(), randomN.getY());
-//			uninfected.add((Uninfected) aCop);
-//			humans.add(aCop);
-//		}
+		for(int i = 0; i < 10; i++){
+			randomN = this.randomNode();
+			Human aCop = new Cop(randomN.getX(), randomN.getY());
+			uninfected.add((Uninfected) aCop);
+			humans.add(aCop);
+		}
 	}
 
 	public void drawTalkBox(String msg, String gifSrc){
