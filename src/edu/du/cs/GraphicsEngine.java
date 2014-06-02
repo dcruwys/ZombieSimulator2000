@@ -167,13 +167,11 @@ public class GraphicsEngine
 	            @Override
 	            public void run() {
 	                try {
-	                	if(!pause.get()) {
-		                	while (player.play(1)) {
-		            			if(pause.get()) {
-		            				LockSupport.park();
-		            			}
-		                    }
-	                	}
+	                	while (player.play(1)) {
+	            			if(pause.get()) {
+	            				LockSupport.park();
+	            			}
+	                    }
 	                }
 	                catch (Exception e) {
 	                    System.err.printf("%s\n", e.getMessage());
@@ -188,7 +186,6 @@ public class GraphicsEngine
 	                LockSupport.unpark(playerThread);
 	            }
 	            if(StdDraw.hasNextKeyTyped()){
-	            	pause.set(!pause.get());
 	            	return;
 	            }
 	        }

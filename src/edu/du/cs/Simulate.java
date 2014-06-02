@@ -48,7 +48,7 @@ public class Simulate {
 					grid[row][col-2] = 0;
 					grid[row][col-3] = 0;
 				}
-				if(grid[row][col] == 0 && ((grid[row+1][col] == 1 && grid[row-1][col] == 1 ) || (grid[row][col-1] == 1 && grid[row][col-1] == 1 )) && (int) Math.ceil(Math.random()*100) < 2)
+				if(grid[row][col] == 0 && ((grid[row+1][col] == 1 && grid[row-1][col] == 1 ) || (grid[row][col-1] == 1 && grid[row][col-1] == 1 )) && (int) Math.ceil(Math.random()*100) == 1)
 					grid[row][col]  = 8;
 			}
 		}
