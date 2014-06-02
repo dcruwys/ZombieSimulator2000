@@ -201,9 +201,9 @@ public abstract class Human
     public Node randomNode() {
         Node tempNode = null;
         ArrayList<Node> radiusList = new ArrayList<Node>();
-        int radius = 60; //Random Node Radius
+        int radius = 70; //Random Node Radius
         for(Node n : walkway){
-            if(this.type != 'i' && (this.estimateDistance(n, currentNode)<=(radius-20)) && (this.estimateDistance(n, currentNode) >= 20)){
+            if(this.type != 'i' && (this.estimateDistance(n, currentNode)<=(radius-30)) && (this.estimateDistance(n, currentNode) >= 20)){
                 radiusList.add(n);
             }
             else if(this.type == 'i' && (this.estimateDistance(n, currentNode)<=(radius)) && (this.estimateDistance(n, currentNode) >= 30)){
@@ -215,7 +215,6 @@ public abstract class Human
         tempNode = radiusList.get(random);
         
         for(Node n: radiusList){
-        	
         	if(this.type == 'i' && n.isWalkable() && n.zcost < tempNode.zcost)
         		tempNode = n;
         	else if(this.type == 'c' && n.isWalkable() && n.zcost > tempNode.zcost){

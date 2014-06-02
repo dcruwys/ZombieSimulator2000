@@ -29,7 +29,7 @@ public class GraphicsEngine
 		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
 		StdDraw.setYscale(0.0, Simulate.mySize*10); //Set scale to 500
 		
-		for(int i = 0; i < Simulate.mySize+10; i++){
+		for(int i = 0; i < Simulate.mySize+(Simulate.mySize/2); i++){
 			Node randomN = this.randomNode();
 			Human aHuman = new Normal(randomN.getX(), randomN.getY());
 			uninfected.add((Uninfected) aHuman);
@@ -39,12 +39,12 @@ public class GraphicsEngine
 		Human aHuman = new Infected(randomN.getX(), randomN.getY());
 		infected.add((Infected)aHuman);
 		humans.add(aHuman);
-		for(int i = 0; i < 10; i++){
-			randomN = this.randomNode();
-			Human aCop = new Cop(randomN.getX(), randomN.getY());
-			uninfected.add((Uninfected) aCop);
-			humans.add(aCop);
-		}
+//		for(int i = 0; i < 10; i++){
+//			randomN = this.randomNode();
+//			Human aCop = new Cop(randomN.getX(), randomN.getY());
+//			uninfected.add((Uninfected) aCop);
+//			humans.add(aCop);
+//		}
 	}
 
 	public void drawTalkBox(String msg, String gifSrc){
@@ -103,7 +103,7 @@ public class GraphicsEngine
 			      case 1:StdDraw.setPenColor( StdDraw.BLACK ); //if the tile is 1, draw Gray
 		      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
 			       break;
-			      case 8:StdDraw.setPenColor( StdDraw.BLACK ); //if the tile is 1, draw Gray
+			      case 8:StdDraw.setPenColor( StdDraw.GRAY ); //if the tile is 1, draw Gray
 	      		    StdDraw.filledSquare(row*10-4, col*10-4, 6); //draw tile
 	      		   break;
 			     }
@@ -124,16 +124,15 @@ public class GraphicsEngine
 	
 	public static void main(String[] args){
 		GraphicsEngine g = new GraphicsEngine();
-		
-			g.draw(g);
+		while(true){
+		g.draw(g);
+		}
 	}
 	
 	public void draw(GraphicsEngine g){
 		ArrayList<Human> deadList = new ArrayList<Human>();
 		
 		while(true){
-//			System.out.println("H: "+uninfected.size());
-//		    System.out.println("Z: "+infected.size());
 		    
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
@@ -191,8 +190,7 @@ public class GraphicsEngine
 		    	}
 
 		    }
-		  
-		    StdDraw.show(30);
+		    StdDraw.show(3);
 		}
 	}
 }
