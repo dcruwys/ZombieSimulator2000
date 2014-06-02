@@ -5,15 +5,12 @@ import java.util.ArrayList;
 public class Cop extends Uninfected
 {
 	private int ammo;
-	private int gun;
 	private ArrayList<Node> hNodes;
 	private int targetX; private int targetY;
 	public Cop(int xIn, int yIn) {
 		super(xIn, yIn);
 		type = 'c';
 		ammo = 25;
-		gun = 1;
-		
 		hNodes = new ArrayList<Node>();
 	}
 	
@@ -29,65 +26,22 @@ public class Cop extends Uninfected
 	
 	public void attack(Infected zombie )
 	{
-		StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
-		StdDraw.filledCircle(x, y, 4);
 		StdDraw.setPenColor(StdDraw.RED);
-		StdDraw.filledCircle(zombie.getX(), zombie.getY(), 5);
 		targetX = zombie.getX(); targetY = zombie.getY();
-		
-		int recoil = 14;
-		int bulletSX = x; int bulletSY = y;int bulletEX;
-		int bulletEY;
-//		if(x == zombie.getX()){
-//				bulletEX = zombie.getX()-10; 
-//				bulletEY = y; 
-//		} else if (y == zombie.getY()){
-//				bulletEX = x; 
-//				bulletEY = zombie.getY()-10; 
-//		} else {
-			int dirX; int dirY;
-			if((x == zombie.getX()) && !(y > zombie.getY() || (y < zombie.getY()))){
-				dirX = 1;
-				dirY = 0;
-				System.out.println("PEWPEW on the X");
-			} else if((y == zombie.getY()) && !(x > zombie.getX() || (x < zombie.getX()))){
-				dirY = 1;
-				dirX = 0;
-				System.out.println("PEWPEW on the Y");
-
-			} else {
-				dirX = 0; dirY = 0;
-				System.out.println("No Pew");
-
-			}
-			bulletEX =  x + x*dirX; 
-			bulletEY = y + y*dirY; 
-//		}
-		//if(gun == 1){
-			while(ammo != 0){
-				if(recoil == 14){
-					StdDraw.setPenColor(StdDraw.ORANGE);
-					StdDraw.line(bulletSX, bulletSY, bulletEX, bulletEY);
-					bulletSX++; bulletSY++; bulletEX++; bulletEY++;
-					ammo--;
-					System.out.println("Ammo: " + ammo);
-					recoil = 0;
-				} else{
-					recoil++;
-					if(ammo == 0){
-						ammo = 20;
-					}
-					System.out.println("Recoil cooldown: " + recoil);
-					System.out.println("Ammo remaining: " + ammo);
-				}
-			}
-		//}
-	}
+		StdDraw.filledCircle(zombie.getX(), zombie.getY(), 2); //draws targeting sight
 	
-	public Infected getInSight()
-	{
-		//if(Infected.)
-		return null;
+		int bulletSX = x; int bulletSY = y;
+		int bulletEX = zombie.getX(); int bulletEY = zombie.getY();
+
+		while((ammo != 0) && (zombie.getHP() >= 0)){
+				StdDraw.setPenColor(StdDraw.DARK_GRAY);
+				StdDraw.line(bulletSX, bulletSY, bulletEX, bulletEY);
+				ammo--;
+				System.out.println("Ammo: " + ammo);
+				zombie.attacked();
+				System.out.println( zombie.getHP() );
+		}
+		move();
 	}
 	
 	public void move(){

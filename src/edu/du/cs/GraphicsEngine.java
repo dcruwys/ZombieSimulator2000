@@ -11,9 +11,9 @@ import javazoom.jl.player.Player;
 public class GraphicsEngine
 {	
 	public static ArrayList<Node> walkwayNodes;
-	public ArrayList<Human> humans;
-	public ArrayList<Infected> infected;
-	public ArrayList<Uninfected> uninfected;
+	public static ArrayList<Human> humans;
+	public static ArrayList<Infected> infected;
+	public static ArrayList<Uninfected> uninfected;
 
 	public int random;
 	public Node startNode;
@@ -23,7 +23,7 @@ public class GraphicsEngine
 		Simulate.generateBuildings();
 		infected = new ArrayList<Infected>();
 		uninfected = new ArrayList<Uninfected>();
-		humans = new ArrayList<Human>(); //Create an array list of humans.
+		humans = new ArrayList<Human>(); //Creat an array list of humans.
 		
 		StdDraw.setCanvasSize(500, 500); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
@@ -34,6 +34,14 @@ public class GraphicsEngine
 			Human aHuman = new Normal(randomN.getX(), randomN.getY());
 			uninfected.add((Uninfected) aHuman);
 			humans.add(aHuman);
+		}
+		
+		for( int i =0; i < 5; i++)
+		{
+			Node randomN = this.randomNode();
+			Human someHuman = new Infected(randomN.getX(), randomN.getY());
+			infected.add((Infected) someHuman);
+			humans.add(someHuman);
 		}
 		Node randomN = this.randomNode();
 		Human aHuman = new Infected(randomN.getX(), randomN.getY());
@@ -131,31 +139,33 @@ public class GraphicsEngine
 	
 	public void draw(GraphicsEngine g){
 		ArrayList<Human> deadList = new ArrayList<Human>();
+		ArrayList<Human> zdeadList = new ArrayList<Human>();
 		
 		while(true){
 		    
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
-			//g.drawTalkBox("Hello World", "meh.gif");
 		    for(Human h : uninfected){
 		    	for(Human z: infected){
 		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 ){
 		    			if(h.type == 'c'){
-		    				((Cop) h).attack((Infected) z);
-		    				System.out.println("Infected Detected. Attacking!");
-
+		    				if(((Cop) h).getAmmo() == 0 )
+		    					((Infected) z).attack((Uninfected) h);
+		    				else
+		    					((Cop) h).attack((Infected) z);
 		    			} else {
 		    				((Infected) z).attack((Uninfected) h);
-		    				System.out.println("ARRHHHHHHHH BRAIIINS");
 		    			}
 		    			
 		    		}
 		    		if( h.isDead && !deadList.contains(h)){
 		    			deadList.add(h);	
 		    		}
+		    		if(z.isDead && !zdeadList.contains(z)){
+		    			zdeadList.add(z);
+		    		}
 		    	}
 		    }			    
-		    //System.out.println(deadList.size());
 		    for(Human h: deadList){
 		    	uninfected.remove(h);
 		    	humans.remove(h);
@@ -164,6 +174,11 @@ public class GraphicsEngine
 		    	humans.add(temp);
 		    	h = null;
 		    }
+		    for(Human z: zdeadList){
+		    	uninfected.remove(z);
+		    	humans.remove(z);
+		    	z = null;
+		    }
 		    deadList.clear();
 		    
 		    for(Human h : humans){
@@ -171,7 +186,6 @@ public class GraphicsEngine
 		    		for(Infected z : infected){
 		    			if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 30 ){
 		    				((Cop) h).attack((Infected) z);
-		    				StdDraw.filledCircle(z.getX(), z.getY(), 8);
 		    				break;
 		    			
 		    			}

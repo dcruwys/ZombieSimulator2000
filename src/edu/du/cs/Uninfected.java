@@ -2,6 +2,10 @@ package edu.du.cs;
 
 import java.util.ArrayList;
 
+import edu.du.cs.Human;
+import edu.du.cs.Node;
+import edu.du.cs.Simulate;
+
 public abstract class Uninfected extends Human
 {
 	private ArrayList<Node> hNodes;

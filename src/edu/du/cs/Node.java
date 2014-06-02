@@ -15,7 +15,7 @@ public class Node {
 	//A* variables
 	protected List<Node> adjacentNodes = new ArrayList<Node>();
 	protected int hcost;
-	protected int zcost;
+	public int zcost;
 	protected int f;
     protected int g;
     protected int h;

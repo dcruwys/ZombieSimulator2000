@@ -9,7 +9,7 @@ public class Infected extends Human
     
     public Infected(int xIn, int yIn) {
         super(xIn, yIn);
-        hp = 10;
+        hp = 5;
         vel = 1;
 
         zNodes = new ArrayList<Node>();
@@ -73,6 +73,13 @@ public class Infected extends Human
     public void attack( Medic doc )
     {
         doc.cure( this );
+    }
+    
+    public void attacked()
+    {
+    	hp = hp-1;
+    	if( hp <= 0 )
+    		die();
     }
    
 }
