@@ -167,6 +167,9 @@ public class GraphicsEngine
 	            @Override
 	            public void run() {
 	                try {
+	                	if(player.isComplete()){
+	                		player.play(1);
+	                	}
 	                	while (player.play(1)) {
 	            			if(pause.get()) {
 	            				LockSupport.park();
@@ -203,7 +206,7 @@ public class GraphicsEngine
 		    {
 		    	for(Human z: infected)
 		    	{
-		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 )
+		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) <= 10 )
 		    		{
 		    			if(h.type == 'c')
 		    			{

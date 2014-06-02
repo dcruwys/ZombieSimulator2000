@@ -207,7 +207,7 @@ public abstract class Human
         	else if(this.type == 'c' && (this.estimateDistance(n, currentNode)<=(radius+10)) && (this.estimateDistance(n, currentNode) >= 30)){
         		radiusList.add(n);
         	}
-        	else if(this.type != 'i' && this.type != 'c' && (this.estimateDistance(n, currentNode)<=(radius-30)) && (this.estimateDistance(n, currentNode) >= 20)){
+        	else if(this.type != 'i' && this.type != 'c' && (this.estimateDistance(n, currentNode)<=(radius-40)) && (this.estimateDistance(n, currentNode) >= 10)){
                 radiusList.add(n);
             }
             
