@@ -1,19 +1,19 @@
 package edu.du.cs;
 
-import java.io.FileInputStream;
+//import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
+//import javazoom.jl.decoder.JavaLayerException;
+//import javazoom.jl.player.Player;
 
 
 public class GraphicsEngine
 {	
 	public static ArrayList<Node> walkwayNodes;
 	public static ArrayList<Human> humans;
-	public static ArrayList<Infected> infected;
-	public static ArrayList<Uninfected> uninfected;
+	public ArrayList<Infected> infected;
+	public ArrayList<Uninfected> uninfected;
 
 	public int random;
 	public Node startNode;
@@ -49,36 +49,35 @@ public class GraphicsEngine
 		humans.add(aHuman);
 		for(int i = 0; i < 10; i++){
 			randomN = this.randomNode();
-			Human aCop = new Cop(randomN.getX(), randomN.getY());
-			uninfected.add((Uninfected) aCop);
-			humans.add(aCop);
+			Human doc = new Medic(randomN.getX(), randomN.getY());
+			uninfected.add((Uninfected) doc);
+			humans.add(doc);
 		}
 	}
 
-	public void drawTalkBox(String msg, String gifSrc){
-		boolean hasPlayedStartSound = false;
-		Player playRadioStart = null;
-		Player playRadioStop = null;
-		
-		try{
-			FileInputStream radioStartIN = new FileInputStream("RadioTransmissionStart.mp3");
-			FileInputStream radioEndIN = new FileInputStream("RadioTransmissionEnd.mp3");
-			playRadioStart = new Player(radioStartIN);
-			playRadioStop = new Player(radioEndIN);
-		} catch(Exception exc){
-			exc.printStackTrace();
-			System.out.println("FAILED TO DO A BARREL ROLL");
-		}
-		StdDraw.setPenColor(StdDraw.BLUE);
-		StdDraw.filledRectangle(150, 50, 150, 60);
-		StdDraw.setPenColor(StdDraw.BLACK);
-		StdDraw.text(170, 40, msg);
-		if(hasPlayedStartSound == false){
-			try { playRadioStart.play(); } catch(JavaLayerException e){System.out.println(e.getMessage());}
-			hasPlayedStartSound = true;
-		}
-
-	}
+//	public void drawTalkBox(String msg, String gifSrc){
+//		boolean hasPlayedStartSound = false;
+//		Player playRadioStart = null;
+//		Player playRadioStop = null;
+//		
+//		try{
+//			FileInputStream radioStartIN = new FileInputStream("RadioTransmissionStart.mp3");
+//			FileInputStream radioEndIN = new FileInputStream("RadioTransmissionEnd.mp3");
+//			playRadioStart = new Player(radioStartIN);
+//			playRadioStop = new Player(radioEndIN);
+//		} catch(Exception exc){
+//			exc.printStackTrace();
+//			System.out.println("FAILED TO DO A BARREL ROLL");
+//		}
+//		StdDraw.setPenColor(StdDraw.BLUE);
+//		StdDraw.filledRectangle(150, 50, 150, 60);
+//		StdDraw.setPenColor(StdDraw.BLACK);
+//		StdDraw.text(170, 40, msg);
+//		if(hasPlayedStartSound == false){
+//			try { playRadioStart.play(); } catch(JavaLayerException e){System.out.println(e.getMessage());}
+//			hasPlayedStartSound = true;
+//		}
+//	}
 	
 	public void drawHuman( Human aHuman ) {
 		if( aHuman.type == 'm') //if human is medic, make it red
@@ -140,22 +139,39 @@ public class GraphicsEngine
 	public void draw(GraphicsEngine g){
 		ArrayList<Human> deadList = new ArrayList<Human>();
 		ArrayList<Human> zdeadList = new ArrayList<Human>();
-		
+		ArrayList<Infected> cured = new ArrayList<Infected>();
 		while(true){
 		    
 			StdDraw.clear();
 			g.drawMap(Simulate.grid);
-		    for(Human h : uninfected){
-		    	for(Human z: infected){
-		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 ){
-		    			if(h.type == 'c'){
+		    for(Human h : uninfected)
+		    {
+		    	for(Human z: infected)
+		    	{
+		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 )
+		    		{
+		    			if(h.type == 'c')
+		    			{
 		    				if(((Cop) h).getAmmo() == 0 )
 		    					((Infected) z).attack((Uninfected) h);
 		    				else
 		    					((Cop) h).attack((Infected) z);
-		    			} else {
-		    				((Infected) z).attack((Uninfected) h);
+		    			} else if(h.type == 'm')
+		    			{
+		    				double cureWorks = Math.random();
+		    				if(cureWorks < .5)
+		    				{
+		    					((Infected) z).setCured(true);
+		    			    	System.out.println("Cure Worked!");
+		    				}
+		    				else
+		    				{
+		    					((Infected) z).attack((Uninfected) h);
+		    					System.out.println("Cure failed.");
+		    				}
 		    			}
+		    			else
+		    				((Infected) z).attack((Uninfected) h);
 		    			
 		    		}
 		    		if( h.isDead && !deadList.contains(h)){
@@ -163,6 +179,9 @@ public class GraphicsEngine
 		    		}
 		    		if(z.isDead && !zdeadList.contains(z)){
 		    			zdeadList.add(z);
+		    		}
+		    		if(((Infected) z).isCured() && !cured.contains(z)){
+		    			cured.add((Infected) z);
 		    		}
 		    	}
 		    }			    
@@ -179,7 +198,18 @@ public class GraphicsEngine
 		    	humans.remove(z);
 		    	z = null;
 		    }
+		    for(Human z: cured)
+		    {
+		    	infected.remove(z);
+		    	humans.remove(z);
+		    	Human temp = new Normal(z.currentNode.getX(), z.currentNode.getY());
+		    	uninfected.add((Uninfected) temp);
+		    	humans.add(temp);
+		    	z = null;
+		    }
 		    deadList.clear();
+		    zdeadList.clear();
+		    cured.clear();
 		    
 		    for(Human h : humans){
 		    	if(h.type == 'c'){

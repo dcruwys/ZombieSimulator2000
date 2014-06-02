@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Infected extends Human 
 {   
     private int hp;
+    private boolean isCured;
     private ArrayList<Node> zNodes;
     
     public Infected(int xIn, int yIn) {
@@ -25,6 +26,16 @@ public class Infected extends Human
     public int getHP()
     {
         return hp;
+    }
+    
+    public boolean isCured()
+    {
+    	return isCured;
+    }
+    
+    public void setCured( boolean answer )
+    {
+    	isCured = answer;
     }
     
     @Override
@@ -68,13 +79,6 @@ public class Infected extends Human
         human.die();
     }
 
-
-    
-    public void attack( Medic doc )
-    {
-        doc.cure( this );
-    }
-    
     public void attacked()
     {
     	hp = hp-1;

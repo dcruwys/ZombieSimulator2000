@@ -10,20 +10,6 @@ public class Medic extends Uninfected
 		type = 'm';
 	}
 	
-	public void cure( Infected zombie )
-	{
-		if(medicine > 0)
-		{
-			medicine--;
-//			if(Math.random() > .5)
-//				zombie.changeType('n');
-//			else
-				die();
-		}
-		else
-			die();
-	}
-	
 	public int getMedicine()
 	{
 		return medicine;
