@@ -86,7 +86,7 @@ public class GraphicsEngine
 	
 	public void drawHuman( Human aHuman ) {
 		if( aHuman.type == 'm') //if human is medic, make it red
-			StdDraw.setPenColor( StdDraw.RED );
+			StdDraw.setPenColor( StdDraw.ORANGE );
 		else if( aHuman.type == 'c') //if human is cop make it blue
 			StdDraw.setPenColor( StdDraw.BLUE );
 		else if( aHuman.type == 'n')//if human is normal make it pink
@@ -206,15 +206,9 @@ public class GraphicsEngine
 		    {
 		    	for(Human z: infected)
 		    	{
-		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) <= 10 )
+		    		if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 10 && !zdeadList.contains(z))
 		    		{
-		    			if(h.type == 'c')
-		    			{
-		    				if(((Cop) h).getAmmo() == 0 )
-		    					((Infected) z).attack((Uninfected) h);
-		    				else
-		    					((Cop) h).attack((Infected) z);
-		    			} else if(h.type == 'm')
+		    			if(h.type == 'm')
 		    			{
 		    				double cureWorks = Math.random();
 		    				if(cureWorks < .5)
@@ -231,6 +225,11 @@ public class GraphicsEngine
 		    				((Infected) z).attack((Uninfected) h);
 		    			
 		    		}
+		    		if(h.type == 'c'){
+		    			if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 30 ){
+		    				((Cop) h).attack((Infected) z);	    			
+		    			}
+		    		}
 		    		if( h.isDead && !deadList.contains(h)){
 		    			deadList.add(h);	
 		    		}
@@ -241,7 +240,7 @@ public class GraphicsEngine
 		    			cured.add((Infected) z);
 		    		}
 		    	}
-		    }			    
+		    }	
 		    for(Human h: deadList){
 		    	uninfected.remove(h);
 		    	humans.remove(h);
@@ -268,19 +267,9 @@ public class GraphicsEngine
 		    zdeadList.clear();
 		    cured.clear();
 		    
-		    for(Human h : humans){
-		    	if(h.type == 'c'){
-		    		for(Infected z : infected){
-		    			if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 30 ){
-		    				((Cop) h).attack((Infected) z);
-		    				break;
-		    			
-		    			}
-		    		}
-		    	}
+		    for(Human h: humans){
 		    	g.drawHuman(h);
 		    	h.move();
-
 		    }
 		    StdDraw.show(2);
 		}
