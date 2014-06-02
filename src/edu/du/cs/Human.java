@@ -17,13 +17,16 @@ public abstract class Human
     protected Node currentNode;
     protected Node nextNode;
     private Node rNode;
+    private Node myNode;
     protected ArrayList<Node> walkway = Simulate.walkway;
     protected boolean isDead;
     protected char type;
 
     public Human(int xIn, int yIn) {
         x = xIn;
-        y = yIn;
+        y = yIn; 
+        myNode = new Node(x, y, true);
+
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
         path = new ArrayList<Node>();
@@ -102,6 +105,9 @@ public abstract class Human
     }
     public boolean isDead(){
     	return isDead;
+    }
+    public Node getNode(){
+    	return myNode;
     }
 
     public void aStar(Node start, Node goal) {
@@ -203,6 +209,7 @@ public abstract class Human
             else if(this.type == 'i' && (this.estimateDistance(n, currentNode)<=(radius)) && (this.estimateDistance(n, currentNode) >= 30)){
                 radiusList.add(n);
             }
+            
         }
         random = (int)(Math.random() * (radiusList.size()));
         tempNode = radiusList.get(random);
@@ -211,7 +218,10 @@ public abstract class Human
         	
         	if(this.type == 'i' && n.isWalkable() && n.zcost < tempNode.zcost)
         		tempNode = n;
-        	else if(this.type != 'i' && n.isWalkable() && n.hcost < tempNode.hcost)
+        	else if(this.type == 'c' && n.isWalkable() && n.zcost > tempNode.zcost){
+        		tempNode = n;
+        	}
+        	else if(this.type != 'i' && this.type != 'c' && n.isWalkable() && n.hcost < tempNode.hcost)
         		tempNode = n;
         	}
 	        if(radiusList.get(random).isWalkable() && tempNode != currentNode){

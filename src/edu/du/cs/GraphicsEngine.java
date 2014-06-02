@@ -172,7 +172,9 @@ public class GraphicsEngine
 		    		for(Infected z : infected){
 		    			if( Math.abs(z.getX() - h.getX()) + Math.abs(z.getY() - h.getY()) < 30 ){
 		    				((Cop) h).attack((Infected) z);
-		    				System.out.println("Infected Detected. Attacking!");
+		    				StdDraw.filledCircle(z.getX(), z.getY(), 8);
+		    				break;
+		    			
 		    			}
 		    		}
 		    	}
