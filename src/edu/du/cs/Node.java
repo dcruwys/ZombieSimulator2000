@@ -21,7 +21,12 @@ public class Node {
     protected int h;
 	protected Node parent;
 
-
+	/*
+	 * @param xIn
+	 * @param yIn
+	 * @param w
+	 * takes in x, y and w and creates a node that is walkable or not
+	 */
 	public Node(int myX, int myY, boolean w){
 		x = myX;
 		y = myY;
@@ -30,6 +35,10 @@ public class Node {
 		zcost = 10;
 		walkable = w;
 	}
+	/*
+	 * @param node
+	 * takes in  a node and deep copies it
+	 */
 	public Node(Node n){
 		
 		topNode = n.topNode;

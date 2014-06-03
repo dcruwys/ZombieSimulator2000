@@ -23,6 +23,11 @@ public class GraphicsEngine
 	public Node startNode;
 	public Node randomNode;
 	
+	/*
+	 * starts the graphics engine 
+	 * simulates the buildings
+	 * creates the objects
+	 */
 	public GraphicsEngine(){
 		Simulate.generateBuildings();
 		infected = new ArrayList<Infected>();

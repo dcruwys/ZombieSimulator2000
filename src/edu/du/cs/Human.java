@@ -19,7 +19,12 @@ public abstract class Human
     protected ArrayList<Node> walkway = Simulate.walkway;
     protected boolean isDead;
     protected char type;
-
+    /*
+	 * @param xIn
+	 * @param yIn
+	 * takes in an x and a y and makes a generic human
+	 * changes based on type
+	 */
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn; 

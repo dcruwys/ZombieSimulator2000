@@ -6,7 +6,9 @@ public class Simulate {
 	protected static int mySize = 61;
 	protected static int[][] grid = new int[mySize][mySize];
 	public static ArrayList<Node> walkway = new ArrayList<Node>();
-	
+	/*
+	 * generates buildings data
+	 */
 	public static void generateBuildings(){
 		for (int row=0; row < mySize; row ++){
 			for (int col=0; col < mySize; col ++){
@@ -66,10 +68,6 @@ public class Simulate {
 		
 		for(Node n: walkway){
 			n.setAdjacent();
-		}
-
-		
+		}	
 	}
-
-	
 }

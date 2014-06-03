@@ -7,7 +7,11 @@ public class Infected extends Human
     private int hp;
     private boolean isCured;
     private ArrayList<Node> zNodes;
-    
+    /*
+	 * @param xIn
+	 * @param yIn
+	 * takes in x, y and w and creates an infected zombie
+	 */
     public Infected(int xIn, int yIn) {
         super(xIn, yIn);
         hp = 5;

@@ -6,6 +6,11 @@ public class Cop extends Uninfected
 {
 	private int ammo;
 	private ArrayList<Node> hNodes;
+	/*
+	 * @param xIn
+	 * @param yIn
+	 * takes in x and y and creates a cop human
+	 */
 	public Cop(int xIn, int yIn) {
 		super(xIn, yIn);
 		type = 'c';
