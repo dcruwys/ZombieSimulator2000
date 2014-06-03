@@ -59,31 +59,14 @@ public class GraphicsEngine
 		}
 		
 	}
-
-//	public void drawTalkBox(String msg, String gifSrc){
-//		boolean hasPlayedStartSound = false;
-//		Player playRadioStart = null;
-//		Player playRadioStop = null;
-//		
-//		try{
-//			FileInputStream radioStartIN = new FileInputStream("RadioTransmissionStart.mp3");
-//			FileInputStream radioEndIN = new FileInputStream("RadioTransmissionEnd.mp3");
-//			playRadioStart = new Player(radioStartIN);
-//			playRadioStop = new Player(radioEndIN);
-//		} catch(Exception exc){
-//			exc.printStackTrace();
-//			System.out.println("FAILED TO DO A BARREL ROLL");
-//		}
-//		StdDraw.setPenColor(StdDraw.BLUE);
-//		StdDraw.filledRectangle(150, 50, 150, 60);
-//		StdDraw.setPenColor(StdDraw.BLACK);
-//		StdDraw.text(170, 40, msg);
-//		if(hasPlayedStartSound == false){
-//			try { playRadioStart.play(); } catch(JavaLayerException e){System.out.println(e.getMessage());}
-//			hasPlayedStartSound = true;
-//		}
-//	}
-	
+    /*
+     * @param ahuman
+     * draws the humans based on type
+     * Orange is a medic
+     * Blue is a cop
+     * Magenta is a normal human
+     * Green is a infected
+     */
 	public void drawHuman( Human aHuman ) {
 		if( aHuman.type == 'm') //if human is medic, make it red
 			StdDraw.setPenColor( StdDraw.ORANGE );
@@ -97,14 +80,13 @@ public class GraphicsEngine
 		StdDraw.filledSquare( aHuman.getX(), aHuman.getY(), 4); //draw human
 	}
 
-	public void drawSupply(Supplies someSupply) {
-		
-		StdDraw.setPenColor( StdDraw.ORANGE ); //make all supplies orange
-		
-		StdDraw.filledCircle( someSupply.getX(), someSupply.getY(), 4); //draw supplies
-		
-	}
-
+    /*
+     * @param grid
+     * draws the grid
+     * Black is buildings
+     * Light gray is walkable
+     * Gray is blockades
+     */
 	public void drawMap( int[][] grid ) {
 		for(int row=0;row<grid.length; row++){
 		   for(int col=0;col<grid.length;col++){
@@ -122,7 +104,10 @@ public class GraphicsEngine
 		   }  
 		}
 	}
-	
+	/*
+     * @return tempNode
+     * recursively returns a randomNode
+     */
 	public Node randomNode(){
 		Node tempNode = null;
 		random = (int )(Math.random() * Simulate.walkway.size());
@@ -143,19 +128,20 @@ public class GraphicsEngine
 		}
 		g.draw(g);
 	}
-	
+	/*
+     * @param g
+     * creates a splash screen and plays funky music
+     */
 	public void splash(GraphicsEngine g) throws JavaLayerException{
 		while(true){
 			String file = "splash/splashscreen.jpg";
 			String shoot = "Portal2_sfx_portal_gun_fire_blue.mp3";
 			FileInputStream fileIn = null;
-			FileInputStream gunIn = null;
 			FileInputStream welcome = null;
-			FileInputStream game = null;
+			
 			try {
 				welcome = new FileInputStream("splash/welcome.mp3");
 				fileIn = new FileInputStream(file);
-				gunIn = new FileInputStream(shoot);
 				
 				
 			} catch (FileNotFoundException e) {
@@ -198,7 +184,10 @@ public class GraphicsEngine
 	        }
 		}
 	}
-	
+	/*
+     * @param g
+     * draws and runs the game
+     */
 	public void draw(GraphicsEngine g){
 		ArrayList<Human> deadList = new ArrayList<Human>();
 		ArrayList<Human> zdeadList = new ArrayList<Human>();

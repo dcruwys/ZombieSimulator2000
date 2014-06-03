@@ -12,17 +12,18 @@ public class Cop extends Uninfected
 		ammo = 25;
 		hNodes = new ArrayList<Node>();
 	}
-	
+    /*
+     * @return ammo
+     * returns the current Ammo
+     */
 	public int getAmmo()
 	{
 		return ammo;
 	}
-	
-	public void findSupply( Supplies someSupply )
-	{
-		ammo += (someSupply.getAmount() * 10);
-	}
-	
+    /*
+     * @param zombie
+     * attacks a zombie
+     */
 	public void attack(Infected zombie )
 	{
 		int bulletSX = x; int bulletSY = y;
@@ -38,6 +39,9 @@ public class Cop extends Uninfected
 		move();
 	}
 	
+    /*
+     * moves the human object
+     */
 	public void move(){
 		for(Node n: Simulate.walkway){
 			if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){

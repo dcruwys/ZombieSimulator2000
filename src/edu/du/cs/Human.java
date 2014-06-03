@@ -16,7 +16,6 @@ public abstract class Human
     protected Node currentNode;
     protected Node nextNode;
     private Node rNode;
-    private Node myNode;
     protected ArrayList<Node> walkway = Simulate.walkway;
     protected boolean isDead;
     protected char type;
@@ -24,7 +23,6 @@ public abstract class Human
     public Human(int xIn, int yIn) {
         x = xIn;
         y = yIn; 
-        myNode = new Node(x, y, true);
 
         currentNode = getNode(walkway, x, y);
         rNode = randomNode();
@@ -32,7 +30,9 @@ public abstract class Human
         isDead = false;
         //aStar(currentNode, rNode);
     }
-    
+    /*
+     * moves the human object
+     */
     public void move(){
     	if(path.size() <= 1){
     		rNode = this.randomNode();
@@ -77,38 +77,65 @@ public abstract class Human
 
     public abstract void die();
 
-
+    /*
+     * @return x
+     * returns x
+     */
     public int getX() 
     {
         return x;
     }
-
+    /*
+     * @return y
+     * returns y
+     */
     public int getY() 
     {
         return y;
     }
-    
+    /*
+     * @param myX
+     * sets x
+     */
     public void setX(int myX){
         x = myX;
     }
     
+    /*
+     * @param myY
+     * sets y
+     */
     public void setY(int myY){
         y = myY;
     }
+    /*
+     * @param t
+     * sets type
+     */
     public void setType(char t){
     	type = t;
     }
+    /*
+     * @return vel
+     * retuns velocity
+     */
     public int getVel() 
     {
         return vel;
     }
+    /*
+     * @return isDead
+     * returns dead boolean
+     */
     public boolean isDead(){
     	return isDead;
     }
-    public Node getNode(){
-    	return myNode;
-    }
 
+    /*
+     * @param start
+     * @param goal
+     * sets path to A* start using cost
+     */
     public void aStar(Node start, Node goal) {
     	path.clear();
         Set<Node> open = new HashSet<Node>();
@@ -178,11 +205,20 @@ public abstract class Human
             path.remove(0);
         }
     }
-    
+    /*
+     * @return path
+     * returns current A* path
+     */
     public List<Node> getPath(){
         return path;
     }
-    
+    /*
+	 *@return n
+	 *@param nodeList
+	 *@param x
+	 *@param y
+	 *returns a node if x = node.x and y = node.y
+     */
     public Node getNode(ArrayList<Node> nodeList, int x, int y){
         for(Node n : nodeList){
             if((n.getX() == x) && (n.getY() == y)){
@@ -192,10 +228,21 @@ public abstract class Human
         return null;
         
     }
+    
+    /*
+     * @param node1
+     * @param node2
+     * @return distance from node1 to node2
+     * returns distance from two nodes
+     */
     public int estimateDistance(Node node1, Node node2) {
         return Math.abs(node1.getX() - node2.getX()) + Math.abs(node1.getY() - node2.getY());
     }
     
+    /*
+     * @return tempNode
+     * recursively returns a randomNode
+     */
     public Node randomNode() {
         Node tempNode = null;
         ArrayList<Node> radiusList = new ArrayList<Node>();

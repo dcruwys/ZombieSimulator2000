@@ -9,15 +9,13 @@ public class Medic extends Uninfected
 		medicine = 3;
 		type = 'm';
 	}
-	
+    /*
+     * @return medicine
+     * returns current medicine
+     */
 	public int getMedicine()
 	{
 		return medicine;
-	}
-	
-	public void findSupply( Supplies someSupply )
-	{
-		medicine += someSupply.getAmount();
 	}
 	
 }
