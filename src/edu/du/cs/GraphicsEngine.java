@@ -147,12 +147,16 @@ public class GraphicsEngine
 	public void splash(GraphicsEngine g) throws JavaLayerException{
 		while(true){
 			String file = "splash/splashscreen.jpg";
+			String shoot = "Portal2_sfx_portal_gun_fire_blue.mp3";
 			FileInputStream fileIn = null;
+			FileInputStream gunIn = null;
 			FileInputStream welcome = null;
 			FileInputStream game = null;
 			try {
 				welcome = new FileInputStream("splash/welcome.mp3");
 				fileIn = new FileInputStream(file);
+				gunIn = new FileInputStream(shoot);
+				
 				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block

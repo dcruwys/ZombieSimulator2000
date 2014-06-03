@@ -29,6 +29,7 @@ public class Cop extends Uninfected
 		int bulletEX = zombie.getX(); int bulletEY = zombie.getY();
 
 		while((ammo != 0) && (zombie.getHP() >= 0)){
+				StdDraw.setPenRadius(0.005);
 				StdDraw.setPenColor(StdDraw.DARK_GRAY);
 				StdDraw.line(bulletSX, bulletSY, bulletEX, bulletEY);
 				ammo--;
