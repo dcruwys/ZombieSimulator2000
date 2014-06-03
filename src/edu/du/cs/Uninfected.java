@@ -14,7 +14,9 @@ public abstract class Uninfected extends Human
 		vel = 1;
 		hNodes = new ArrayList<Node>();
 	}
-
+	/*
+	 * sets to dead
+	 */
 	public void die()	{
 		for(Node n: Simulate.walkway){
 			if(hNodes.contains(n)){
@@ -25,6 +27,9 @@ public abstract class Uninfected extends Human
 		isDead = true;
 		
 	}
+	/*
+	 * moves the object
+	 */
 	public void move(){
 		for(Node n: Simulate.walkway){
 		  if(Math.abs(n.getX() - this.x) <= 0 && Math.abs(n.getY() - this.y) <= 0 && !hNodes.contains(n)){

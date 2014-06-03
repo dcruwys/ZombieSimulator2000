@@ -45,7 +45,9 @@ public class Node {
 		zcost = 10;
 			
 	}
-	
+	/*
+	 * sets adjacent nodes
+	 */
 	public void setAdjacent(){
 		Node temp = null;
 		temp = findNode(x+10, y);
@@ -72,15 +74,33 @@ public class Node {
 			adjacentNodes.add(bottomNode);
 		}
 	}
+	/*
+	 * @return x
+	 * return x
+	 */
 	public int getX(){
 		return x;
 	}
+	/*
+	 * @return y
+	 * return y
+	 */
 	public int getY(){
 		return y;
 	}
+	/*
+	 * @return walkable
+	 * return walkable
+	 */
 	public boolean isWalkable(){
 		return walkable;
 	}
+	/*
+	 * @return n
+	 * @param x
+	 * @param y
+	 * return node
+	 */
 	public Node findNode(int x, int y){
 		for(Node n : Simulate.walkway){
 			if((n.getX() == x) && (n.getY() == y)){
@@ -89,40 +109,84 @@ public class Node {
 		}
 		return null;
 	}
+	/*
+	 * @param x
+	 * sets myX to x
+	 */
 	
 	public void setX(int myX){
 		x = myX;
 	}
+	/*
+	 * @param y
+	 * sets myY to Y
+	 */
 	public void setY(int myY){
 		y = myY;
 	}
+	/*
+	 * @param c
+	 * sets hcost to c
+	 */
 	public void setHCost(int c){
 		hcost = c;
-	}
+	} 
+	/*
+	 * @param c
+	 * sets zcost to c
+	 */
 	public void setzCost(int c){
 		zcost = c;
 	}
+	/*
+	 * @return topNode
+	 * return topNode
+	 */
 	public Node getTopNode(){
 		return topNode;
 	}
+	/*
+	 * @return bottomNode
+	 * return bottomNode
+	 */
 	public Node getBottomNode(){
 		return bottomNode;
 	}
+	/*
+	 * @return rightNode
+	 * return rightNode
+	 */
 	public Node getRightNode(){
 		return rightNode;
 	}
+	/*
+	 * @return leftNode
+	 * return leftNode
+	 */
 	public Node getLeftNode(){
 		return leftNode;
 	}
+	/*
+	 * @return zcost
+	 * return zcost
+	 */
 	public int getZCost(){
 		return zcost;
 	}
 	public int gethCost(){
 		return hcost;
 	}
+	/*
+	 * @return adjacentNode
+	 * return adjacentNode
+	 */
 	public List<Node> getAdjacentNodes(){
 		return adjacentNodes;
 	}
+	/*
+	 * @param Anode
+	 * sets parent to aNode
+	 */
 	public Node setParent(Node aNode){
 		return parent = aNode;
 	}

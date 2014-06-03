@@ -39,6 +39,9 @@ public class Infected extends Human
     }
     
     @Override
+    /*
+	 * moves the object
+	 */
     public void move()
     {
         if(!isDead)
@@ -73,12 +76,16 @@ public class Infected extends Human
 	        super.move();   
         }
     }
-    
+    /*
+	 * attack the human
+	 */
     public void attack( Uninfected human )
     {
         human.die();
     }
-
+    /*
+	 * sets if attacked
+	 */
     public void attacked()
     {
     	hp = hp-1;
