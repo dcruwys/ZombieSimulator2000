@@ -138,6 +138,8 @@ public class GraphicsEngine
      * creates a splash screen and plays funky music
      */
 	public void splash(GraphicsEngine g) throws JavaLayerException{
+		StdDraw.setXscale(0.0, 610); //Set scale to 500
+		StdDraw.setYscale(0.0, 610); //Set scale to 500
 		while(true){
 			String file = "splash/splashscreen.jpg";
 			String shoot = "Portal2_sfx_portal_gun_fire_blue.mp3";
@@ -194,6 +196,8 @@ public class GraphicsEngine
      * draws and runs the game
      */
 	public void draw(GraphicsEngine g){
+		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
+		StdDraw.setYscale(0.0, Simulate.mySize*10); //Set scale to 500
 		ArrayList<Human> deadList = new ArrayList<Human>();
 		ArrayList<Human> zdeadList = new ArrayList<Human>();
 		ArrayList<Infected> cured = new ArrayList<Infected>();
@@ -269,7 +273,7 @@ public class GraphicsEngine
 		    	g.drawHuman(h);
 		    	h.move();
 		    }
-		    StdDraw.show(2);
+		    StdDraw.show(20);
 		}
 	}
 }
