@@ -1,10 +1,7 @@
-package edu.du.cs;
 
 import java.io.FileInputStream;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.LockSupport;
 
@@ -32,7 +29,7 @@ public class GraphicsEngine
 		Simulate.generateBuildings();
 		infected = new ArrayList<Infected>();
 		uninfected = new ArrayList<Uninfected>();
-		humans = new ArrayList<Human>(); //Creat an array list of humans.
+		humans = new ArrayList<Human>(); //Create an array list of humans.
 		
 		StdDraw.setCanvasSize(700, 700); //Set Canvas size is set to 500, 500
 		StdDraw.setXscale(0.0, Simulate.mySize*10); //Set scale to 500
@@ -124,15 +121,6 @@ public class GraphicsEngine
 		
 	}
 	
-	public static void main(String[] args){
-		GraphicsEngine g = new GraphicsEngine();
-		try {
-			g.splash(g);
-		} catch (JavaLayerException e) {
-			e.printStackTrace();
-		}
-		g.draw(g);
-	}
 	/*
      * @param g
      * creates a splash screen and plays funky music
@@ -142,13 +130,11 @@ public class GraphicsEngine
 		StdDraw.setYscale(0.0, 610); //Set scale to 500
 		while(true){
 			String file = "splash/splashscreen.jpg";
-			String shoot = "Portal2_sfx_portal_gun_fire_blue.mp3";
-			FileInputStream fileIn = null;
+			//String shoot = "Portal2_sfx_portal_gun_fire_blue.mp3";
 			FileInputStream welcome = null;
 			
 			try {
 				welcome = new FileInputStream("splash/welcome.mp3");
-				fileIn = new FileInputStream(file);
 				
 				
 			} catch (FileNotFoundException e) {
@@ -275,5 +261,15 @@ public class GraphicsEngine
 		    }
 		    StdDraw.show(20);
 		}
+	}
+	
+	public static void main(String[] args){
+		GraphicsEngine g = new GraphicsEngine();
+		try {
+			g.splash(g);
+		} catch (JavaLayerException e) {
+			e.printStackTrace();
+		}
+		g.draw(g);
 	}
 }

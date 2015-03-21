@@ -1,10 +1,6 @@
-package edu.du.cs;
 
 import java.util.ArrayList;
 
-import edu.du.cs.Human;
-import edu.du.cs.Node;
-import edu.du.cs.Simulate;
 /*
  * @param xIn
  * @param yIn

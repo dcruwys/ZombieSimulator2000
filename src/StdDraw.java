@@ -1,4 +1,4 @@
-package edu.du.cs;
+
 /*************************************************************************
  *  Compilation:  javac StdDraw.java
  *  Execution:    java StdDraw

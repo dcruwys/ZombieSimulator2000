@@ -1,4 +1,3 @@
-package edu.du.cs;
 
 public class Normal extends Uninfected
 {

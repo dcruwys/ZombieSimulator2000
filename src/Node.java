@@ -1,4 +1,3 @@
-package edu.du.cs;
 
 import java.util.ArrayList;
 import java.util.List;
