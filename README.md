@@ -2,7 +2,7 @@
 
 This project was done for Intro To Computer Science III, taught by Jeff Edgington (jedgingt@du.edu)
 
-Created by Dan.Cruwys@du.edu, Paul.Heinen@du.edu, David.Garcia@du.edu, and Harrison.Kuzbyt@du.edu. 
+Created by Dan.Cruwys@du.edu, Paul.Heinen@du.edu, and David.Garcia@du.edu. 
 
 Our team name was Team Jeff Edgington, named after (obviously) our professor, who is the "the man".
 
