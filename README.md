@@ -29,6 +29,10 @@ Dr. Nathan Sturtevant (sturtevant@cs.du.edu) was a huge help with getting the AI
 
 It runs smoothly in game, this gif is just choppy :)
 
+How To Run
+----------------------
+Clone this repo and run the jar! It should all be prepackaged. If you have any issues please email Dan.Cruwys@du.edu.
+The code should also be compilable on most computers, but it's only been tested on MacOS 10.9/10.10. 
 
 
 
