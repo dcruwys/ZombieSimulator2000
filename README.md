@@ -1,6 +1,6 @@
 #ZombieSimulator2001
 
-This project was done for Intro To Computer Science III, taught by Jeff Edgington (jedgingt@du.edu)
+This project was done for Intro To Computer Science III (Spring Quarter of 2014), taught by Jeff Edgington (jedgingt@du.edu)
 
 Created by Dan.Cruwys@du.edu, Paul.Heinen@du.edu, and David.Garcia@du.edu. 
 
