@@ -1,4 +1,4 @@
-#ZombieSimulator2001
+#ZombieSimulator2000
 
 This project was done for Intro To Computer Science III (Spring Quarter of 2014), taught by Jeff Edgington (jedgingt@du.edu)
 
