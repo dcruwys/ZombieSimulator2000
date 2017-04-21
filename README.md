@@ -6,7 +6,7 @@ Created by Dan.Cruwys@du.edu, Paul.Heinen@du.edu, and David.Garcia@du.edu.
 
 Our team name was Team Jeff Edgington, named after (obviously) our professor, who is the "the man".
 
-The name "Zombie Simulator 2001" is a play off games like "Ant Sim" and "Sim City 2000".
+The name "Zombie Simulator 2000" is a play off games like "Ant Sim" and "Sim City 2000".
 
 Goal
 ---------------
